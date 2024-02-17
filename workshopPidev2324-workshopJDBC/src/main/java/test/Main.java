@@ -10,6 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         UserService Us = new UserService();
+        System.out.println("hello");
 
 
 
