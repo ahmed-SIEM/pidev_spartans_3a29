@@ -15,7 +15,11 @@ public class UserService implements IService<User> {
         connection = MyDatabase.getInstance().getConnection();
     }
 
+<<<<<<< Updated upstream
   
+=======
+
+>>>>>>> Stashed changes
 
     public User getByEmail(String e) throws SQLException{
         User user = new User();
@@ -37,6 +41,7 @@ public class UserService implements IService<User> {
     }
 
     public boolean userExist(String e) throws SQLException{
+<<<<<<< Updated upstream
        String query = "SELECT COUNT(*) FROM user WHERE email = ?";
          PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, e);
@@ -49,16 +54,38 @@ public class UserService implements IService<User> {
             return true;
 
        
+=======
+        String query = "SELECT COUNT(*) FROM user WHERE email = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setString(1, e);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            if(rs.getInt(1) == 0){
+                return false;
+            }
+        }
+        return true;
+
+
+>>>>>>> Stashed changes
     }
 
 
 
     public void add(User t) throws SQLException{
+<<<<<<< Updated upstream
          if(userExist(t.getEmail())){
             System.out.println("User already exist");
             return;
         }
         
+=======
+        if(userExist(t.getEmail())){
+            System.out.println("User already exist");
+            return;
+        }
+
+>>>>>>> Stashed changes
         String query = "INSERT INTO user (age, name , email , address , password , phone , role) VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, t.getAge());
@@ -69,10 +96,17 @@ public class UserService implements IService<User> {
         ps.setInt(6, t.getPhone());
         ps.setString(7, t.getRole());
         ps.executeUpdate();
+<<<<<<< Updated upstream
     
     }
 
    
+=======
+
+    }
+
+
+>>>>>>> Stashed changes
     public void delete(String email) throws SQLException{
         if(!userExist(email)){
             System.out.println("User does not exist");
@@ -86,8 +120,13 @@ public class UserService implements IService<User> {
     public void update(User t , String email) throws SQLException{
 
         String query = "UPDATE user SET age = ?, name = ?  , address = ? , password = ? , phone = ?  WHERE email = ?";
+<<<<<<< Updated upstream
        
        
+=======
+
+
+>>>>>>> Stashed changes
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, t.getAge());
         ps.setString(2, t.getName());
@@ -97,7 +136,11 @@ public class UserService implements IService<User> {
         ps.setString(6, email);
         ps.executeUpdate();
     }
+<<<<<<< Updated upstream
    
+=======
+
+>>>>>>> Stashed changes
     public List<User> getAll() throws SQLException{
         List<User> users = new ArrayList<>();
         String query = "SELECT * FROM user";
