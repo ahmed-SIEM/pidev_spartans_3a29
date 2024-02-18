@@ -1,25 +1,17 @@
 package test;
 
-<<<<<<< Updated upstream
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-
-public class SampleController {
-    @FXML
-    private Label welcomeText;
-
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
-}
-=======
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+import javafx.animation.*;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 
 
 public class SampleController {
@@ -55,4 +47,3 @@ public class SampleController {
 }
 
 
->>>>>>> Stashed changes

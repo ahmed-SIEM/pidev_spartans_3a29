@@ -16,21 +16,12 @@ public class Main {
 
 
 
-<<<<<<< Updated upstream
-    try {
-        Us.delete("fdsf");
-
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
-    }
-=======
         try {
             Us.delete("fdsf");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
->>>>>>> Stashed changes
 
 
     }

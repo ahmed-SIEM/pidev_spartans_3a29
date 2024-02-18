@@ -10,7 +10,6 @@ public class User {
     private String Password;
     private String name;
 
-<<<<<<< Updated upstream
     private String Status = "Active" ;
 
     public String getStatus() {
@@ -18,15 +17,6 @@ public class User {
     }
 
     public void setStatus(String status) {
-=======
-    private Boolean Status = true ;
-
-    public Boolean getStatus() {
-        return Status;
-    }
-
-    public void setStatus(Boolean status) {
->>>>>>> Stashed changes
         Status = status;
     }
 
@@ -88,11 +78,7 @@ public class User {
         this.Address = address;
         this.Password = password;
         this.name = name;
-<<<<<<< Updated upstream
-        this.Phone = phone;        
-=======
         this.Phone = phone;
->>>>>>> Stashed changes
     }
 
     public User(){}
