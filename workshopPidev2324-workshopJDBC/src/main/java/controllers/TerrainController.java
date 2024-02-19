@@ -46,10 +46,19 @@ public class TerrainController implements Initializable {
     @FXML
     private TextField tfaddress;
 
-    @FXML
-    private TextField tfgradin;
 
-    @FXML
+        @FXML
+
+        private TextField tfnom;
+        
+        @FXML
+
+        private TextField tfgradin;
+        @FXML
+
+        private TextField tfprix;
+
+        @FXML
     private TextField tfid;
 
     @FXML
@@ -57,7 +66,8 @@ public class TerrainController implements Initializable {
 
     @FXML
     private TextField tfvestiare;
-
+     @FXML
+        private TextField tfduree;
     @FXML
     private TableColumn<Terrain, String> caddress;
 
@@ -73,6 +83,13 @@ public class TerrainController implements Initializable {
     @FXML
     private TableColumn<Terrain, Integer> idc;
 
+    @FXML
+    private TableColumn<Terrain,String> cnom;
+
+    @FXML
+    private TableColumn<Terrain,Integer> cprix;
+    @FXML
+    private TableColumn<Terrain,Integer> cduree;
 
     @FXML
     private TableView<Terrain> table;
@@ -91,21 +108,18 @@ public class TerrainController implements Initializable {
             while (rs.next()){
                 Terrain t = new Terrain();
                 t.setId(rs.getInt("id"));
+                t.setNomt(rs.getString("nom"));
                 t.setAddress(rs.getString("address"));
                 t.setGardin(rs.getString("gradin"));
                 t.setVestiaire(rs.getString("vestiaire"));
                 t.setStatus(rs.getString("status"));
-                terrains.add(t);
-
-
-
-            }
+                t.setDuree(rs.getInt("duree"));
+                t.setPrix(rs.getInt("prix"));
+                 terrains.add(t);}
         }catch (SQLException e){
             throw  new RuntimeException(e);
         }
-
-        return terrains;
-    }
+        return terrains;}
 public void showTerrains(){
         ObservableList<Terrain> list = getTerrain();
         table.setItems(list);
@@ -114,13 +128,12 @@ public void showTerrains(){
         cgradin.setCellValueFactory(new PropertyValueFactory<Terrain,String>("gradin"));
         cvestiaire.setCellValueFactory(new PropertyValueFactory<Terrain,String >("vestiaire"));
         cstatus.setCellValueFactory(new PropertyValueFactory<Terrain,String>("status"));
-
+        cstatus.setCellValueFactory(new PropertyValueFactory<Terrain,String>("status"));
 
 }
 
     @FXML
     void clearField(ActionEvent event) {
-
     }
 
     @FXML
@@ -142,15 +155,11 @@ public void showTerrains(){
     }
     }
 
+
     @FXML
     void deleteTerrain(ActionEvent event) {
-
     }
 
     @FXML
-    void updateTerrain(ActionEvent event) {
-
-    }
-
-
+    void updateTerrain(ActionEvent event) {}
 }

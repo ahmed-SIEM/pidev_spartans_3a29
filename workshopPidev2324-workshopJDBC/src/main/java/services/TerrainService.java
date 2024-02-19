@@ -1,3 +1,4 @@
+
 package services;
 
 import entity.Terrain;
@@ -16,56 +17,77 @@ public class TerrainService implements ITerrain<Terrain> {
     }
 
     public void add(Terrain t) throws SQLException{
-        String query = "INSERT INTO user (age, name) VALUES (?, ?)";
+        String query = "INSERT INTO terrain (id,nomt,address,gradin,vestiaire,status,duree,prix) VALUES (?, ?, ?, ? ,? ,? ,? ,?)";
         PreparedStatement ps = connection.prepareStatement(query);
-        ps.setInt(1, t.getAge());
-        ps.setString(2, t.getName());
+        ps.setInt(1, t.getId());
+        ps.setString(2, t.getNomt());
+        ps.setString(3, t.getAddress());
+        ps.setString(4, t.getGardin());
+        ps.setString(5, t.getVestiaire());
+        ps.setString(6, t.getStatus());
+        ps.setInt(7, t.getDuree());
+        ps.setInt(8, t.getPrix());
         ps.executeUpdate();
     }
 
     public void update(Terrain t) throws SQLException{
-        String query = "UPDATE user SET age = ?, name = ? WHERE id = ?";
+        String query = "UPDATE user SET id = ?, nomt = ?, address = ?, gradin = ?, vestiaire = ?, status = ?, duree = ?, prix = ? WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(query);
-        ps.setInt(1, t.getAge());
-        ps.setString(2, t.getName());
-        ps.setInt(3, t.getId());
+        ps.setInt(1, t.getId());
+        ps.setString(2, t.getNomt());
+        ps.setString(3, t.getAddress());
+        ps.setString(4, t.getGardin());
+        ps.setString(5, t.getVestiaire());
+        ps.setString(6, t.getStatus());
+        ps.setInt(7, t.getDuree());
+        ps.setInt(8, t.getPrix());
         ps.executeUpdate();
     }
 
     public void delete(int id) throws SQLException{
-        String query = "DELETE FROM user WHERE id = ?";
+        String query = "DELETE FROM terrain WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, id);
         ps.executeUpdate();
     }
 
     public List<Terrain> getAll() throws SQLException{
-        List<Terrain> users = new ArrayList<>();
-        String query = "SELECT * FROM user";
+        List<Terrain> terrains = new ArrayList<>();
+        String query = "SELECT * FROM terrain";
         Statement st = connection.createStatement();
         ResultSet rs = st.executeQuery(query);
         while (rs.next()) {
-            Terrain user = new Terrain();
-            user.setId(rs.getInt("id"));
-            user.setAge(rs.getInt("age"));
-            user.setName(rs.getString("name"));
-            users.add(user);
+            Terrain terrain = new Terrain();
+            terrain.setId(rs.getInt("id"));
+            terrain.setNomt(rs.getString("nom"));
+            terrain.setAddress(rs.getString("address"));
+            terrain.setGardin(rs.getString("address"));
+            terrain.setVestiaire(rs.getString("vestiaire"));
+            terrain.setStatus(rs.getString("status"));
+            terrain.setDuree(rs.getInt("duree"));
+            terrain.setPrix(rs.getInt("prix"));
+
+            terrains.add(terrain);
         }
-        return users;
+        return terrains;
     }
 
     public Terrain getById(int id) throws SQLException{
-        Terrain user = new Terrain();
-        String query = "SELECT * FROM user WHERE id = ?";
+        Terrain terrain = new Terrain();
+        String query = "SELECT * FROM terrain WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            user.setId(rs.getInt("id"));
-            user.setAge(rs.getInt("age"));
-            user.setName(rs.getString("name"));
+            terrain.setId(rs.getInt("id"));
+            terrain.setNomt(rs.getString("nom"));
+            terrain.setAddress(rs.getString("address"));
+            terrain.setGardin(rs.getString("address"));
+            terrain.setVestiaire(rs.getString("vestiaire"));
+            terrain.setStatus(rs.getString("status"));
+            terrain.setDuree(rs.getInt("duree"));
+            terrain.setPrix(rs.getInt("prix"));
         }
-        return user;
+        return terrain;
     }
 }
-*/

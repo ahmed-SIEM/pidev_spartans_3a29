@@ -12,32 +12,41 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="502.0" prefWidth="814.0" styleClass="form_container" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TerrainController">
+<AnchorPane prefHeight="632.0" prefWidth="820.0" styleClass="form_container" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TerrainController">
     <children>
-        <VBox layoutX="14.0" layoutY="51.0" prefHeight="300.0" prefWidth="300.0" spacing="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="51.0">
+        <VBox layoutX="14.0" layoutY="27.0" prefHeight="597.0" prefWidth="300.0" spacing="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="27.0">
             <children>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="id" />
-                <TextField fx:id="tfid" />
+                <TextField fx:id="tfid" prefHeight="17.0" prefWidth="228.0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="nom" />
+                <TextField fx:id="tfnom" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="address" />
                 <TextField fx:id="tfaddress" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="gradin" />
                 <TextField fx:id="tfgradin" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="vestiaire" />
-                <TextField fx:id="tfvestiare" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="status" />
-                <TextField fx:id="tfstatus" prefHeight="62.0" prefWidth="328.0" />
+                <TextField fx:id="tfvestiaire" prefHeight="62.0" prefWidth="328.0" />
+            <Label text="status" />
+            <TextField fx:id="tfstatus" />
+            <Label text="prix" />
+            <TextField fx:id="tfprix" />
+            <Label text="duree" />
+            <TextField fx:id="tfduree" />
             </children>
         </VBox>
-        <TableView fx:id="table" layoutX="344.0" layoutY="98.0" prefHeight="270.0" prefWidth="461.0" AnchorPane.rightAnchor="8.399999999999977" AnchorPane.topAnchor="98.0">
+        <TableView fx:id="table" layoutX="350.0" layoutY="127.2" prefHeight="270.0" prefWidth="498.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="127.0">
             <columns>
-                <TableColumn fx:id="idc" prefWidth="87.20001065731049" text="id" />
-                <TableColumn fx:id="caddress" prefWidth="84.79999542236328" text="address" />
-                <TableColumn fx:id="cgradin" prefWidth="98.39996337890625" text="gradin" />
-                <TableColumn fx:id="cvestiaire" prefWidth="88.0" text="vestiaire" />
-                <TableColumn fx:id="cstatus" prefWidth="103.2000732421875" text="status" />
+                <TableColumn fx:id="idc" prefWidth="62.400025963783264" text="id" />
+                <TableColumn fx:id="cnom" prefWidth="67.99993133544922" text="nom" />
+                <TableColumn fx:id="caddress" prefWidth="56.79998779296875" text="address" />
+                <TableColumn fx:id="cgradin" prefWidth="60.800018310546875" text="gradin" />
+                <TableColumn fx:id="cvestiaire" prefWidth="62.4000244140625" text="vestiaire" />
+            <TableColumn fx:id="cstatus" prefWidth="54.40008544921875" text="status" />
+            <TableColumn fx:id="cprix" prefWidth="59.9998779296875" text="prix" />
+            <TableColumn fx:id="cduree" prefWidth="59.9998779296875" text="duree" />
             </columns>
         </TableView>
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="292.0" layoutY="31.0" text="GESTION TERRAIN" textAlignment="CENTER" textFill="#253061">
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="466.0" layoutY="27.0" text="GESTION TERRAIN" textAlignment="CENTER" textFill="#253061">
             <font>
                 <Font size="28.0" />
             </font>
@@ -45,9 +54,9 @@
                 <Glow />
             </effect>
         </Label>
-        <ButtonBar layoutX="102.0" layoutY="442.0" prefHeight="40.0" prefWidth="514.0">
+        <ButtonBar layoutX="327.0" layoutY="462.0" prefHeight="40.0" prefWidth="456.0">
             <buttons>
-                <Button fx:id="btnsave" mnemonicParsing="false" onAction="#createTerrain" prefHeight="35.0" prefWidth="162.0" text="Enregistrer" textFill="#10215e" />
+                <Button fx:id="btnsave" mnemonicParsing="false" onAction="#createTerrain" prefHeight="35.0" prefWidth="141.0" text="Enregistrer" textFill="#10215e" />
                 <Button fx:id="btnupdate" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#updateTerrain" text="Modifier" />
                 <Button fx:id="btndelete" layoutX="351.0" layoutY="17.0" mnemonicParsing="false" onAction="#deleteTerrain" text="Supprimer" />
                 <Button fx:id="btnclear" layoutX="265.0" layoutY="17.0" mnemonicParsing="false" onAction="#clearField" prefHeight="35.0" prefWidth="143.0" text="Annuler" />

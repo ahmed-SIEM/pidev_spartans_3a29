@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Terrain {
     private int id;
+    private String nomt;
     private String address;
     private String gardin;
     private String vestiaire;
@@ -21,10 +22,23 @@ public class Terrain {
         this.duree = duree;
     }
 
+    public Terrain(int id, String nomt, String address, String gardin, String vestiaire, String status, int prix, int duree) {
+        this.id = id;
+        this.nomt = nomt;
+        this.address = address;
+        this.gardin = gardin;
+        this.vestiaire = vestiaire;
+        this.status = status;
+        this.prix = prix;
+        this.duree = duree;
+    }
+
+
     @Override
     public String toString() {
         return "Terrain{" +
                 "id=" + id +
+                ", nomt='" + nomt + '\'' +
                 ", address='" + address + '\'' +
                 ", gardin='" + gardin + '\'' +
                 ", vestiaire='" + vestiaire + '\'' +
@@ -39,12 +53,24 @@ public class Terrain {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Terrain terrain = (Terrain) o;
-        return id == terrain.id && prix == terrain.prix && duree == terrain.duree && Objects.equals(address, terrain.address) && Objects.equals(gardin, terrain.gardin) && Objects.equals(vestiaire, terrain.vestiaire) && Objects.equals(status, terrain.status);
+        return id == terrain.id && prix == terrain.prix && duree == terrain.duree && Objects.equals(nomt, terrain.nomt) && Objects.equals(address, terrain.address) && Objects.equals(gardin, terrain.gardin) && Objects.equals(vestiaire, terrain.vestiaire) && Objects.equals(status, terrain.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, address, gardin, vestiaire, status, prix, duree);
+        return Objects.hash(id, nomt, address, gardin, vestiaire, status, prix, duree);
+    }
+
+    public String getNomt() {
+        return nomt;
+    }
+
+    public void setNomt(String nomt) {
+        this.nomt = nomt;
+    }
+
+    public Terrain() {
+
     }
 
     public int getPrix() {
