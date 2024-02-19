@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.DropdownButton?>
+<?import com.gluonhq.charm.glisten.control.Icon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="640.0" prefWidth="850.0" style="test2.c" stylesheets="@test2.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <DropdownButton id="dropdown1" layoutX="697.0" layoutY="56.0" style="-fx-background-color: #4CAF50;" stylesheets="@test2.css" AnchorPane.topAnchor="50.0">
+       <items>
+           <MenuItem id="profile1" text="profile" />
+           <MenuItem text="deconnexion" />
+       </items>
+   </DropdownButton>
+ <HBox layoutX="348.0" layoutY="46.0" prefHeight="47.0" prefWidth="334.0" spacing="10">
+     <Button fx:id="buttonAccueil" style="-fx-background-radius: 15px; -fx-background-color: #4CAF50;" text="Accueil" textFill="#02365c">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Button>
+     <Button fx:id="buttonActualites" style="-fx-background-radius: 15px; -fx-background-color: #4CAF50;" text="Actualités" textFill="#02365c">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Button>
+     <Button fx:id="buttonReservation" style="-fx-background-radius: 15px; -fx-background-color: #4CAF50;" text="Réservation" textFill="#02365c">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Button>
+     <Button fx:id="buttonEvenement" style="-fx-background-radius: 15px; -fx-background-color: #4CAF50;" text="Événement" textFill="#02365c">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Button>
+ </HBox>
+   <AnchorPane id="anchro1" layoutX="11.0" layoutY="105.0" prefHeight="718.0" prefWidth="827.0" stylesheets="@test2.css">
+      <children>
+         <Label id="label1" layoutX="33.0" layoutY="32.0" prefHeight="82.0" prefWidth="677.0" stylesheets="@test2.css" text="                            Créez votre légende" textAlignment="CENTER" textFill="#4caf50" AnchorPane.bottomAnchor="684.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="32.0">
+            <font>
+               <Font name="Arial Black" size="26.0" />
+            </font>
+         </Label>
+         <VBox layoutX="33.0" layoutY="140.0" prefHeight="506.0" prefWidth="226.0">
+            <children>
+               <Label id="label3" prefHeight="0.0" prefWidth="222.0" stylesheets="@test2.css" text="    Créez votre partie !" textFill="#4caf50">
+                  <font>
+                     <Font name="Arial Black" size="17.0" />
+                  </font></Label>
+               <AnchorPane id="anchrocreation" prefHeight="536.0" prefWidth="226.0">
+                  <children>
+                     <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="63.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@367401473_585490203796779_7106352973885908640_n.png" />
+                        </image>
+                     </ImageView>
+                     <Text fill="#4caf50" layoutX="30.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Participez à un événement palpitant où vous créez, défiez des rivaux et attendez avec anticipation les confirmations des propriétaires de terrains pour une expérience de jeu captivante. Formulaire à la conquête : Remplissez-le avec flair! Choix stratégiques : Sélectionnez vos terrains favoris! Affrontez l'inconnu : Attendez qu'un adversaire se manifeste pour le défi! Confirmation en suspense : Attendez le feu vert du propriétaire du terrain!" textAlignment="CENTER" wrappingWidth="166.64570999145508">
+                        <font>
+                           <Font name="Arial Black" size="12.0" />
+                        </font>
+                     </Text>
+                  </children>
+                  <VBox.margin>
+                     <Insets top="20.0" />
+                  </VBox.margin></AnchorPane>
+            </children>
+         </VBox>
+         <VBox layoutX="306.0" layoutY="140.0" prefHeight="506.0" prefWidth="226.0">
+            <children>
+               <Label id="label3" prefHeight="0.0" prefWidth="222.0" stylesheets="@test2.css" text=" En quête d'adversaires" textFill="#4caf50">
+                  <font>
+                     <Font name="Arial Black" size="17.0" />
+                  </font>
+               </Label>
+               <AnchorPane id="anchrocreation" prefHeight="478.0" prefWidth="244.0">
+                  <children>
+                     <Text fill="#4caf50" layoutX="19.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plongez dans l'action en rejoignant des parties, choisissez vos terrains tactiquement, et attendez la confirmation des propriétaires pour une expérience de jeu passionnante!1. Explorez l'action: Rejoignez une partie en cours!2. Formulaires futés : Complétez-les pour entrer dans l'arène!3. Adoptez la tactique du terrain :Alignez vos choix sur ceux de votre adversaire pour un défi passionnant!&quot;4. En suspense : Attendre avec impatience la validation du propriétaire du terrain!" textAlignment="CENTER" wrappingWidth="188.24574661254883">
+                        <font>
+                           <Font name="Arial Black" size="12.0" />
+                        </font>
+                     </Text>
+                     <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="63.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@426184527_1045045299907489_7955346661872487039_n.png" />
+                        </image>
+                     </ImageView>
+                  </children>
+                  <VBox.margin>
+                     <Insets top="20.0" />
+                  </VBox.margin>
+               </AnchorPane>
+            </children>
+         </VBox>
+         <VBox layoutX="575.0" layoutY="140.0" prefHeight="506.0" prefWidth="226.0">
+            <children>
+               <Label id="label3" prefHeight="0.0" prefWidth="222.0" stylesheets="@test2.css" text="        Lansez un defi" textFill="#4caf50">
+                  <font>
+                     <Font name="Arial Black" size="17.0" />
+                  </font>
+               </Label>
+               <AnchorPane id="anchrocreation" prefHeight="490.0" prefWidth="226.0">
+                  <children>
+                     <Text fill="#4caf50" layoutX="19.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plongez dans une expérience de jeu captivante en créant votre propre partie, remplissant des formulaires stratégiques, en choisissant judicieusement un terrain, et en attendant avec anticipation la confirmation du propriétaire pour un défi palpitant. Initiez le défi : Créez votre propre arène de jeu! Paperasse ludique : Remplissez les formulaires avec brio! Terrain de prédilection : Optez pour un seul terrain stratégique! Sous suspense : Attendez la validation du propriétaire du terrain choisi!" textAlignment="CENTER" wrappingWidth="188.24574661254883">
+                        <font>
+                           <Font name="Arial Black" size="12.0" />
+                        </font>
+                     </Text>
+                     <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="63.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@414701634_1410039389583838_1223732391004318772_n.png" />
+                        </image>
+                     </ImageView>
+                  </children>
+                  <VBox.margin>
+                     <Insets top="20.0" />
+                  </VBox.margin>
+               </AnchorPane>
+            </children>
+         </VBox>
+      </children></AnchorPane>
+   <ImageView fitHeight="91.0" fitWidth="95.0" layoutX="53.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../../../../../../../../../../Downloads/BORCELLE%20soccer%20league%20(2).png" />
+      </image>
+   </ImageView>
+   <Icon content="ADD_ALERT" layoutX="796.0" layoutY="46.0" AnchorPane.topAnchor="48.0" />
+</AnchorPane>
