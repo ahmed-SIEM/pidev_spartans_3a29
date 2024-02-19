@@ -1,9 +1,9 @@
-package services.GestionUser;
+package services;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public interface IService<T> {
+public interface ITerrain<T> {
 
     void add(T t) throws SQLException;
 
@@ -13,5 +13,5 @@ public interface IService<T> {
 
     List<T> getAll() throws SQLException;
 
-    T getById(int id) throws SQLException;
+    T getById(int id) throws  SQLException;
 }

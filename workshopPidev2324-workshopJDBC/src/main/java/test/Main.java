@@ -1,15 +1,12 @@
 package test;
 
-import models.User;
-import services.GestionUser.UserService;
-
-import java.sql.SQLException;
+import services.TerrainService;
 
 public class Main {
 
 
     public static void main(String[] args) {
-        UserService Us = new UserService();
+        TerrainService Us = new TerrainService();
         System.out.println("hello");
 
 

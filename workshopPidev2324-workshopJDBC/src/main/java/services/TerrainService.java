@@ -1,21 +1,21 @@
-package services.GestionUser;
+/*package services;
 
-import models.User;
+import entity.Terrain;
 import utils.MyDatabase;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserService implements IService<User> {
+public class TerrainService implements ITerrain<Terrain> {
 
     private Connection connection;
 
-    public UserService() {
+    public TerrainService() {
         connection = MyDatabase.getInstance().getConnection();
     }
 
-    public void add(User t) throws SQLException{
+    public void add(Terrain t) throws SQLException{
         String query = "INSERT INTO user (age, name) VALUES (?, ?)";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, t.getAge());
@@ -23,7 +23,7 @@ public class UserService implements IService<User> {
         ps.executeUpdate();
     }
 
-    public void update(User t) throws SQLException{
+    public void update(Terrain t) throws SQLException{
         String query = "UPDATE user SET age = ?, name = ? WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, t.getAge());
@@ -39,13 +39,13 @@ public class UserService implements IService<User> {
         ps.executeUpdate();
     }
 
-    public List<User> getAll() throws SQLException{
-        List<User> users = new ArrayList<>();
+    public List<Terrain> getAll() throws SQLException{
+        List<Terrain> users = new ArrayList<>();
         String query = "SELECT * FROM user";
         Statement st = connection.createStatement();
         ResultSet rs = st.executeQuery(query);
         while (rs.next()) {
-            User user = new User();
+            Terrain user = new Terrain();
             user.setId(rs.getInt("id"));
             user.setAge(rs.getInt("age"));
             user.setName(rs.getString("name"));
@@ -54,8 +54,8 @@ public class UserService implements IService<User> {
         return users;
     }
 
-    public User getById(int id) throws SQLException{
-        User user = new User();
+    public Terrain getById(int id) throws SQLException{
+        Terrain user = new Terrain();
         String query = "SELECT * FROM user WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, id);
@@ -68,3 +68,4 @@ public class UserService implements IService<User> {
         return user;
     }
 }
+*/
