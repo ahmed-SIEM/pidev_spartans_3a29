@@ -4,15 +4,20 @@ import java.time.LocalDateTime;
 
 public class Paiement {
     private int idPaiement ;
-    private Membre membre ;
-    private LocalDateTime date ;
-    private LocalDateTime heure ;
+    private int idmembre ;
+    private int idreservation ;
+    private String date ;
+    private String heure ;
 
-    public Paiement(int idPaiement, Membre membre, LocalDateTime date, LocalDateTime heure) {
-        this.idPaiement = idPaiement;
-        this.membre = membre;
+    public Paiement( int idmembre, int idreservation, String date, String heure) {
+
+        this.idmembre = idmembre;
+        this.idreservation = idreservation;
         this.date = date;
         this.heure = heure;
+    }
+
+    public Paiement() {
     }
 
     public int getIdPaiement() {
@@ -23,27 +28,35 @@ public class Paiement {
         this.idPaiement = idPaiement;
     }
 
-    public Membre getMembre() {
-        return membre;
+    public int getIdmembre() {
+        return idmembre;
     }
 
-    public void setMembre(Membre membre) {
-        this.membre = membre;
+    public void setIdmembre(int idmembre) {
+        this.idmembre = idmembre;
     }
 
-    public LocalDateTime getDate() {
+    public int getIdreservation() {
+        return idreservation;
+    }
+
+    public void setIdreservation(int idreservation) {
+        this.idreservation = idreservation;
+    }
+
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public LocalDateTime getHeure() {
+    public String getHeure() {
         return heure;
     }
 
-    public void setHeure(LocalDateTime heure) {
+    public void setHeure(String heure) {
         this.heure = heure;
     }
 
@@ -51,10 +64,10 @@ public class Paiement {
     public String toString() {
         return "Paiement{" +
                 "idPaiement=" + idPaiement +
-                ", membre=" + membre +
-                ", date=" + date +
-                ", heure=" + heure +
+                ", idmembre=" + idmembre +
+                ", idreservation=" + idreservation +
+                ", date='" + date + '\'' +
+                ", heure='" + heure + '\'' +
                 '}';
     }
-
 }

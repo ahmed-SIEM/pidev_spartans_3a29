@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="478.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.ReservationController">
+   <children>
+      <Button layoutX="202.0" layoutY="348.0" mnemonicParsing="false" onAction="#add" text="confirmer" />
+      <DatePicker fx:id="datepicker" layoutX="164.0" layoutY="101.0" promptText="Select Date" />
+      <Label layoutX="85.0" layoutY="64.0" text="heure" />
+      <Label layoutX="82.0" layoutY="26.0" text="choix equipe" />
+      <SplitMenuButton fx:id="nom_equipe" layoutX="164.0" layoutY="22.0" mnemonicParsing="false" text="equipe">
+        <items>
+          <MenuItem fx:id="nom_equipe1" mnemonicParsing="false" text="Action 1" />
+          <MenuItem fx:id="nom_equipe2" mnemonicParsing="false" text="Action 2" />
+        </items>
+      </SplitMenuButton>
+      <TextField fx:id="heure" layoutX="163.0" layoutY="60.0" promptText="20h00" />
+      <Label layoutX="85.0" layoutY="105.0" text="date " />
+      <Label layoutX="88.0" layoutY="165.0" text="terrain" />
+      <TableView layoutX="139.0" layoutY="165.0" prefHeight="108.0" prefWidth="380.0">
+        <columns>
+          <TableColumn fx:id="nomTerrain" prefWidth="83.20001220703125" text="Nom Terrain" />
+          <TableColumn fx:id="localisation" prefWidth="81.5999755859375" text="localisation" />
+            <TableColumn fx:id="duree" prefWidth="61.60003662109375" text="duree" />
+            <TableColumn fx:id="prix" prefWidth="75.0" text="prix" />
+            <TableColumn fx:id="reserver" prefWidth="75.0" text="Reserver" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

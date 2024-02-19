@@ -1,16 +1,29 @@
 package models;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Reservation {
     private int idReservation ;
     private boolean isConfirm ;
-    private LocalDateTime dateReservation ;
-    private LocalDateTime heureReservation ;
+    private String dateReservation ;
+    private String heureReservation ;
     private  TypeReservation type ;
+    List<Terrain> listTerrain ;
+    void addListe(Terrain terrain){
+        this.listTerrain.add(terrain);
+    }
 
-    public Reservation(int idReservation, boolean isConfirm, LocalDateTime dateReservation, LocalDateTime heureReservation, TypeReservation type) {
-        this.idReservation = idReservation;
+
+    public List<Terrain> getListTerrain() {
+        return listTerrain;
+    }
+
+    public Reservation() {
+    }
+
+    public Reservation(boolean isConfirm, String dateReservation, String heureReservation, TypeReservation type) {
+        listTerrain = new ArrayList<>();
         this.isConfirm = isConfirm;
         this.dateReservation = dateReservation;
         this.heureReservation = heureReservation;
@@ -33,24 +46,25 @@ public class Reservation {
         isConfirm = confirm;
     }
 
-    public LocalDateTime getDateReservation() {
+    public String getDateReservation() {
         return dateReservation;
     }
 
-    public void setDateReservation(LocalDateTime dateReservation) {
+    public void setDateReservation(String dateReservation) {
         this.dateReservation = dateReservation;
     }
 
-    public LocalDateTime getHeureReservation() {
+    public String getHeureReservation() {
         return heureReservation;
     }
 
-    public void setHeureReservation(LocalDateTime heureReservation) {
+    public void setHeureReservation(String heureReservation) {
         this.heureReservation = heureReservation;
     }
 
-    public TypeReservation getType() {
-        return type;
+    public String getType() {
+        String t = this.type.name();
+        return t;
     }
 
     public void setType(TypeReservation type) {
