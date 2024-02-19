@@ -3,6 +3,7 @@ package controllers;
 import com.mysql.cj.jdbc.JdbcConnection;
 import entity.Terrain;
 import javafx.beans.Observable;
+import javafx.beans.property.Property;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +12,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn;
+
+import javafx.scene.control.cell.PropertyValueFactory;
 import utils.MyDatabase;
 
 import java.net.URL;
@@ -55,15 +59,31 @@ public class TerrainController implements Initializable {
     private TextField tfvestiare;
 
     @FXML
+    private TableColumn<Terrain, String> caddress;
+
+    @FXML
+    private TableColumn<Terrain, String> cgradin;
+
+    @FXML
+    private TableColumn<Terrain, String> cstatus;
+
+    @FXML
+    private TableColumn<Terrain, String> cvestiaire;
+
+    @FXML
+    private TableColumn<Terrain, Integer> idc;
+
+
+    @FXML
     private TableView<Terrain> table;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+    showTerrains();
     }
     public ObservableList<Terrain> getTerrain(){
         ObservableList<Terrain> terrains = FXCollections.observableArrayList();
-        String query = "select* from terrains";
+        String query = "select* from terrain";
         connection = MyDatabase.getInstance().getConnection();
         try {
             t = connection.prepareStatement(query);
@@ -86,6 +106,18 @@ public class TerrainController implements Initializable {
 
         return terrains;
     }
+public void showTerrains(){
+        ObservableList<Terrain> list = getTerrain();
+        table.setItems(list);
+        idc.setCellValueFactory(new PropertyValueFactory<Terrain,Integer>("id"));
+        caddress.setCellValueFactory(new PropertyValueFactory<Terrain,String>("address"));
+        cgradin.setCellValueFactory(new PropertyValueFactory<Terrain,String>("gradin"));
+        cvestiaire.setCellValueFactory(new PropertyValueFactory<Terrain,String >("vestiaire"));
+        cstatus.setCellValueFactory(new PropertyValueFactory<Terrain,String>("status"));
+
+
+}
+
     @FXML
     void clearField(ActionEvent event) {
 
@@ -93,7 +125,21 @@ public class TerrainController implements Initializable {
 
     @FXML
     void createTerrain(ActionEvent event) {
+    String insert = "insert into terrain(id,address,gradin,vestiaire,status) values(?,?,?,?,?)";
+    connection = MyDatabase.getInstance().getConnection();
+    try {
+         t = connection.prepareStatement(insert);
+         t.setString(1,tfid.getText());
+         t.setString(2,tfaddress.getText());
+         t.setString(3,tfgradin.getText());
+         t.setString(4,tfvestiare.getText());
+         t.setString(5,tfstatus.getText());
+         t.executeUpdate();
+         showTerrains();
 
+    }   catch (SQLException e){
+        throw new RuntimeException(e);
+    }
     }
 
     @FXML
