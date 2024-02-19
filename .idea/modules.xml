@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$USER_HOME$/AppData/Local/SceneBuilder/runtime/lib/lib.iml" filepath="$USER_HOME$/AppData/Local/SceneBuilder/runtime/lib/lib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/workshopPidev2324-workshopJDBC.iml" filepath="$PROJECT_DIR$/.idea/workshopPidev2324-workshopJDBC.iml" />
     </modules>
   </component>
 </project>
