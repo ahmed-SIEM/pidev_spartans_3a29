@@ -18,22 +18,25 @@ public class UserService implements IService<User> {
 
 
     public User getByEmail(String e) throws SQLException{
-        User user = new User();
-        String query = "SELECT * FROM user WHERE email = ?";
-        PreparedStatement ps = connection.prepareStatement(query);
-        ps.setString(1, e);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            user.setId(rs.getInt("id"));
-            user.setAge(rs.getInt("age"));
-            user.setName(rs.getString("name"));
-            user.setEmail(rs.getString("email"));
-            user.setAddress(rs.getString("address"));
-            user.setPassword(rs.getString("password"));
-            user.setPhone(rs.getInt("phone"));
-            user.setRole(rs.getString("role"));
+        if(userExist(e)){
+            User user = new User();
+            String query = "SELECT * FROM user WHERE email = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, e);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                user.setId(rs.getInt("id"));
+                user.setAge(rs.getInt("age"));
+                user.setName(rs.getString("name"));
+                user.setEmail(rs.getString("email"));
+                user.setAddress(rs.getString("address"));
+                user.setPassword(rs.getString("password"));
+                user.setPhone(rs.getInt("phone"));
+                user.setRole(rs.getString("role"));
+            }
+            return user;
         }
-        return user;
+        return new User();
     }
 
     public boolean userExist(String e) throws SQLException{
@@ -116,5 +119,13 @@ public class UserService implements IService<User> {
             users.add(user);
         }
         return users;
+    }
+
+    public boolean Login(String e , String P) throws SQLException{
+        User U1 = getByEmail(e);
+        if( U1.getPassword() != null){
+            return U1.getPassword().equals(P);
+        }
+        return false;
     }
 }
