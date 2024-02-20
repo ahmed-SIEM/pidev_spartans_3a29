@@ -33,6 +33,7 @@ public class UserService implements IService<User> {
             user.setPhone(rs.getInt("phone"));
             user.setRole(rs.getString("role"));
             user.setDate_de_Creation(rs.getString("DatedeCreation"));
+            user.setImage(rs.getString("Image"));
         }
         return user;
     }
@@ -93,6 +94,15 @@ public class UserService implements IService<User> {
         ps.setString(4, t.getPassword());
         ps.setInt(5, t.getPhone());
         ps.setString(6, email);
+        ps.executeUpdate();
+    }
+
+    public void updatePhoto(String Photo , String email) throws SQLException {
+        String query = "UPDATE user SET Image = ?  WHERE email = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setString(1, Photo);
+        ps.setString(2,email);
+        System.out.println("done image uploaded");
         ps.executeUpdate();
     }
 

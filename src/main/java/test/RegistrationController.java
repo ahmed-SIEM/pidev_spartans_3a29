@@ -154,6 +154,7 @@ public class RegistrationController {
             SeconnecterController seconnectercontroller = loader.getController();
 
             seconnectercontroller.setData(u1);
+
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();

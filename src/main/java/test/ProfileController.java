@@ -3,12 +3,20 @@ package test;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import models.User;
 import services.GestionUser.UserService;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -43,9 +51,9 @@ public class ProfileController {
     @FXML
     private Button btnuploadimage;
 
-    @FXML
-    private ImageView imgDelete;
 
+    @FXML
+    private ImageView imgview;
 
 
     @FXML
@@ -66,13 +74,16 @@ public class ProfileController {
     private Text tfRoleAffichage;
 
     private User CurrentUser ;
-    public void setData(User u) {
-        CurrentUser = u ;
+    public void setData(User u) throws SQLException {
+        UserService us = new UserService();
+        CurrentUser = us.getByEmail(u.getEmail());
+        System.out.println(CurrentUser);
         tfRoleAffichage.setText(CurrentUser.getRole());
         tfDatedecreation.setText(CurrentUser.getDate_de_Creation());
         tdNomaffichage.setText(CurrentUser.getName());
         inputPassword.setText(CurrentUser.getPassword());
         inputCPassword.setText(CurrentUser.getPassword());
+
 
         InputAddress.setText(
                 CurrentUser.getEmail().isEmpty() ? "" : CurrentUser.getEmail()
@@ -86,9 +97,19 @@ public class ProfileController {
         InputPhone.setText(
                 CurrentUser.getPhone() == 0 ? "" : String.valueOf(CurrentUser.getPhone())
         );
+
+        if( CurrentUser.getImage() != null){
+            System.out.println(CurrentUser.getImage());
+            Path targetPath = Paths.get("src/main/resources", CurrentUser.getImage());
+            Image image = new Image(targetPath.toUri().toString());
+            imgview.setImage(image);
+            System.out.println("photoupdated");
+        }
+
     }
 
-    public void initialize() {
+    public void initialize() throws SQLException {
+
         // Define a UnaryOperator to filter out non-numeric characters
         UnaryOperator<TextFormatter.Change> filter = change -> {
             String newText = change.getControlNewText();
@@ -112,10 +133,7 @@ public class ProfileController {
 
     }
 
-    @FXML
-    void RemoveImage(MouseEvent event) {
 
-    }
 
     @FXML
     void SeeInformationElements(ActionEvent event) {
@@ -128,7 +146,28 @@ public class ProfileController {
     }
 
     @FXML
-    void changerphoto(ActionEvent event) {
+    void changerphoto(ActionEvent event) throws SQLException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Image File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png")
+        );
+        File selectedFile = fileChooser.showOpenDialog(btnuploadimage.getScene().getWindow());
+        if (selectedFile != null) {
+            UserService us = new UserService();
+            us.updatePhoto(String.valueOf(CurrentUser.getId())+".png",CurrentUser.getEmail());
+            // Move the selected file to the resources folder
+            try {
+                String filename = String.valueOf(CurrentUser.getId())+".png";
+                Path targetPath = Paths.get("src/main/resources", filename);
+                Files.copy(selectedFile.toPath(), targetPath, StandardCopyOption.REPLACE_EXISTING);
+                Image image = new Image(targetPath.toUri().toString());
+                imgview.setImage(image);
+            } catch ( IOException e) {
+                e.printStackTrace();
+            }
+        }
+
 
     }
 

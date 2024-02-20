@@ -73,11 +73,13 @@ public class SeconnecterController {
             alert.setTitle("Champ vide");
             alert.setHeaderText("Tous les champs sont requis");
             alert.showAndWait();
+            return;
         } else if (!Us.Login(tfaddress.getText(),tfmotdepass.getText())) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Champ invalid");
             alert.setHeaderText("L'un des champs est incorrect");
             alert.showAndWait();
+            return;
 
         }
         try {

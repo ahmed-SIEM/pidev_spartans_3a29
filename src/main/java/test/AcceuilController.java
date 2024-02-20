@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class AcceuilController {
-    UserService us = new UserService();
+
 
     @FXML
     private Text Username;
@@ -51,7 +51,7 @@ public class AcceuilController {
 
             ((Stage) btnseeProfile.getScene().getWindow()).close();
 
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
 
