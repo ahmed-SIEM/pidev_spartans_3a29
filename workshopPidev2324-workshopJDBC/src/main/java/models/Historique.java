@@ -2,13 +2,17 @@ package models;
 
 public class Historique {
     private int idHistorique ;
-    private Reservation reservation ;
-    private String score ;
+    private String dateReservation,heureReservtion ;
+    private int idMembre ;
 
-    public Historique(int idHistorique, Reservation reservation, String score) {
-        this.idHistorique = idHistorique;
-        this.reservation = reservation;
-        this.score = score;
+    public Historique() {
+    }
+
+    public Historique( String dateReservation, String heureReservtion, int idMembre) {
+
+        this.dateReservation = dateReservation;
+        this.heureReservtion = heureReservtion;
+        this.idMembre = idMembre;
     }
 
     public int getIdHistorique() {
@@ -19,28 +23,38 @@ public class Historique {
         this.idHistorique = idHistorique;
     }
 
-    public Reservation getReservation() {
-        return reservation;
+    public String getDateReservation() {
+        return dateReservation;
     }
 
-    public void setReservation(Reservation reservation) {
-        this.reservation = reservation;
+    public void setDateReservation(String dateReservation) {
+        this.dateReservation = dateReservation;
     }
 
-    public String getScore() {
-        return score;
+    public String getHeureReservtion() {
+        return heureReservtion;
     }
 
-    public void setScore(String score) {
-        this.score = score;
+    public void setHeureReservtion(String heureReservtion) {
+        this.heureReservtion = heureReservtion;
     }
+
+    public int getIdMembre() {
+        return idMembre;
+    }
+
+    public void setIdMembre(int idMembre) {
+        this.idMembre = idMembre;
+    }
+
 
     @Override
     public String toString() {
         return "Historique{" +
                 "idHistorique=" + idHistorique +
-                ", reservation=" + reservation +
-                ", score='" + score + '\'' +
+                ", dateReservation='" + dateReservation + '\'' +
+                ", heureReservtion='" + heureReservtion + '\'' +
+                ", idMembre=" + idMembre +
                 '}';
     }
 }

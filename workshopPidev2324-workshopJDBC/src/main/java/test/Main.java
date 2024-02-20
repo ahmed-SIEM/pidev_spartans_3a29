@@ -16,9 +16,9 @@ public class Main {
 
         System.out.println("hello");
 
-        Reservation reservation = new Reservation(false,"2024-03-22","20:00",ReserverTerrainPourEquipe);
-        ReservationService reservationService = new ReservationService();
-        reservationService.ajouterReservation(reservation);
+//        Reservation reservation = new Reservation(false,"2024-03-22","20:00",ReserverTerrainPourEquipe,1);
+//        ReservationService reservationService = new ReservationService();
+//        reservationService.ajouterReservation(reservation);
 
 
 

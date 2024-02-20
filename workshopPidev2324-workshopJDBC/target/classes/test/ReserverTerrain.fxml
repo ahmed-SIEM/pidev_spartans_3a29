@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.DropdownButton?>
+<?import com.gluonhq.charm.glisten.control.Icon?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="534.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.ReservationController">
+   <children>
+      <Label layoutX="384.0" layoutY="217.0" text="terrain" />
+      <DropdownButton id="dropdown1" layoutX="660.0" layoutY="46.0" style="-fx-background-color: #4CAF50;" stylesheets="@test2.css">
+         <items>
+            <MenuItem id="profile1" text="profile" />
+            <MenuItem text="deconnexion" />
+         </items>
+      </DropdownButton>
+      <HBox layoutX="280.0" layoutY="39.0" prefHeight="51.0" prefWidth="380.0" spacing="10">
+         <children>
+            <Button fx:id="buttonAccueil" style="-fx-background-radius: 15px; -fx-background-color: #4CAF50;" text="Accueil" textFill="#02365c">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonActualites" style="-fx-background-radius: 15px; -fx-background-color: #4CAF50;" text="Actualités" textFill="#02365c">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonReservation" style="-fx-background-radius: 15px; -fx-background-color: #4CAF50;" text="Réservation" textFill="#02365c">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonEvenement" style="-fx-background-radius: 15px; -fx-background-color: #4CAF50;" text="Événement" textFill="#02365c">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <ImageView fitHeight="65.0" fitWidth="84.0" layoutX="110.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@playmateLogo.png" />
+         </image>
+      </ImageView>
+      <Icon content="ADD_ALERT" layoutX="719.0" layoutY="47.0" />
+      <AnchorPane id="anchroCreerPartie" layoutX="110.0" layoutY="100.0" prefHeight="402.0" prefWidth="583.0" stylesheets="@ReserveTerrain.css">
+         <children>
+            <Button id="submitbutton" layoutX="242.0" layoutY="350.0" mnemonicParsing="false" onAction="#add" prefHeight="37.0" prefWidth="114.0" stylesheets="@button.css" text="confirmer" textFill="#02365c">
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font></Button>
+            <TableView id="tableview1" layoutX="89.0" layoutY="183.0" prefHeight="150.0" prefWidth="420.0" stylesheets="@ReserveTerrain.css">
+              <columns>
+                <TableColumn fx:id="nomTerrain" prefWidth="99.199951171875" text="Nom Terrain" />
+                <TableColumn fx:id="localisation" prefWidth="104.7999267578125" text="localisation" />
+                  <TableColumn fx:id="duree" prefWidth="71.199951171875" text="duree" />
+                  <TableColumn fx:id="prix" prefWidth="61.599945068359375" text="prix" />
+                  <TableColumn fx:id="reserver" prefWidth="85.5999755859375" text="Reserver" />
+              </columns>
+            </TableView>
+            <DatePicker id="date" fx:id="datepicker" layoutX="266.0" layoutY="129.0" prefHeight="26.0" prefWidth="167.0" promptText="chosir une date" />
+            <Label id="label" layoutX="135.0" layoutY="82.0" prefHeight="23.0" prefWidth="114.0" text="    Heure :" textAlignment="CENTER" textFill="#02365c">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </Label>
+            <Label id="label" layoutX="126.0" layoutY="24.0" stylesheets="@ReserveTerrain.css" text="  Choix Equipe : " textAlignment="CENTER" textFill="#02365c">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </Label>
+            <SplitMenuButton id="choixequipe" fx:id="nom_equipe" layoutX="269.0" layoutY="18.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="161.0" text="equipe" textFill="#02365c">
+              <items>
+                <MenuItem fx:id="nom_equipe1" mnemonicParsing="false" text="equipe1" />
+                <MenuItem fx:id="nom_equipe2" mnemonicParsing="false" text="equipe2" />
+              </items>
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+               <stylesheets>
+                  <URL value="@button.css" />
+                  <URL value="@ReserveTerrain.css" />
+               </stylesheets>
+            </SplitMenuButton>
+            <TextField id="heure" layoutX="269.0" layoutY="76.0" prefHeight="23.0" prefWidth="174.0" promptText="la forme 20:00" stylesheets="@ReserveTerrain.css" />
+            <Label id="label" layoutX="145.0" layoutY="138.0" prefHeight="26.0" prefWidth="114.0" stylesheets="@ReserveTerrain.css" text="    Date  :" textAlignment="CENTER" textFill="#02365c">
+               <font>
+                  <Font name="Arial Black" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

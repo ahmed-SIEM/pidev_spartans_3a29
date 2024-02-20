@@ -9,25 +9,26 @@ public class Reservation {
     private String dateReservation ;
     private String heureReservation ;
     private  TypeReservation type ;
-    List<Terrain> listTerrain ;
-    void addListe(Terrain terrain){
-        this.listTerrain.add(terrain);
-    }
+    private int idTerrain ;
 
-
-    public List<Terrain> getListTerrain() {
-        return listTerrain;
-    }
 
     public Reservation() {
     }
 
-    public Reservation(boolean isConfirm, String dateReservation, String heureReservation, TypeReservation type) {
-        listTerrain = new ArrayList<>();
+    public Reservation(boolean isConfirm, String dateReservation, String heureReservation, TypeReservation type , int idTerrain) {
+        this.idTerrain = idTerrain ;
         this.isConfirm = isConfirm;
         this.dateReservation = dateReservation;
         this.heureReservation = heureReservation;
         this.type = type;
+    }
+
+    public int getIdTerrain() {
+        return idTerrain;
+    }
+
+    public void setIdTerrain(int idTerrain) {
+        this.idTerrain = idTerrain;
     }
 
     public int getIdReservation() {

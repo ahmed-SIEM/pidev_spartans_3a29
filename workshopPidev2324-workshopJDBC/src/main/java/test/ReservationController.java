@@ -8,11 +8,16 @@ import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableColumn;
 import models.Reservation;
 import models.Terrain;
+import services.ReservationService;
 
 import java.awt.*;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -51,33 +56,40 @@ public class ReservationController implements Initializable {
     private TableColumn<Terrain, Checkbox> reserver;
 
     public boolean verfierHeure(String horaire) {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH'h'mm");
-        sdf.setLenient(false);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
         try {
-
-            Date date = sdf.parse(horaire);
-
-            Date plageDebut = sdf.parse("08h00");
-            Date plageFin = sdf.parse("23h59");
-
-
-            return !date.before(plageDebut) && !date.after(plageFin);
-        } catch (ParseException e) {
-
+            LocalTime heure = LocalTime.parse(horaire, formatter);
+            return (heure.isAfter(LocalTime.of(7, 59)) && heure.isBefore(LocalTime.of(23, 0)));
+        } catch (Exception e) {
             return false;
+        }
+    }
+    public boolean verfierDate(DatePicker datepicker){
+        LocalDate dateActuelle = LocalDate.now();
+        LocalDate dateSelectionnee = datepicker.getValue();
+        return dateSelectionnee != null && dateSelectionnee.isAfter(dateActuelle);
+    }
 
-
+    public String convertirDateEnString(DatePicker datepicker){
+        LocalDate dateSelectionnee = datepicker.getValue(); ;
+        if (dateSelectionnee != null) {
+            return dateSelectionnee.toString();
+        } else {
+            return null;
         }
     }
 
-    public static int i ;
-    public void add(ActionEvent event) {
 
 
-
-        if(verfierHeure(heure.getText())){
-            Reservation r1 = new Reservation(false,this.datepicker.getValue().toString(),heure.getText(),ReserverTerrainPourEquipe);
-        //r1.getListTerrain().add();
+    public void add(ActionEvent event) throws SQLException {
+        if(verfierHeure(heure.getText()) && verfierDate(datepicker)){
+            String date = convertirDateEnString(datepicker);
+            //                                                                    a ajouter id terrain
+            int idt = 1 ;
+            Reservation r1 = new Reservation(false,date,heure.getText(),ReserverTerrainPourEquipe ,idt);
+            ReservationService reservationService = new ReservationService();
+            reservationService.ajouterReservation(r1);
         }
     }
 

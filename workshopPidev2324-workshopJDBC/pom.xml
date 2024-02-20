@@ -32,12 +32,7 @@
             <version>21.0.2</version>
         </dependency>
 
-        <!-- Add BootstrapFX dependency -->
-        <dependency>
-            <groupId>org.kordamp.bootstrapfx</groupId>
-            <artifactId>bootstrapfx-core</artifactId>
-            <version>0.4.0</version>
-        </dependency>
+
     </dependencies>
 
     <build>

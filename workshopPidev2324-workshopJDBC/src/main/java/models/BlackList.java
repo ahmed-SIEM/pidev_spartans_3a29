@@ -2,12 +2,19 @@ package models;
 
 public class BlackList {
     private int idBlackList ;
+    private int idMembre ;
+    private int idTerrain ;
     private Reservation reservation ;
     private int duree ;
     private String cause ;
 
-    public BlackList(int idBlackList, Reservation reservation, int duree, String cause) {
-        this.idBlackList = idBlackList;
+    public BlackList() {
+    }
+
+    public BlackList( int idMembre, int idTerrain, Reservation reservation, int duree, String cause) {
+
+        this.idMembre = idMembre;
+        this.idTerrain = idTerrain;
         this.reservation = reservation;
         this.duree = duree;
         this.cause = cause;
@@ -19,6 +26,22 @@ public class BlackList {
 
     public void setIdBlackList(int idBlackList) {
         this.idBlackList = idBlackList;
+    }
+
+    public int getIdMembre() {
+        return idMembre;
+    }
+
+    public void setIdMembre(int idMembre) {
+        this.idMembre = idMembre;
+    }
+
+    public int getIdTerrain() {
+        return idTerrain;
+    }
+
+    public void setIdTerrain(int idTerrain) {
+        this.idTerrain = idTerrain;
     }
 
     public Reservation getReservation() {
@@ -49,6 +72,8 @@ public class BlackList {
     public String toString() {
         return "BlackList{" +
                 "idBlackList=" + idBlackList +
+                ", idMembre=" + idMembre +
+                ", idTerrain=" + idTerrain +
                 ", reservation=" + reservation +
                 ", duree=" + duree +
                 ", cause='" + cause + '\'' +

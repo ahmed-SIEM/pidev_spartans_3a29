@@ -11,7 +11,10 @@
 #vbox1 Label, #vbox2 Label, #vbox3 Label {
     -fx-text-fill: #4caf50;
 }
+##anchrocreation1:hover{
+-fx-background-color: rgba(2, 54, 92, 0.8);
 
+}
 #vbox1 Button11, #vbox2 Button22, #vbox3 Button33 {
     -fx-background-color: transparent;
     -fx-text-fill: #4caf50;
@@ -19,6 +22,9 @@
     -fx-border-color: #4caf50;
     -fx-border-width: 2px;
     -fx-padding: 5 10;
+}
+#vbox1:hover{
+-fx-background-color: rgba(255, 255, 255, 0.5);
 }
 
 #vbox1 Button11:hover, #vbox2 Button22:hover, #vbox3 Button33:hover {
