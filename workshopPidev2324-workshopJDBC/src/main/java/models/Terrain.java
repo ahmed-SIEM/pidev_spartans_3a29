@@ -23,6 +23,10 @@ public class Terrain {
         this.duree = duree;
     }
 
+    public Terrain() {
+
+    }
+
     @Override
     public String toString() {
         return "Terrain{" +

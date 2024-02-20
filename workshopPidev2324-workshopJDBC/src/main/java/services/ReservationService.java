@@ -156,6 +156,7 @@ public class ReservationService {
             }
 
         }
+        // appel de l historique
         public void supprimerReservation(int idreservation) throws SQLException {
 
             String query = "DELETE FROM reservation WHERE idReservation = ?";
