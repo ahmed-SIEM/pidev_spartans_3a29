@@ -10,6 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Pidev" target="17" />
       <module name="workshoppidev" target="17" />
     </bytecodeTargetLevel>
   </component>
