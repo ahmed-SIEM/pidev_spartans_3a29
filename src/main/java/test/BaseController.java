@@ -55,8 +55,6 @@ public class BaseController {
         File selectedFile = fileChooser.showOpenDialog(uploadButton.getScene().getWindow());
         if (selectedFile != null) {
             // Move the selected file to the resources folder
-            File targetDir = new File("src/main/resources");
-            targetDir.mkdirs();
             try {
                 Path targetPath = Paths.get("src/main/resources", selectedFile.getName());
                 Files.move(selectedFile.toPath(), targetPath, StandardCopyOption.REPLACE_EXISTING);

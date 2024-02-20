@@ -80,31 +80,29 @@ public class SeconnecterController {
             alert.setHeaderText("L'un des champs est incorrect");
             alert.showAndWait();
 
-        }else{
-            try {
-                // Load the FXML file for the registration scene
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Base.fxml"));
-                Parent root = loader.load();
-
-                // Get the controller for the registration scene
-                BaseController baseController = loader.getController();
-
-
-                baseController.setData(Us.getByEmail(tfaddress.getText()));
-
-
-                // Switch to the registration scene
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-
-                ((Stage) sinscrirebutton.getScene().getWindow()).close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
+        try {
+            // Load the FXML file for the registration scene
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Base.fxml"));
+            Parent root = loader.load();
 
+            // Get the controller for the registration scene
+            BaseController baseController = loader.getController();
+
+
+             baseController.setData(Us.getByEmail(tfaddress.getText()));
+
+
+            // Switch to the registration scene
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            ((Stage) sinscrirebutton.getScene().getWindow()).close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
