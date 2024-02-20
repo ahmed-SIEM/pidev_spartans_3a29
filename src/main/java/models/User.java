@@ -1,9 +1,15 @@
 package models;
 
+import java.util.Date;
+
 public class User {
     private int id;
     private int age;
+    private String image ;
+    private int Phone ;
+    private String role ;
 
+    private Date Date_de_Creation;
     private String Email ;
     private String Address;
 
@@ -11,6 +17,24 @@ public class User {
     private String name;
 
     private String Status = "Active" ;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Date getDate_de_Creation() {
+        return Date_de_Creation;
+    }
+
+    public void setDate_de_Creation(Date date_de_Creation) {
+        Date_de_Creation = date_de_Creation;
+    }
+
+
 
     public String getStatus() {
         return Status;
@@ -28,8 +52,6 @@ public class User {
         this.role = role;
     }
 
-    private int Phone ;
-    private String role ;
 
     public String getEmail() {
         return Email;
