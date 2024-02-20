@@ -54,10 +54,7 @@ public class UserService implements IService<User> {
 
 
     public void add(User t) throws SQLException{
-        if(userExist(t.getEmail())){
-            System.out.println("User already exist");
-            return;
-        }
+
 
         String query = "INSERT INTO user (age, name , email , address , password , phone , role) VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = connection.prepareStatement(query);

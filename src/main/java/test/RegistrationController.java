@@ -90,7 +90,13 @@ public class RegistrationController {
             alert.setContentText("vous pouvez les remplir soigneusement");
             alert.setHeaderText("Tous les champs sont requis");
             alert.showAndWait();
-        }else {
+        }else if(us.userExist(tfaddresselectronique.getText())){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("l'utilisateur existe déjà");
+            alert.setContentText("Il y a déjà un utilisateur avec cet e-mail");
+            alert.setHeaderText("Warning Alert");
+            alert.showAndWait();
+        } else{
             String role;
             if(rbtnfournisseur.isSelected()){
                 role = "fournisseur" ;
@@ -103,17 +109,19 @@ public class RegistrationController {
             }
             User u1 = new User(0,tfaddresselectronique.getText(),"",tdmotdepass.getText(),tfnom.getText(),0, role);
             System.out.println(u1);
-            us.add(u1);
-            openseconnectertab(event);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Compte créé avec succès");
+                us.add(u1);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Compte créé avec succès");
 
-            alert.setHeaderText("Votre Compte a été créé avec succès");
+                alert.setHeaderText("Votre Compte a été créé avec succès");
 
-            tfnom.setText("");
-            tfaddresselectronique.setText("");
-            tdmotdepass.setText("");
-            tdconfirmermotdepass.setText("");
+                tfnom.setText("");
+                tfaddresselectronique.setText("");
+                tdmotdepass.setText("");
+                tdconfirmermotdepass.setText("");
+
+
+
 
 
 
