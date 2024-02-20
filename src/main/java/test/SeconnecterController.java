@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import models.User;
 import services.GestionUser.UserService;
 
 import java.io.IOException;
@@ -40,6 +41,14 @@ public class SeconnecterController {
     @FXML
     void forgetpassword(ActionEvent event) {
         System.out.println("forgetpassword");
+    }
+
+    private User CurrentUser ;
+    public void setData(User us) {
+
+        this.CurrentUser = us;
+        tfaddress.setText(us.getEmail());
+        tfmotdepass.setText(us.getPassword());
     }
 
     @FXML

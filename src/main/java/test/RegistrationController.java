@@ -62,6 +62,8 @@ public class RegistrationController {
             SeconnecterController seconnectercontroller = loader.getController();
 
 
+
+
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
@@ -78,7 +80,7 @@ public class RegistrationController {
 
     @FXML
     void sinscrire(ActionEvent event) throws SQLException {
-        System.out.println("hello");
+
         if (tfaddresselectronique.getText().equals("")
                 || tfnom.getText().equals("")
                 || tdmotdepass.getText().equals("")){
@@ -87,6 +89,10 @@ public class RegistrationController {
             alert.setContentText("vous pouvez les remplir soigneusement");
             alert.setHeaderText("Tous les champs sont requis");
             alert.showAndWait();
+            tfnom.setText("");
+            tfaddresselectronique.setText("");
+            tdmotdepass.setText("");
+            tdconfirmermotdepass.setText("");
             return;
         }
         if(!tdmotdepass.getText().equals(tdconfirmermotdepass.getText()) ){
@@ -95,6 +101,10 @@ public class RegistrationController {
             alert.setContentText("mot de passe et confirmer le mot de mot de passe devraient avoir le même contenu");
             alert.setHeaderText("Warning Alert");
             alert.showAndWait();
+            tfnom.setText("");
+            tfaddresselectronique.setText("");
+            tdmotdepass.setText("");
+            tdconfirmermotdepass.setText("");
             return;
         }
         if(us.userExist(tfaddresselectronique.getText())){
@@ -103,6 +113,10 @@ public class RegistrationController {
             alert.setContentText("Il y a déjà un utilisateur avec cet e-mail");
             alert.setHeaderText("Warning Alert");
             alert.showAndWait();
+            tfnom.setText("");
+            tfaddresselectronique.setText("");
+            tdmotdepass.setText("");
+            tdconfirmermotdepass.setText("");
             return;
         }
 
@@ -118,17 +132,30 @@ public class RegistrationController {
                 role = "Joueur";
             }
             User u1 = new User(0,tfaddresselectronique.getText(),"",tdmotdepass.getText(),tfnom.getText(),0, role);
-            System.out.println(u1);
                 us.add(u1);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Compte créé avec succès");
-
                 alert.setHeaderText("Votre Compte a été créé avec succès");
+                alert.showAndWait();
+        try {
 
-                tfnom.setText("");
-                tfaddresselectronique.setText("");
-                tdmotdepass.setText("");
-                tdconfirmermotdepass.setText("");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SeConnecter.fxml"));
+            Parent root = loader.load();
+
+            SeconnecterController seconnectercontroller = loader.getController();
+
+            seconnectercontroller.setData(u1);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            ((Stage) btnSeconnecter.getScene().getWindow()).close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
 
 
 
