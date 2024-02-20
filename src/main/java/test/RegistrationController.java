@@ -78,25 +78,35 @@ public class RegistrationController {
 
     @FXML
     void sinscrire(ActionEvent event) throws SQLException {
+        System.out.println("hello");
+        if (tfaddresselectronique.getText().equals("")
+                || tfnom.getText().equals("")
+                || tdmotdepass.getText().equals("")){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Champ vide");
+            alert.setContentText("vous pouvez les remplir soigneusement");
+            alert.setHeaderText("Tous les champs sont requis");
+            alert.showAndWait();
+            return;
+        }
         if(!tdmotdepass.getText().equals(tdconfirmermotdepass.getText()) ){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("mots de passe ne correspondent pas");
             alert.setContentText("mot de passe et confirmer le mot de mot de passe devraient avoir le même contenu");
             alert.setHeaderText("Warning Alert");
             alert.showAndWait();
-        }else if (tfaddresselectronique.getText().equals("") || tfnom.getText().equals("") || tdmotdepass.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Champ vide");
-            alert.setContentText("vous pouvez les remplir soigneusement");
-            alert.setHeaderText("Tous les champs sont requis");
-            alert.showAndWait();
-        }else if(us.userExist(tfaddresselectronique.getText())){
+            return;
+        }
+        if(us.userExist(tfaddresselectronique.getText())){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("l'utilisateur existe déjà");
             alert.setContentText("Il y a déjà un utilisateur avec cet e-mail");
             alert.setHeaderText("Warning Alert");
             alert.showAndWait();
-        } else{
+            return;
+        }
+
+
             String role;
             if(rbtnfournisseur.isSelected()){
                 role = "fournisseur" ;
@@ -126,7 +136,7 @@ public class RegistrationController {
 
 
 
-        }
+
 
 
     }
