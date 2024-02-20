@@ -1,7 +1,6 @@
-test\MainFx.class
-services\GestionUser\IService.class
-services\GestionUser\UserService.class
 test\Main.class
 utils\MyDatabase.class
 models\User.class
-test\SampleController.class
+test\MainFx.class
+services\GestionUser\IService.class
+services\GestionUser\UserService.class
