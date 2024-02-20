@@ -1,6 +1,7 @@
 package models;
 
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 
 public class User {
     private int id;
@@ -9,7 +10,7 @@ public class User {
     private int Phone ;
     private String role ;
 
-    private Date Date_de_Creation;
+    private java.sql.Date Date_de_Creation;
     private String Email ;
     private String Address;
 
@@ -26,11 +27,11 @@ public class User {
         this.image = image;
     }
 
-    public Date getDate_de_Creation() {
+    public java.sql.Date getDate_de_Creation() {
         return Date_de_Creation;
     }
 
-    public void setDate_de_Creation(Date date_de_Creation) {
+    public void setDate_de_Creation(java.sql.Date date_de_Creation) {
         Date_de_Creation = date_de_Creation;
     }
 
@@ -85,27 +86,7 @@ public class User {
         Phone = phone;
     }
 
-    public User(int age, String email, String address, String password, String name, int phone , String role) {
-        this.role = role;
-        this.age = age;
-        this.Email = email;
-        this.Address = address;
-        this.Password = password;
-        this.name = name;
-        this.Phone = phone;
-    }
 
-    public User(int age, String name, String address, String password,  int phone ) {
-        this.age = age;
-        this.Address = address;
-        this.Password = password;
-        this.name = name;
-        this.Phone = phone;
-    }
-
-
-
-    public User(){}
 
     public int getId() {
         return id;
@@ -130,7 +111,30 @@ public class User {
         this.name = name;    }
 
 
+    public User(int id, int age, int phone, String role, Date date_de_Creation, String email, String address, String password, String name) {
+        this.id = id;
+        this.age = age;
+        this.Phone = phone;
+        this.role = role;
+        this.Date_de_Creation = date_de_Creation;
+        this.Email = email;
+        this.Address = address;
+        this.Password = password;
+        this.name = name;
 
+    }
+
+    public User(String role, Date date_de_Creation, String email, String password, String name) {
+        this.role = role;
+        this.Date_de_Creation = date_de_Creation;
+        this.Email = email;
+        this.Password = password;
+        this.name = name;
+
+    }
+
+
+    public User(){}
 
     @Override
     public String toString() {

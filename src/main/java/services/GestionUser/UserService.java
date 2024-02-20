@@ -56,15 +56,15 @@ public class UserService implements IService<User> {
     public void add(User t) throws SQLException{
 
 
-        String query = "INSERT INTO user (age, name , email , address , password , phone , role) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO user (email , password , name , role , date_de_creation , status ) VALUES (?,?,?, ?, ?, ?)";
         PreparedStatement ps = connection.prepareStatement(query);
-        ps.setInt(1, t.getAge());
-        ps.setString(2, t.getName());
-        ps.setString(3, t.getEmail());
-        ps.setString(4, t.getAddress());
-        ps.setString(5, t.getPassword());
-        ps.setInt(6, t.getPhone());
-        ps.setString(7, t.getRole());
+        ps.setString(1, t.getEmail());
+        ps.setString(2, t.getPassword());
+        ps.setString(3, t.getName());
+        ps.setString(4, t.getRole());
+        ps.setDate(5,t.getDate_de_Creation());
+        ps.setString(6,t.getStatus());
+
         ps.executeUpdate();
 
     }

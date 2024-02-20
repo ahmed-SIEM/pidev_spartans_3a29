@@ -12,7 +12,9 @@ import org.w3c.dom.events.MouseEvent;
 import services.GestionUser.UserService;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -131,7 +133,10 @@ public class RegistrationController {
             }else{
                 role = "Joueur";
             }
-            User u1 = new User(0,tfaddresselectronique.getText(),"",tdmotdepass.getText(),tfnom.getText(),0, role);
+
+            Date currentdate = java.sql.Date.valueOf(LocalDate.now());
+
+            User u1 = new User(role,currentdate,tfaddresselectronique.getText(),tdmotdepass.getText(),tfnom.getText());
                 us.add(u1);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Compte créé avec succès");
@@ -154,14 +159,6 @@ public class RegistrationController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-
-
-
-
-
 
 
 
