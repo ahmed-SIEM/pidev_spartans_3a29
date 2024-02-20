@@ -32,6 +32,7 @@ public class UserService implements IService<User> {
             user.setPassword(rs.getString("password"));
             user.setPhone(rs.getInt("phone"));
             user.setRole(rs.getString("role"));
+            user.setDate_de_Creation(rs.getString("DatedeCreation"));
         }
         return user;
     }
@@ -56,13 +57,13 @@ public class UserService implements IService<User> {
     public void add(User t) throws SQLException{
 
 
-        String query = "INSERT INTO user (email , password , name , role , date_de_creation , status ) VALUES (?,?,?, ?, ?, ?)";
+        String query = "INSERT INTO user (email , password , name , role , DatedeCreation , status ) VALUES (?,?,?, ?, ?, ?)";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setString(1, t.getEmail());
         ps.setString(2, t.getPassword());
         ps.setString(3, t.getName());
         ps.setString(4, t.getRole());
-        ps.setDate(5,t.getDate_de_Creation());
+        ps.setString(5,t.getDate_de_Creation());
         ps.setString(6,t.getStatus());
 
         ps.executeUpdate();
@@ -110,6 +111,7 @@ public class UserService implements IService<User> {
             user.setPassword(rs.getString("password"));
             user.setPhone(rs.getInt("phone"));
             user.setRole(rs.getString("role"));
+
             users.add(user);
         }
         return users;

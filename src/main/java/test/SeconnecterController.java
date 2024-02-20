@@ -54,23 +54,13 @@ public class SeconnecterController {
     @FXML
     void sinscrire(ActionEvent event) {
         try {
-            // Load the FXML file for the registration scene
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Registration.fxml"));
             Parent root = loader.load();
-
-            // Get the controller for the registration scene
             RegistrationController registrationController = loader.getController();
-
-            // Pass any data or variables if needed
-            // registrationController.setData(...);
-
-            // Switch to the registration scene
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
-
             ((Stage) sinscrirebutton.getScene().getWindow()).close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -96,10 +86,10 @@ public class SeconnecterController {
             Parent root = loader.load();
 
             // Get the controller for the registration scene
-            AcceuilController baseController = loader.getController();
+            AcceuilController acceuilController = loader.getController();
 
 
-             baseController.setData(Us.getByEmail(tfaddress.getText()));
+            acceuilController.setData(Us.getByEmail(tfaddress.getText()));
 
 
             // Switch to the registration scene

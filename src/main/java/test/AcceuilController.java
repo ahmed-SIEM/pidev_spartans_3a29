@@ -9,16 +9,27 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.User;
+import services.GestionUser.UserService;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class AcceuilController {
+    UserService us = new UserService();
 
     @FXML
     private Text Username;
 
     @FXML
     private Button btnseeProfile;
+
+    private User CurrentUser ;
+    public void setData(User u) {
+        this.CurrentUser = u ;
+        Username.setText(u.getName());
+
+
+    }
 
     @FXML
     void btnseeProfile(ActionEvent event) {
@@ -28,10 +39,10 @@ public class AcceuilController {
             Parent root = loader.load();
 
 
-            ProfileController profile = loader.getController();
+            ProfileController profilecontroler = loader.getController();
 
 
-            // registrationController.setData(...);
+            profilecontroler.setData(CurrentUser);
 
 
             Stage stage = new Stage();
@@ -45,9 +56,5 @@ public class AcceuilController {
         }
 
     }
-  private User CurrentUser ;
-    public void setData(User u) {
-        this.CurrentUser = u ;
-        Username.setText(u.getName());
-    }
+
 }

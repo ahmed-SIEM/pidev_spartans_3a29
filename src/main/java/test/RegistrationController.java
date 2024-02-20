@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -134,10 +135,13 @@ public class RegistrationController {
                 role = "Joueur";
             }
 
-            Date currentdate = java.sql.Date.valueOf(LocalDate.now());
+        LocalDate currentDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String dateString = currentDate.format(formatter);
 
-            User u1 = new User(role,currentdate,tfaddresselectronique.getText(),tdmotdepass.getText(),tfnom.getText());
+            User u1 = new User(role,dateString,tfaddresselectronique.getText(),tdmotdepass.getText(),tfnom.getText());
                 us.add(u1);
+
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Compte créé avec succès");
                 alert.setHeaderText("Votre Compte a été créé avec succès");

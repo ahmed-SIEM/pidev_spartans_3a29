@@ -1,7 +1,6 @@
 package models;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 public class User {
     private int id;
@@ -10,7 +9,7 @@ public class User {
     private int Phone ;
     private String role ;
 
-    private java.sql.Date Date_de_Creation;
+    private String Date_de_Creation;
     private String Email ;
     private String Address;
 
@@ -27,12 +26,12 @@ public class User {
         this.image = image;
     }
 
-    public java.sql.Date getDate_de_Creation() {
+    public String getDate_de_Creation() {
         return Date_de_Creation;
     }
 
-    public void setDate_de_Creation(java.sql.Date date_de_Creation) {
-        Date_de_Creation = date_de_Creation;
+    public void setDate_de_Creation(String date_de_Creation) {
+        this.Date_de_Creation = date_de_Creation;
     }
 
 
@@ -42,7 +41,7 @@ public class User {
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.Status = status;
     }
 
     public String getRole() {
@@ -59,7 +58,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.Email = email;
     }
 
     public String getAddress() {
@@ -67,7 +66,7 @@ public class User {
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.Address = address;
     }
 
     public String getPassword() {
@@ -75,7 +74,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.Password = password;
     }
 
     public int getPhone() {
@@ -83,7 +82,7 @@ public class User {
     }
 
     public void setPhone(int phone) {
-        Phone = phone;
+        this.Phone = phone;
     }
 
 
@@ -111,7 +110,7 @@ public class User {
         this.name = name;    }
 
 
-    public User(int id, int age, int phone, String role, Date date_de_Creation, String email, String address, String password, String name) {
+    public User(int id, int age, int phone, String role, String date_de_Creation, String email, String address, String password, String name) {
         this.id = id;
         this.age = age;
         this.Phone = phone;
@@ -124,7 +123,7 @@ public class User {
 
     }
 
-    public User(String role, Date date_de_Creation, String email, String password, String name) {
+    public User(String role, String date_de_Creation, String email, String password, String name) {
         this.role = role;
         this.Date_de_Creation = date_de_Creation;
         this.Email = email;
@@ -141,12 +140,15 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", age=" + age +
+                ", image='" + image + '\'' +
+                ", Phone=" + Phone +
+                ", role='" + role + '\'' +
+                ", Date_de_Creation=" + Date_de_Creation +'\''+
                 ", Email='" + Email + '\'' +
                 ", Address='" + Address + '\'' +
                 ", Password='" + Password + '\'' +
                 ", name='" + name + '\'' +
-                ", Phone=" + Phone +
-                ", role='" + role + '\'' +
+                ", Status='" + Status + '\'' +
                 '}';
     }
 }
