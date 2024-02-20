@@ -104,11 +104,19 @@ public class RegistrationController {
             User u1 = new User(0,tfaddresselectronique.getText(),"",tdmotdepass.getText(),tfnom.getText(),0, role);
             System.out.println(u1);
             us.add(u1);
+            openseconnectertab(event);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Compte créé avec succès");
 
             alert.setHeaderText("Votre Compte a été créé avec succès");
-            alert.showAndWait();
+
+            tfnom.setText("");
+            tfaddresselectronique.setText("");
+            tdmotdepass.setText("");
+            tdconfirmermotdepass.setText("");
+
+
+
 
         }
 
