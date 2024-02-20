@@ -30,14 +30,14 @@ public class TerrainService  implements ITerrain<Terrain>{
         ps.executeUpdate();
     }
     public void update(Terrain t) throws SQLException{
-        String query = "UPDATE user SET id = ?, nom = ?, address = ?, gradin = ?, vestiaire = ?, status = ?, duree = ?, prix = ? WHERE id = ?";
+        String query = "UPDATE user SET id = ?, address = ?, gradin = ?, vestiaire = ?, status = ?, nom = ?, duree = ?, prix = ? WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, t.getId());
-        ps.setString(2, t.getNomt());
-        ps.setString(3, t.getAddress());
-        ps.setString(4, t.getGradin());
-        ps.setString(5, t.getVestiaire());
-        ps.setString(6, t.getStatus());
+        ps.setString(2, t.getAddress());
+        ps.setString(3, t.getGradin()); // Corrected field name
+        ps.setString(4, t.getVestiaire());
+        ps.setString(5, t.getStatus());
+        ps.setString(6, t.getNomt());
         ps.setInt(7, t.getDuree());
         ps.setInt(8, t.getPrix());
         ps.executeUpdate();
@@ -60,7 +60,7 @@ public class TerrainService  implements ITerrain<Terrain>{
             terrain.setId(rs.getInt("id"));
             terrain.setNomt(rs.getString("nom"));
             terrain.setAddress(rs.getString("address"));
-            terrain.setGradin(rs.getString("address"));
+            terrain.setGradin(rs.getString("gradin"));
             terrain.setVestiaire(rs.getString("vestiaire"));
             terrain.setStatus(rs.getString("status"));
             terrain.setDuree(rs.getInt("duree"));
@@ -87,5 +87,7 @@ public class TerrainService  implements ITerrain<Terrain>{
             terrain.setPrix(rs.getInt("prix"));
         }
         return terrain;
-    }}
+    }
+
+}
 

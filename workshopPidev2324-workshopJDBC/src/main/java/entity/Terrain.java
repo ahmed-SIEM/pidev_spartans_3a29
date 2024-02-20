@@ -1,20 +1,20 @@
 package entity;
 
-import java.util.Objects;
 
 public class Terrain {
     private int id;
-    private String nomt;
     private String address;
-    private String gardin;
+    private String gradin;
     private String vestiaire;
     private String status;
+    private String nomt;
+
     private int prix;
     private  int duree;
-    public Terrain(int id, String address, String gardin, String vestiaire, String status,String nomt, int prix, int duree) {
+    public Terrain(int id, String address, String gradin, String vestiaire, String status,String nomt, int prix, int duree) {
         this.id = id;
         this.address = address;
-        this.gardin = gardin;
+        this.gradin = gradin;
         this.vestiaire = vestiaire;
         this.status = status;
         this.nomt = nomt;
@@ -22,25 +22,17 @@ public class Terrain {
         this.duree = duree;
     }
 
-  /*  public Terrain(int id, String nomt, String address, String gardin, String vestiaire, String status, int prix, int duree) {
-        this.id = id;
-        this.nomt = nomt;
-        this.address = address;
-        this.gardin = gardin;
-        this.vestiaire = vestiaire;
-        this.status = status;
-        this.prix = prix;
-        this.duree = duree;
-    }*/
+    public Terrain(String text, String text1, int i, String text2, String text3, int i1, int i2) {
+    }
 
 
     @Override
     public String toString() {
         return "Terrain{" +
-                "id=" + id +
+                ", id='" + id + '\'' +
                 ", nomt='" + nomt + '\'' +
                 ", address='" + address + '\'' +
-                ", gardin='" + gardin + '\'' +
+                ", gradin='" + gradin + '\'' +
                 ", vestiaire='" + vestiaire + '\'' +
                 ", status='" + status + '\'' +
                 ", prix=" + prix +
@@ -76,13 +68,7 @@ public class Terrain {
         this.duree = duree;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getAddress() {
         return address;
@@ -93,11 +79,19 @@ public class Terrain {
     }
 
     public String getGradin() {
-        return gardin;
+        return gradin;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setGradin(String gardin) {
-        this.gardin = gardin;
+        this.gradin = gardin;
     }
 
     public String getVestiaire() {
