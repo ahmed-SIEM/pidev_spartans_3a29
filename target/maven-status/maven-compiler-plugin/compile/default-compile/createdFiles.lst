@@ -1,6 +1,8 @@
+test\AcceuilController.class
 test\Main.class
 utils\MyDatabase.class
 models\User.class
+test\ProfileController.class
 test\MainFx.class
 services\GestionUser\IService.class
 services\GestionUser\UserService.class

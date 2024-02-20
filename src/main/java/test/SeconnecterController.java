@@ -92,11 +92,11 @@ public class SeconnecterController {
         }
         try {
             // Load the FXML file for the registration scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Base.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Acceuil.fxml"));
             Parent root = loader.load();
 
             // Get the controller for the registration scene
-            BaseController baseController = loader.getController();
+            AcceuilController baseController = loader.getController();
 
 
              baseController.setData(Us.getByEmail(tfaddress.getText()));
