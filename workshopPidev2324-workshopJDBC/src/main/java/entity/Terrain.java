@@ -11,18 +11,18 @@ public class Terrain {
     private String status;
     private int prix;
     private  int duree;
-
-    public Terrain(int id, String address, String gardin, String vestiaire, String status, int prix, int duree) {
+    public Terrain(int id, String address, String gardin, String vestiaire, String status,String nomt, int prix, int duree) {
         this.id = id;
         this.address = address;
         this.gardin = gardin;
         this.vestiaire = vestiaire;
         this.status = status;
+        this.nomt = nomt;
         this.prix = prix;
         this.duree = duree;
     }
 
-    public Terrain(int id, String nomt, String address, String gardin, String vestiaire, String status, int prix, int duree) {
+  /*  public Terrain(int id, String nomt, String address, String gardin, String vestiaire, String status, int prix, int duree) {
         this.id = id;
         this.nomt = nomt;
         this.address = address;
@@ -31,7 +31,7 @@ public class Terrain {
         this.status = status;
         this.prix = prix;
         this.duree = duree;
-    }
+    }*/
 
 
     @Override
@@ -46,19 +46,6 @@ public class Terrain {
                 ", prix=" + prix +
                 ", duree=" + duree +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Terrain terrain = (Terrain) o;
-        return id == terrain.id && prix == terrain.prix && duree == terrain.duree && Objects.equals(nomt, terrain.nomt) && Objects.equals(address, terrain.address) && Objects.equals(gardin, terrain.gardin) && Objects.equals(vestiaire, terrain.vestiaire) && Objects.equals(status, terrain.status);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nomt, address, gardin, vestiaire, status, prix, duree);
     }
 
     public String getNomt() {
@@ -105,11 +92,11 @@ public class Terrain {
         this.address = address;
     }
 
-    public String getGardin() {
+    public String getGradin() {
         return gardin;
     }
 
-    public void setGardin(String gardin) {
+    public void setGradin(String gardin) {
         this.gardin = gardin;
     }
 

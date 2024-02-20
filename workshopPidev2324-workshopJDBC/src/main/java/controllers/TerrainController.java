@@ -1,6 +1,7 @@
 package controllers;
 
 import com.mysql.cj.jdbc.JdbcConnection;
+import com.sun.jdi.IntegerValue;
 import entity.Terrain;
 import javafx.beans.Observable;
 import javafx.beans.property.Property;
@@ -15,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn;
 
 import javafx.scene.control.cell.PropertyValueFactory;
+import services.TerrainService;
 import utils.MyDatabase;
 
 import java.net.URL;
@@ -24,10 +26,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class TerrainController implements Initializable {
-    Connection connection = null;
-    PreparedStatement t = null;
-    ResultSet rs = null;
+public class TerrainController  {
+    Connection connection ;
+    PreparedStatement t;
+    ResultSet rs;
 
     @FXML
     private Button btnclear;
@@ -63,11 +65,11 @@ public class TerrainController implements Initializable {
 
     @FXML
     private TextField tfstatus;
-
     @FXML
-    private TextField tfvestiare;
+    private TextField tfvestiaire;
+
      @FXML
-        private TextField tfduree;
+     private TextField tfduree;
     @FXML
     private TableColumn<Terrain, String> caddress;
 
@@ -93,12 +95,12 @@ public class TerrainController implements Initializable {
 
     @FXML
     private TableView<Terrain> table;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+TerrainService ts=new TerrainService();
+    //@Override
+  /*  public void initialize(URL url, ResourceBundle resourceBundle) {
     showTerrains();
     }
-    public ObservableList<Terrain> getTerrain(){
+    /*public ObservableList<Terrain> getTerrain(){
         ObservableList<Terrain> terrains = FXCollections.observableArrayList();
         String query = "select* from terrain";
         connection = MyDatabase.getInstance().getConnection();
@@ -124,35 +126,45 @@ public void showTerrains(){
         ObservableList<Terrain> list = getTerrain();
         table.setItems(list);
         idc.setCellValueFactory(new PropertyValueFactory<Terrain,Integer>("id"));
-        caddress.setCellValueFactory(new PropertyValueFactory<Terrain,String>("address"));
+    cnom.setCellValueFactory(new PropertyValueFactory<Terrain,String>("nom"));
+    caddress.setCellValueFactory(new PropertyValueFactory<Terrain,String>("address"));
         cgradin.setCellValueFactory(new PropertyValueFactory<Terrain,String>("gradin"));
         cvestiaire.setCellValueFactory(new PropertyValueFactory<Terrain,String >("vestiaire"));
         cstatus.setCellValueFactory(new PropertyValueFactory<Terrain,String>("status"));
-        cstatus.setCellValueFactory(new PropertyValueFactory<Terrain,String>("status"));
+        cprix.setCellValueFactory(new PropertyValueFactory<Terrain,Integer>("prix"));
+    cduree.setCellValueFactory(new PropertyValueFactory<Terrain,Integer>("duree"));
 
-}
+
+}*/
 
     @FXML
     void clearField(ActionEvent event) {
     }
 
     @FXML
-    void createTerrain(ActionEvent event) {
-    String insert = "insert into terrain(id,address,gradin,vestiaire,status) values(?,?,?,?,?)";
+    void createTerrain(ActionEvent event) throws SQLException {
+    /*String insert = "insert into terrain(id,nom,address,gradin,vestiaire,status,prix,duree) values(?,?,?,?,?,?,?,?)";
     connection = MyDatabase.getInstance().getConnection();
     try {
          t = connection.prepareStatement(insert);
          t.setString(1,tfid.getText());
-         t.setString(2,tfaddress.getText());
-         t.setString(3,tfgradin.getText());
-         t.setString(4,tfvestiare.getText());
-         t.setString(5,tfstatus.getText());
-         t.executeUpdate();
+        t.setString(2,tfnom.getText());
+        t.setString(3,tfaddress.getText());
+         t.setString(4,tfgradin.getText());
+         t.setString(5,tfvestiare.getText());
+         t.setString(6,tfstatus.getText());
+        t.setInt(7, Integer.parseInt(tfprix.getText()));
+        t.setInt(8, Integer.parseInt(tfduree.getText()));
+
+        t.executeUpdate();
          showTerrains();
 
     }   catch (SQLException e){
         throw new RuntimeException(e);
-    }
+    }*/
+
+        ts.add(new Terrain(Integer.parseInt(tfid.getText()),tfaddress.getText(),
+                tfgradin.getText(),tfvestiaire.getText(),(tfstatus.getText()),tfnom.getText(),Integer.parseInt(tfprix.getText()),Integer.parseInt(tfduree.getText())));
     }
 
 
@@ -161,5 +173,7 @@ public void showTerrains(){
     }
 
     @FXML
-    void updateTerrain(ActionEvent event) {}
+    void updateTerrain(ActionEvent event) {
+        
+    }
 }
