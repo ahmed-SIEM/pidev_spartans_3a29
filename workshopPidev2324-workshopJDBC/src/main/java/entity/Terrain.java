@@ -5,13 +5,13 @@ public class Terrain {
     private int id;
     private String address;
     private String gradin;
-    private String vestiaire;
+    private int vestiaire;
     private String status;
     private String nomt;
 
     private int prix;
     private  int duree;
-    public Terrain(int id, String address, String gradin, String vestiaire, String status,String nomt, int prix, int duree) {
+    public Terrain(int id, String address, String gradin, int vestiaire, String status,String nomt, int prix, int duree) {
         this.id = id;
         this.address = address;
         this.gradin = gradin;
@@ -22,9 +22,15 @@ public class Terrain {
         this.duree = duree;
     }
 
-    public Terrain(String text, String text1, int i, String text2, String text3, int i1, int i2) {
+    public Terrain(String address, String gradin, int vestiaire, String status, String nomt, int prix, int duree) {
+        this.address = address;
+        this.gradin = gradin;
+        this.vestiaire = vestiaire;
+        this.status = status;
+        this.nomt = nomt;
+        this.prix = prix;
+        this.duree = duree;
     }
-
 
     @Override
     public String toString() {
@@ -94,11 +100,11 @@ public class Terrain {
         this.gradin = gardin;
     }
 
-    public String getVestiaire() {
+    public int getVestiaire() {
         return vestiaire;
     }
 
-    public void setVestiaire(String vestiaire) {
+    public void setVestiaire(int vestiaire) {
         this.vestiaire = vestiaire;
     }
 

@@ -84,7 +84,7 @@ public class TerrainController  {
     private TableColumn<Terrain, String> cstatus;
 
     @FXML
-    private TableColumn<Terrain, String> cvestiaire;
+    private TableColumn<Terrain, Integer> cvestiaire;
 
     @FXML
     private TableColumn<Terrain, Integer> idc;
@@ -117,7 +117,7 @@ private TerrainService ts=new TerrainService();
                 t.setNomt(rs.getString("nom"));
                 t.setAddress(rs.getString("address"));
                 t.setGradin(rs.getString("gradin"));
-                t.setVestiaire(rs.getString("vestiaire"));
+                t.setVestiaire(rs.getInt("vestiaire"));
                 t.setStatus(rs.getString("status"));
                 t.setPrix(rs.getInt("prix"));
                 t.setDuree(rs.getInt("duree"));
@@ -137,7 +137,7 @@ private TerrainService ts=new TerrainService();
         cnom.setCellValueFactory(new PropertyValueFactory<Terrain,String>("nomt"));
         caddress.setCellValueFactory(new PropertyValueFactory<Terrain,String>("address"));
         cgradin.setCellValueFactory(new PropertyValueFactory<Terrain,String>("gradin"));
-        cvestiaire.setCellValueFactory(new PropertyValueFactory<Terrain,String>("vestiaire"));
+        cvestiaire.setCellValueFactory(new PropertyValueFactory<Terrain,Integer>("vestiaire"));
         cstatus.setCellValueFactory(new PropertyValueFactory<Terrain,String>("status"));
         cprix.setCellValueFactory(new PropertyValueFactory<Terrain,Integer>("prix"));
         cduree.setCellValueFactory(new PropertyValueFactory<Terrain,Integer>("duree"));
@@ -186,7 +186,7 @@ private TerrainService ts=new TerrainService();
     @FXML
     void createTerrain(ActionEvent event) throws SQLException {
         ts.add(new Terrain(Integer.parseInt(tfid.getText()),tfaddress.getText(),
-                tfgradin.getText(),tfvestiaire.getText(),(tfstatus.getText()),tfnom.getText(),Integer.parseInt(tfprix.getText()),Integer.parseInt(tfduree.getText())));
+                tfgradin.getText(),Integer.parseInt(tfvestiaire.getText()),(tfstatus.getText()),tfnom.getText(),Integer.parseInt(tfprix.getText()),Integer.parseInt(tfduree.getText())));
     }
 
 
