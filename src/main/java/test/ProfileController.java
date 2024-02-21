@@ -110,6 +110,7 @@ public class ProfileController {
 
     public void initialize() throws SQLException {
 
+
         // Define a UnaryOperator to filter out non-numeric characters
         UnaryOperator<TextFormatter.Change> filter = change -> {
             String newText = change.getControlNewText();
@@ -181,14 +182,28 @@ public class ProfileController {
             alert.showAndWait();
             return ;
         }
+        if( inputPassword.getText().isEmpty()  ){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("mots de passe invalid");
+            alert.setContentText("le mot de passe ne peut pas être vide");
+            alert.setHeaderText("Warning Alert");
+            alert.showAndWait();
+            return ;
+        }
 
         UserService us = new UserService();
         User UpdateUser = new User();
+
         UpdateUser.setAddress(InputAddress.getText());
-        UpdateUser.setPhone(Integer.parseInt(InputPhone.getText()));
+        UpdateUser.setPhone(
+                InputPhone.getText().isEmpty() ? 0 : Integer.parseInt(InputPhone.getText())
+        );
         UpdateUser.setPassword(inputPassword.getText());
         UpdateUser.setName(InputNom.getText());
-        UpdateUser.setAge(Integer.parseInt(InputAge.getText()));
+        UpdateUser.setAge(
+                InputAge.getText().isEmpty() ? 0 : Integer.parseInt(InputAge.getText())
+
+        );
         us.update(UpdateUser,CurrentUser.getEmail());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Profil mis à jour avec succès\n");
