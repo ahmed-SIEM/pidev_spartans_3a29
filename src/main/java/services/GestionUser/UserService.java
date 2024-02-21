@@ -137,6 +137,8 @@ public class UserService implements IService<User> {
             user.setPassword(rs.getString("password"));
             user.setPhone(rs.getInt("phone"));
             user.setRole(rs.getString("role"));
+            user.setDate_de_Creation(rs.getString("DatedeCreation"));
+            user.setImage(rs.getString("Image"));
             user.setStatus(rs.getString("Status"));
 
             users.add(user);
