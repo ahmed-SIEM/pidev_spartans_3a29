@@ -93,7 +93,7 @@ public class ProfileController {
 
 
         InputAddress.setText(
-                CurrentUser.getEmail().isEmpty() ? "" : CurrentUser.getEmail()
+                CurrentUser.getEmail().isEmpty() ? "" : CurrentUser.getAddress()
         );
         InputAge.setText(
                 CurrentUser.getAge() == 0 ? "" : String.valueOf(CurrentUser.getAge())
