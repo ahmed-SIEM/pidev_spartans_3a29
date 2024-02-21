@@ -157,26 +157,27 @@ public class ProfileController {
                 e.printStackTrace();
 
             }
+            try {
+                UserService us = new UserService();
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("SeConnecter.fxml"));
+                Parent root = loader.load();
+
+                SeconnecterController seconnectercontroller = loader.getController();
+
+
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+
+                ((Stage) btnDesactiver.getScene().getWindow()).close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        try {
-            UserService us = new UserService();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("SeConnecter.fxml"));
-            Parent root = loader.load();
-
-            SeconnecterController seconnectercontroller = loader.getController();
-
-
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-
-            ((Stage) btnDesactiver.getScene().getWindow()).close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
 
     }
