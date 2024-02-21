@@ -16,6 +16,8 @@ import java.sql.SQLException;
 
 public class AcceuilController {
 
+    @FXML
+    private Button btnlogout;
 
     @FXML
     private Text Username;
@@ -55,6 +57,31 @@ public class AcceuilController {
             e.printStackTrace();
         }
 
+    }
+    @FXML
+    void logoutaction(ActionEvent event) {
+        try {
+            UserService us = new UserService();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SeConnecter.fxml"));
+            Parent root = loader.load();
+
+            SeconnecterController seconnectercontroller = loader.getController();
+
+
+            seconnectercontroller.setData(us.getByEmail(CurrentUser.getEmail()));
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            ((Stage) btnlogout.getScene().getWindow()).close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

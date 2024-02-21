@@ -34,6 +34,7 @@ public class UserService implements IService<User> {
             user.setRole(rs.getString("role"));
             user.setDate_de_Creation(rs.getString("DatedeCreation"));
             user.setImage(rs.getString("Image"));
+            user.setStatus(rs.getString("Status"));
         }
         return user;
     }
@@ -106,6 +107,21 @@ public class UserService implements IService<User> {
         ps.executeUpdate();
     }
 
+    public void InvertStatus(String email) throws SQLException {
+        String query = "UPDATE user SET Status = ?  WHERE email = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        if (getByEmail(email).getStatus().equals("Active")) {
+            ps.setString(1, "Desactive");
+        } else {
+            ps.setString(1, "Active");
+        }
+        ps.setString(2,email);
+        System.out.println("done image uploaded");
+        ps.executeUpdate();
+    }
+
+
+
     public List<User> getAll() throws SQLException{
         List<User> users = new ArrayList<>();
         String query = "SELECT * FROM user";
@@ -121,6 +137,7 @@ public class UserService implements IService<User> {
             user.setPassword(rs.getString("password"));
             user.setPhone(rs.getInt("phone"));
             user.setRole(rs.getString("role"));
+            user.setStatus(rs.getString("Status"));
 
             users.add(user);
         }

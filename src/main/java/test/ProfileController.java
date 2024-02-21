@@ -2,12 +2,16 @@ package test;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import models.User;
 import services.GestionUser.UserService;
 
@@ -20,9 +24,12 @@ import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.function.UnaryOperator;
 
 public class ProfileController {
+    @FXML
+    private Button Btnback;
 
     @FXML
     private TextField InputAddress;
@@ -77,7 +84,7 @@ public class ProfileController {
     public void setData(User u) throws SQLException {
         UserService us = new UserService();
         CurrentUser = us.getByEmail(u.getEmail());
-        System.out.println(CurrentUser);
+
         tfRoleAffichage.setText(CurrentUser.getRole());
         tfDatedecreation.setText(CurrentUser.getDate_de_Creation());
         tdNomaffichage.setText(CurrentUser.getName());
@@ -99,11 +106,11 @@ public class ProfileController {
         );
 
         if( CurrentUser.getImage() != null){
-            System.out.println(CurrentUser.getImage());
+
             Path targetPath = Paths.get("src/main/resources", CurrentUser.getImage());
             Image image = new Image(targetPath.toUri().toString());
             imgview.setImage(image);
-            System.out.println("photoupdated");
+
         }
 
     }
@@ -111,26 +118,66 @@ public class ProfileController {
     public void initialize() throws SQLException {
 
 
-        // Define a UnaryOperator to filter out non-numeric characters
+
         UnaryOperator<TextFormatter.Change> filter = change -> {
             String newText = change.getControlNewText();
-            if (newText.matches("\\d*")) { // Only allow digits
-                return change; // Accept the change
+            if (newText.matches("\\d*")) {
+                return change;
             }
-            return null; // Reject the change
+            return null;
         };
 
-        // Create a TextFormatter with the filter
+
         TextFormatter<String> textFormatter = new TextFormatter<>(filter);
         TextFormatter<String> textFormatter2 = new TextFormatter<>(filter);
 
-        // Set the TextFormatter to the TextField
+
         InputPhone.setTextFormatter(textFormatter);
         InputAge.setTextFormatter(textFormatter2);
     }
+    public boolean showConfirmationDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
 
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.OK;
+    }
     @FXML
     void DesactiverProfile(ActionEvent event) {
+        if (showConfirmationDialog("Are you sure you want to deactivate the profile?")) {
+            try {
+                UserService us = new UserService();
+
+                us.InvertStatus(CurrentUser.getEmail());
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+
+            }
+        }
+        try {
+            UserService us = new UserService();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SeConnecter.fxml"));
+            Parent root = loader.load();
+
+            SeconnecterController seconnectercontroller = loader.getController();
+
+
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            ((Stage) btnDesactiver.getScene().getWindow()).close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -157,7 +204,7 @@ public class ProfileController {
         if (selectedFile != null) {
             UserService us = new UserService();
             us.updatePhoto(String.valueOf(CurrentUser.getId())+".png",CurrentUser.getEmail());
-            // Move the selected file to the resources folder
+
             try {
                 String filename = String.valueOf(CurrentUser.getId())+".png";
                 Path targetPath = Paths.get("src/main/resources", filename);
@@ -209,6 +256,37 @@ public class ProfileController {
         alert.setTitle("Profil mis à jour avec succès\n");
         alert.setHeaderText("votre compte a été mis à jour");
         alert.showAndWait();
+    }
+
+    @FXML
+    void goToAcceuil(ActionEvent event) {
+        try {
+            UserService us = new UserService();
+
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Acceuil.fxml"));
+            Parent root = loader.load();
+
+
+            AcceuilController acceuilController = loader.getController();
+
+
+            acceuilController.setData(us.getByEmail(CurrentUser.getEmail()));
+
+
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            ((Stage) Btnback.getScene().getWindow()).close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 

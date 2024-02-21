@@ -5,16 +5,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.User;
 import services.GestionUser.UserService;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 
 public class SeconnecterController {
@@ -65,7 +63,16 @@ public class SeconnecterController {
             e.printStackTrace();
         }
     }
+    public boolean showConfirmationDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
 
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.OK;
+    }
     @FXML
     void submit(ActionEvent event) throws SQLException {
         if(tfaddress.getText().equals("") || tfmotdepass.getText().equals("")){
@@ -74,36 +81,66 @@ public class SeconnecterController {
             alert.setHeaderText("Tous les champs sont requis");
             alert.showAndWait();
             return;
-        } else if (!Us.Login(tfaddress.getText(),tfmotdepass.getText())) {
+        }
+        if (!Us.Login(tfaddress.getText(),tfmotdepass.getText())) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Champ invalid");
             alert.setHeaderText("L'un des champs est incorrect");
             alert.showAndWait();
             return;
-
         }
-        try {
-            // Load the FXML file for the registration scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Acceuil.fxml"));
-            Parent root = loader.load();
+        User u = Us.getByEmail(tfaddress.getText());
+        if( u.getStatus().equals("Desactive")){
+            if( showConfirmationDialog("Your account is currently deactivated. Do you want to reactivate and log in?")){
+                Us.InvertStatus(u.getEmail());
+                try {
 
-            // Get the controller for the registration scene
-            AcceuilController acceuilController = loader.getController();
-
-
-            acceuilController.setData(Us.getByEmail(tfaddress.getText()));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Acceuil.fxml"));
+                    Parent root = loader.load();
 
 
-            // Switch to the registration scene
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+                    AcceuilController acceuilController = loader.getController();
 
-            ((Stage) sinscrirebutton.getScene().getWindow()).close();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+                    acceuilController.setData(Us.getByEmail(tfaddress.getText()));
+
+
+
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.show();
+
+                    ((Stage) sinscrirebutton.getScene().getWindow()).close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else{
+            try {
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Acceuil.fxml"));
+                Parent root = loader.load();
+
+
+                AcceuilController acceuilController = loader.getController();
+
+
+                acceuilController.setData(Us.getByEmail(tfaddress.getText()));
+
+
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+
+                ((Stage) sinscrirebutton.getScene().getWindow()).close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
 
     }
 
