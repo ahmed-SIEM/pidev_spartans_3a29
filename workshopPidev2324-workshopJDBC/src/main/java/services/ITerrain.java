@@ -11,7 +11,7 @@ public interface ITerrain<T> {
 
     void delete(int id) throws SQLException;
 
-    List<T> getAll() throws SQLException;
+    //List<T> getAll() throws SQLException;
 
-    T getById(int id) throws  SQLException;
+   // T getById(int id) throws  SQLException;
 }

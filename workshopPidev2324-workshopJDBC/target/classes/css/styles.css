@@ -26,7 +26,7 @@
 .form_container Button{
     /*-fx-background-color: linear-gradient(to right,#A3353, #016A91);*/
     -fx-effect: dropshadow(three-pass-box, #121111, 3, 0,0,3);
-    -fx-pref-width: 100;
+    -fx-pref-width: 200;
     -fx-font-size: 1.5em;
     -fx-font-family: "Calibri Light";
     -fx-text-fill: #121111;

@@ -11,7 +11,7 @@ public class Terrain {
 
     private int prix;
     private  int duree;
-    public Terrain(int id, String address, String gradin, int vestiaire, String status,String nomt, int prix, int duree) {
+    /*public Terrain(int id, String address, String gradin, int vestiaire, String status,String nomt, int prix, int duree) {
         this.id = id;
         this.address = address;
         this.gradin = gradin;
@@ -20,7 +20,7 @@ public class Terrain {
         this.nomt = nomt;
         this.prix = prix;
         this.duree = duree;
-    }
+    }*/
 
     public Terrain(String address, String gradin, int vestiaire, String status, String nomt, int prix, int duree) {
         this.address = address;

@@ -16,8 +16,6 @@
     <children>
         <VBox layoutX="14.0" layoutY="16.0" prefHeight="597.0" prefWidth="300.0" spacing="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="16.0">
             <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="id" />
-                <TextField fx:id="tfid" prefHeight="17.0" prefWidth="228.0" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="nom" />
                 <TextField fx:id="tfnom" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="address" />
@@ -34,7 +32,7 @@
             <TextField fx:id="tfduree" />
             </children>
         </VBox>
-        <TableView fx:id="table" layoutX="390.0" layoutY="120.0" prefHeight="270.0" prefWidth="498.0" AnchorPane.rightAnchor="38.60000000000002" AnchorPane.topAnchor="120.0">
+        <TableView fx:id="table" layoutX="390.0" layoutY="120.0" onMouseClicked="#getData" onSort="#showTerrain" prefHeight="270.0" prefWidth="498.0" AnchorPane.rightAnchor="38.60000000000002" AnchorPane.topAnchor="120.0">
             <columns>
                 <TableColumn fx:id="idc" prefWidth="62.400025963783264" text="id" />
                 <TableColumn fx:id="cnom" prefWidth="67.99993133544922" text="nom" />
@@ -54,13 +52,11 @@
                 <Glow />
             </effect>
         </Label>
-        <ButtonBar layoutX="306.0" layoutY="437.0" prefHeight="151.0" prefWidth="606.0">
+        <ButtonBar layoutX="321.0" layoutY="437.0" prefHeight="151.0" prefWidth="595.0">
             <buttons>
-                <Button fx:id="btnsave" mnemonicParsing="false" onAction="#createTerrain" prefHeight="35.0" prefWidth="143.0" text="Enregistrer" textFill="#10215e" />
+                <Button fx:id="btnsave" mnemonicParsing="false" onAction="#createTerrain" prefHeight="35.0" prefWidth="206.0" text="Enregistrer" textFill="#10215e" />
                 <Button fx:id="btnupdate" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#updateTerrain" text="Modifier" />
                 <Button fx:id="btndelete" layoutX="351.0" layoutY="17.0" mnemonicParsing="false" onAction="#deleteTerrain" text="Supprimer" />
-                <Button fx:id="btnclear" layoutX="265.0" layoutY="17.0" mnemonicParsing="false" onAction="#clearField" prefHeight="35.0" prefWidth="143.0" text="Annuler" />
-            <Button fx:id="btnshow" mnemonicParsing="false" onAction="#show" text="Show" />
             </buttons>
         </ButtonBar>
     </children>
