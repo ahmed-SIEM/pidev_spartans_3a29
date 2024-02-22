@@ -1,12 +1,18 @@
 package test;
 
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import models.*;
 import org.w3c.dom.events.MouseEvent;
 import services.GestionUser.UserService;
@@ -54,24 +60,35 @@ public class RegistrationController {
     @FXML
     private TextField tfnom;
 
+    @FXML
+    private AnchorPane RegistrationLeftPane;
 
+    @FXML
+    private AnchorPane RegistrationPane;
+
+    @FXML
+    private AnchorPane RegistrationRightPane;
     @FXML
     void openseconnectertab(ActionEvent event) {
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("SeConnecter.fxml"));
-            Parent root = loader.load();
+            AnchorPane root = loader.load();
 
             SeconnecterController seconnectercontroller = loader.getController();
+            Scene scene = btnsinscrire.getScene();
+            root.translateYProperty().set(scene.getHeight());
+            RegistrationPane.getChildren().add(root);
+            Timeline timeline = new Timeline();
+            KeyValue kv = new KeyValue(root.translateXProperty(),0, Interpolator.EASE_IN);
+            KeyFrame kf = new KeyFrame(Duration.seconds(1),kv);
+            timeline.getKeyFrames().add(kf);
+
+            timeline.play();
+            //   RegistrationPane.getChildren().setAll(root);
 
 
 
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-
-            ((Stage) btnSeconnecter.getScene().getWindow()).close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -125,7 +142,7 @@ public class RegistrationController {
 
 
             String role;
-          User u1 = new User();
+          User u1;
             if(rbtnfournisseur.isSelected()){
                 role = "Fournisseur" ;
                 LocalDate currentDate = LocalDate.now();

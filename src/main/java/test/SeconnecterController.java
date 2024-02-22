@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import models.User;
 import services.GestionUser.UserService;
@@ -48,19 +49,23 @@ public class SeconnecterController {
         tfaddress.setText(us.getEmail());
         tfmotdepass.setText(us.getPassword());
     }
+    @FXML
+    private AnchorPane SeconnecterLeftPane;
 
+    @FXML
+    private AnchorPane SeconnecterPane;
+
+    @FXML
+    private AnchorPane SeconnecterRightPane;
 
 
     @FXML
     void sinscrire(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Registration.fxml"));
-            Parent root = loader.load();
+            AnchorPane root = loader.load();
             RegistrationController registrationController = loader.getController();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-            ((Stage) sinscrirebutton.getScene().getWindow()).close();
+            SeconnecterPane.getChildren().setAll(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
