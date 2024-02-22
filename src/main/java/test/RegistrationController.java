@@ -1,9 +1,5 @@
 package test;
 
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import models.*;
 import org.w3c.dom.events.MouseEvent;
 import services.GestionUser.UserService;
@@ -76,16 +71,8 @@ public class RegistrationController {
             AnchorPane root = loader.load();
 
             SeconnecterController seconnectercontroller = loader.getController();
-            Scene scene = btnsinscrire.getScene();
-            root.translateYProperty().set(scene.getHeight());
-            RegistrationPane.getChildren().add(root);
-            Timeline timeline = new Timeline();
-            KeyValue kv = new KeyValue(root.translateXProperty(),0, Interpolator.EASE_IN);
-            KeyFrame kf = new KeyFrame(Duration.seconds(1),kv);
-            timeline.getKeyFrames().add(kf);
 
-            timeline.play();
-            //   RegistrationPane.getChildren().setAll(root);
+               RegistrationPane.getChildren().setAll(root);
 
 
 
