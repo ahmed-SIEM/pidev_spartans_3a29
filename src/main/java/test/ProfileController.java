@@ -119,17 +119,24 @@ public class ProfileController {
 
 
 
-        UnaryOperator<TextFormatter.Change> filter = change -> {
+        UnaryOperator<TextFormatter.Change> filterPhone = change -> {
             String newText = change.getControlNewText();
-            if (newText.matches("\\d*")) {
+            if (newText.matches("\\d*") && newText.length()<=8 ) {
+                return change;
+            }
+            return null;
+        };
+        UnaryOperator<TextFormatter.Change> filterAge = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("\\d*") && newText.length()<=2) {
                 return change;
             }
             return null;
         };
 
 
-        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
-        TextFormatter<String> textFormatter2 = new TextFormatter<>(filter);
+        TextFormatter<String> textFormatter = new TextFormatter<>(filterPhone);
+        TextFormatter<String> textFormatter2 = new TextFormatter<>(filterAge);
 
 
         InputPhone.setTextFormatter(textFormatter);
@@ -196,6 +203,7 @@ public class ProfileController {
 
     @FXML
     void changerphoto(ActionEvent event) throws SQLException {
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Image File");
         fileChooser.getExtensionFilters().addAll(

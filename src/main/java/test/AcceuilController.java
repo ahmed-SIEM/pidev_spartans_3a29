@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.User;
@@ -32,13 +34,15 @@ public class AcceuilController {
 
 
     }
+    @FXML
+    private AnchorPane profileContainer; // This should be a container in your "Acceuil.fxml" to hold the "Profile" view
 
     @FXML
     void btnseeProfile(ActionEvent event) {
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Profile.fxml"));
-            Parent root = loader.load();
+            AnchorPane root = loader.load();
 
 
             ProfileController profilecontroler = loader.getController();
@@ -46,12 +50,9 @@ public class AcceuilController {
 
             profilecontroler.setData(CurrentUser);
 
+            profileContainer.getChildren().setAll(root);
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
 
-            ((Stage) btnseeProfile.getScene().getWindow()).close();
 
         } catch (IOException | SQLException e) {
             e.printStackTrace();

@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import models.User;
+import models.*;
 import org.w3c.dom.events.MouseEvent;
 import services.GestionUser.UserService;
 
@@ -125,22 +125,43 @@ public class RegistrationController {
 
 
             String role;
+          User u1 = new User();
             if(rbtnfournisseur.isSelected()){
-                role = "fournisseur" ;
+                role = "Fournisseur" ;
+                LocalDate currentDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String dateString = currentDate.format(formatter);
+
+
+                u1 = new Fournisseur(role,dateString,tfaddresselectronique.getText(),tdmotdepass.getText(),tfnom.getText(),"");
+                us.addFournisseur((Fournisseur) u1);
             } else if (rbtnpropriéte.isSelected()) {
-                role = "propriétaire de Terrain";
+                role = "Proprietaire_de_Terrain";
+                LocalDate currentDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String dateString = currentDate.format(formatter);
+
+                 u1 = new Proprietaire_de_terrain(role,dateString,tfaddresselectronique.getText(),tdmotdepass.getText(),tfnom.getText());
+                us.addProprietairedeTerarin((Proprietaire_de_terrain) u1);
             } else if (rbtnorganisateur.isSelected()) {
-                role = "Organisateur d'évenement";
+                role = "Organisateur";
+                LocalDate currentDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String dateString = currentDate.format(formatter);
+
+                 u1 = new Organisateur(role,dateString,tfaddresselectronique.getText(),tdmotdepass.getText(),tfnom.getText(),"");
+                us.addOrganisateur((Organisateur)u1);
             }else{
                 role = "Joueur";
+                LocalDate currentDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String dateString = currentDate.format(formatter);
+
+                 u1 = new Joueur(role,dateString,tfaddresselectronique.getText(),tdmotdepass.getText(),tfnom.getText());
+                us.addJoueur((Joueur)u1);
             }
 
-        LocalDate currentDate = LocalDate.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String dateString = currentDate.format(formatter);
 
-            User u1 = new User(role,dateString,tfaddresselectronique.getText(),tdmotdepass.getText(),tfnom.getText());
-                us.add(u1);
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Compte créé avec succès");

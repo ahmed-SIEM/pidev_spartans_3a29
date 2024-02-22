@@ -1,6 +1,5 @@
 package models;
 
-import java.sql.Date;
 
 public class User {
     private int id;
@@ -34,7 +33,14 @@ public class User {
         this.Date_de_Creation = date_de_Creation;
     }
 
-
+    public static boolean isValidRole(String input) {
+        for (Roles role : Roles.values()) {
+            if (role.name().equals(input)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public String getStatus() {
         return Status;
@@ -49,7 +55,10 @@ public class User {
     }
 
     public void setRole(String role) {
-        this.role = role;
+         if(isValidRole(role)){
+             this.role = role;
+         }
+
     }
 
 
@@ -114,7 +123,7 @@ public class User {
         this.id = id;
         this.age = age;
         this.Phone = phone;
-        this.role = role;
+        setRole(role);
         this.Date_de_Creation = date_de_Creation;
         this.Email = email;
         this.Address = address;
@@ -124,7 +133,7 @@ public class User {
     }
 
     public User(String role, String date_de_Creation, String email, String password, String name) {
-        this.role = role;
+        setRole(role);
         this.Date_de_Creation = date_de_Creation;
         this.Email = email;
         this.Password = password;

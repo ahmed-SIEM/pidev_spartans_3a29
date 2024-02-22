@@ -1,3 +1,4 @@
+models\Roles.class
 test\Main.class
 utils\MyDatabase.class
 models\User.class
@@ -5,7 +6,11 @@ test\SeconnecterController.class
 module-info.class
 services\GestionUser\IService.class
 services\GestionUser\UserService.class
+models\Organisateur.class
 test\AcceuilController.class
 test\RegistrationController.class
+models\Fournisseur.class
+models\Joueur.class
+models\Proprietaire_de_terrain.class
 test\ProfileController.class
 test\MainFx.class
