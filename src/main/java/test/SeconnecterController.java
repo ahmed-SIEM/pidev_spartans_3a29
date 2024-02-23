@@ -1,13 +1,16 @@
 package test;
 
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import models.User;
 import services.GestionUser.UserService;
 
@@ -60,12 +63,26 @@ public class SeconnecterController {
 
 
     @FXML
+    private ImageView imgviewid;
+    @FXML
+    private AnchorPane imgpane;
+
+    @FXML
     void sinscrire(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Registration.fxml"));
             AnchorPane root = loader.load();
             RegistrationController registrationController = loader.getController();
-            SeconnecterPane.getChildren().setAll(root);
+
+            TranslateTransition transition = new TranslateTransition(Duration.seconds(1), SeconnecterLeftPane);
+            transition.setToX(SeconnecterLeftPane.getTranslateX() - 850); // Move left by 50 pixels (adjust as needed)
+            TranslateTransition transition1 = new TranslateTransition(Duration.seconds(1),imgpane);
+            transition1.setToX(imgpane.getTranslateX() - 417); // Move left by 50 pixels (adjust as needed)
+            TranslateTransition transition2 = new TranslateTransition(Duration.seconds(1),SeconnecterRightPane);
+            transition2.setToX(SeconnecterRightPane.getTranslateX() + 235); // Move left by 50 pixels (adjust as needed)
+            transition.play();
+            transition1.play();
+            transition2.play();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -14,18 +14,22 @@
 
 <AnchorPane fx:id="SeconnecterPane" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #033E6A;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.SeconnecterController">
    <children>
-      <ImageView fitHeight="568.0" fitWidth="668.0" layoutX="512.0" layoutY="74.0" preserveRatio="true">
-         <image>
-            <Image url="@cup.jpg" />
-         </image>
-         <effect>
-            <Lighting bumpInput="$null">
-               <light>
-                  <Light.Distant />
-               </light>
-            </Lighting>
-         </effect>
-      </ImageView>
+      <AnchorPane fx:id="imgpane" layoutX="512.0" layoutY="74.0">
+         <children>
+            <ImageView fx:id="imgviewid" fitHeight="568.0" fitWidth="668.0" preserveRatio="true">
+               <image>
+                  <Image url="@cup.jpg" />
+               </image>
+               <effect>
+                  <Lighting bumpInput="$null">
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
+            </ImageView>
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="SeconnecterLeftPane" layoutX="950.0" layoutY="75.0" prefHeight="568.0" prefWidth="225.0" style="-fx-background-color: transparent;">
          <children>
             <Button fx:id="sinscrirebutton" layoutX="40.0" layoutY="374.0" mnemonicParsing="false" onAction="#sinscrire" prefHeight="52.0" prefWidth="135.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 50; -fx-border-color: white; -fx-cursor: pointer; -fx-border-width: 2;" text="S'inscrire" textAlignment="CENTER" textFill="WHITE">
