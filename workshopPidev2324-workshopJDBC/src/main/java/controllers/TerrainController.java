@@ -134,9 +134,8 @@ public class TerrainController {
 
     @FXML
     void updateTerrain(ActionEvent event) throws SQLException {
-        Node source = (Node) event.getSource();
-        HBox terrainBox = (HBox) source.getParent();
-        Terrain terrain = (Terrain) terrainBox.getUserData();
+        String nom = tfnom.getText();
+        Terrain terrain = ts.getTerrainByNom(nom);
         if (terrain != null) {
             if (!tfaddress.getText().isEmpty()) {
                 terrain.setAddress(tfaddress.getText());
@@ -172,6 +171,8 @@ public class TerrainController {
             System.out.println("Terrain non trouvé.");
         }
     }
+
+
 
 
     @FXML
