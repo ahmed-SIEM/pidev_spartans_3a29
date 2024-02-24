@@ -10,5 +10,7 @@ module test {
 
     opens test to javafx.fxml;
     exports test;
+    exports services.GestionUser;
+    opens services.GestionUser to javafx.fxml;
 
 }

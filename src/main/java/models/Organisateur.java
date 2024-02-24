@@ -3,14 +3,14 @@ package models;
 public class Organisateur extends User{
     private String Nom_Organisation;
 
-    public Organisateur(int id, int age, int phone, String role, String date_de_Creation, String email, String address, String password, String name, String nom_Organisateur) {
-        super(id, age, phone, role, date_de_Creation, email, address, password, name);
-        this.Nom_Organisation = nom_Organisateur;
+    public Organisateur(int id, String Email, String Password, String Name, int age, int Phone, String address, Roles role, String image) throws Exception {
+        super(id, Email, Password, Name, age, Phone, address, role, image);
+        Nom_Organisation = "";
     }
 
-    public Organisateur(int age, int phone, String role, String date_de_Creation, String email, String password, String name, String status, String nom_Organisation) {
-        super(age, phone, role, date_de_Creation, email, password, name, status);
-        this.Nom_Organisation = nom_Organisation;
+    public Organisateur(String Email, String Password, String Name, int age, int Phone, Roles role) throws Exception {
+        super(Email, Password, Name, age, Phone, role);
+        Nom_Organisation = "";
     }
 
     public Organisateur(String nom_Organisateur) {

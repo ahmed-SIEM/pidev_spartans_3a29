@@ -16,7 +16,9 @@ import javafx.scene.text.Text;
 
 import javafx.util.Duration;
 import models.*;
+import services.GestionUser.SMSAPI;
 import services.GestionUser.UserService;
+import services.GestionUser.VerificationCodeGenerator;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -126,6 +128,7 @@ public class LoginRegistrationPageController {
     private PasswordField registerPass2;
 
     UserService us = new UserService();
+
     private User CurrentUser ;
     public void setData(User us) {
 
@@ -312,7 +315,7 @@ public class LoginRegistrationPageController {
         }
         User u = us.getByEmail(Seconnecterfield1.getText());
         if( showConfirmationDialog("Un code de vérification sera envoyé à votre e-mail. Voulez-vous continuer?")){
-            sendSMS(u.getEmail(),"Votre code de vérification est : " + u.getVerificationCode());
+         //   sendSMS(u.getEmail(),"Votre code de vérification est : " + u.getVerificationCode());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Code envoyé");
             alert.setHeaderText("Un code de vérification a été envoyé à votre e-mail");
@@ -424,6 +427,23 @@ public class LoginRegistrationPageController {
         rbtn4
         registerPass2
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @FXML
     void sinscrire(ActionEvent event) throws SQLException {
@@ -546,15 +566,29 @@ public class LoginRegistrationPageController {
             String dateString = currentDate.format(formatter);
 
 
-            u1 = new Fournisseur(Integer.parseInt(Registerfield21age.getText()),Integer.parseInt(Registerfield111numero.getText()),role,dateString,Registerfield2.getText(),registerPass2.getText(),Registerfield1.getText(),"Active","");
+            u1 = new Fournisseur(
+                    Integer.parseInt(Registerfield21age.getText()),
+                    Integer.parseInt(Registerfield111numero.getText()),
+                    role,
+                    VerificationCodeGenerator.generateVerificationCode(),
+                    dateString,
+                    Registerfield2.getText(),
+                    registerPass2.getText(),
+                    Registerfield1.getText(),
+                    "Active",
+                    "");
             us.addFournisseur((Fournisseur) u1);
         } else if (rbtn2.isSelected()) {
             role = "Proprietaire_de_Terrain";
-            LocalDate currentDate = LocalDate.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            String dateString = currentDate.format(formatter);
 
-            u1 = new Proprietaire_de_terrain(Integer.parseInt(Registerfield21age.getText()),Integer.parseInt(Registerfield111numero.getText()),role,dateString,Registerfield2.getText(),registerPass2.getText(),Registerfield1.getText(),"Active");
+
+            u1 = new Proprietaire_de_terrain(
+                    Integer.parseInt(Registerfield21age.getText()),
+                    Integer.parseInt(Registerfield111numero.getText()),
+                    role,dateString,Registerfield2.getText(),
+                    registerPass2.getText(),
+                    Registerfield1.getText(),
+                    "Active");
             us.addProprietairedeTerarin((Proprietaire_de_terrain) u1);
         } else if (rbtn3.isSelected()) {
             role = "Organisateur";

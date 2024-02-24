@@ -18,6 +18,7 @@ import java.sql.SQLException;
 
 public class AcceuilController {
 
+    public AnchorPane Container;
     @FXML
     private Button btnlogout;
 
@@ -34,8 +35,7 @@ public class AcceuilController {
 
 
     }
-    @FXML
-    private AnchorPane profileContainer; // This should be a container in your "Acceuil.fxml" to hold the "Profile" view
+
 
     @FXML
     void btnseeProfile(ActionEvent event) {
@@ -50,7 +50,7 @@ public class AcceuilController {
 
             profilecontroler.setData(CurrentUser);
 
-            profileContainer.getChildren().setAll(root);
+            Container.getChildren().setAll(root);
 
 
 
@@ -65,18 +65,14 @@ public class AcceuilController {
             UserService us = new UserService();
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginRegistrationPage.fxml"));
-            Parent root = loader.load();
+            AnchorPane root = loader.load();
 
             LoginRegistrationPageController Registrationcontroller = loader.getController();
 
 
             Registrationcontroller.setData(us.getByEmail(CurrentUser.getEmail()));
+            Container.getChildren().setAll(root);
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-
-            ((Stage) btnlogout.getScene().getWindow()).close();
 
         } catch (IOException e) {
             e.printStackTrace();

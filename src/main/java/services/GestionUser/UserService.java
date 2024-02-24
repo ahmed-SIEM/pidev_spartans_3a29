@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UserService implements IService<User> {
 
-    private Connection connection;
+    private final Connection connection;
 
     public UserService() {
         connection = MyDatabase.getInstance().getConnection();
@@ -36,7 +36,7 @@ public class UserService implements IService<User> {
             user.setRole(rs.getString("role"));
             user.setDate_de_Creation(rs.getString("DatedeCreation"));
             user.setImage(rs.getString("Image"));
-            user.setStatus(rs.getString("Status"));
+            user.setStatus(rs.getBoolean("Status"));
         }
         return user; // Return either the populated user or null if no user is found
     }
@@ -50,9 +50,7 @@ public class UserService implements IService<User> {
         ps.setString(1, e);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            if(rs.getInt(1) == 0){
-                return false;
-            }
+            return rs.getInt(1) != 0;
         }
         return true;
 
@@ -68,9 +66,9 @@ public class UserService implements IService<User> {
         psUser.setString(1, J.getEmail());
         psUser.setString(2, J.getPassword());
         psUser.setString(3, J.getName());
-        psUser.setString(4, J.getRole());
+        psUser.setString(4, J.getRole().toString());
         psUser.setString(5,J.getDate_de_Creation());
-        psUser.setString(6,J.getStatus());
+        psUser.setBoolean(6,J.getStatus());
         psUser.executeUpdate();
 
         String QueryToJoueur = "INSERT INTO Joueur (JoueurId ) VALUES (?)";
@@ -85,9 +83,9 @@ public class UserService implements IService<User> {
         psUser.setString(1, F.getEmail());
         psUser.setString(2, F.getPassword());
         psUser.setString(3, F.getName());
-        psUser.setString(4, F.getRole());
+        psUser.setString(4, F.getRole().toString());
         psUser.setString(5,F.getDate_de_Creation());
-        psUser.setString(6,F.getStatus());
+        psUser.setBoolean(6,F.getStatus());
         psUser.executeUpdate();
 
         String QueryToFournisseur = "INSERT INTO fournisseur (Fournisseur_id , Nom_Sociéte ) VALUES (?,?)";
@@ -104,9 +102,9 @@ public class UserService implements IService<User> {
         psUser.setString(1, O.getEmail());
         psUser.setString(2, O.getPassword());
         psUser.setString(3, O.getName());
-        psUser.setString(4, O.getRole());
+        psUser.setString(4, O.getRole().toString());
         psUser.setString(5,O.getDate_de_Creation());
-        psUser.setString(6,O.getStatus());
+        psUser.setBoolean(6,O.getStatus());
         psUser.executeUpdate();
 
         String QueryToOrganisateur = "INSERT INTO organisateur (Organisateur_id , Nom_Organisation ) VALUES (?,?)";
@@ -123,9 +121,9 @@ public class UserService implements IService<User> {
         psUser.setString(1, P.getEmail());
         psUser.setString(2, P.getPassword());
         psUser.setString(3, P.getName());
-        psUser.setString(4, P.getRole());
+        psUser.setString(4, P.getRole().toString());
         psUser.setString(5,P.getDate_de_Creation());
-        psUser.setString(6,P.getStatus());
+        psUser.setBoolean(6,P.getStatus());
         psUser.executeUpdate();
 
         String QueryToProprietairedeTerarin = "INSERT INTO proprietaire_de_terrain (Proprietaire_de_terrain_id ) VALUES (?)";
@@ -136,7 +134,7 @@ public class UserService implements IService<User> {
     }
 
 
-/*
+
     public void delete(String email) throws SQLException{
         if(!userExist(email)){
             System.out.println("User does not exist");
@@ -148,7 +146,7 @@ public class UserService implements IService<User> {
         ps.executeUpdate();
     }
 
- */
+
 
     public void update(User t , String email) throws SQLException{
 
@@ -197,13 +195,12 @@ public class UserService implements IService<User> {
     public void InvertStatus(String email) throws SQLException {
         String query = "UPDATE user SET Status = ?  WHERE email = ?";
         PreparedStatement ps = connection.prepareStatement(query);
-        if (getByEmail(email).getStatus().equals("Active")) {
+        if (getByEmail(email).getStatus()) {
             ps.setString(1, "Desactive");
         } else {
             ps.setString(1, "Active");
         }
         ps.setString(2,email);
-        System.out.println("done image uploaded");
         ps.executeUpdate();
     }
 
@@ -227,7 +224,7 @@ public class UserService implements IService<User> {
             user.setRole(rs.getString("role"));
             user.setDate_de_Creation(rs.getString("DatedeCreation"));
             user.setImage(rs.getString("Image"));
-            user.setStatus(rs.getString("Status"));
+            user.setStatus(rs.getBoolean("Status"));
 
             users.add(user);
         }

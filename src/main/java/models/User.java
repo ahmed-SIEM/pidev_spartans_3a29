@@ -1,24 +1,32 @@
 package models;
 
 
+import services.GestionUser.CurrentTime;
+import services.GestionUser.VerificationCodeGenerator;
+
 public class User {
     private int id;
 
     private int age;
     private String image ;
     private int Phone ;
-    private String role ;
+    private Roles role ;
 
     private String VerificationCode;
 
+    private Boolean isVerified ;
+
     private String Date_de_Creation;
+
+
+
     private String Email ;
     private String Address;
 
     private String Password;
     private String name;
 
-    private String Status ;
+    private boolean Status ;
 
     public String getImage() {
         return image;
@@ -36,35 +44,48 @@ public class User {
         this.Date_de_Creation = date_de_Creation;
     }
 
-    public static boolean isValidRole(String input) {
-        for (Roles role : Roles.values()) {
-            if (role.name().equals(input)) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 
     public void setVerificationCode(String verificationCode) {
         this.VerificationCode = verificationCode;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return Status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.Status = status;
     }
 
-    public String getRole() {
+    public Roles getRole() {
         return role;
     }
 
     public void setRole(String role) {
-         if(isValidRole(role)){
-             this.role = role;
-         }
+
+        //convert string to role with switch case
+        switch (role) {
+            case "Admin":
+                this.role = Roles.Fournisseur;
+                break;
+            case "Client":
+
+                this.role = Roles.Joueur;
+                break;
+            case "Fournisseur":
+
+                this.role = Roles.Organisateur;
+                break;
+            default:
+                this.role = Roles.Proprietaire_de_Terrain;
+                break;
+
+        }
+        
+
+          
+
 
     }
 
@@ -126,50 +147,67 @@ public class User {
         this.name = name;    }
 
 
-    public User(int id, int age, int phone, String role, String verificationCode, String date_de_Creation, String email, String address, String password, String name) {
-        this.id = id;
-        this.age = age;
-        this.Phone = phone;
-        this.VerificationCode = verificationCode;
-        setRole(role);
-        this.Date_de_Creation = date_de_Creation;
-        this.Email = email;
-        this.Address = address;
-        this.Password = password;
-        this.name = name;
 
+
+
+    public String getVerificationCode() {
+        return VerificationCode;
     }
 
-    public User(int age, int phone, String role, String verificationCode, String date_de_Creation, String email, String password, String name, String status) {
-        this.age = age;
-        this.Phone = phone;
-        this.VerificationCode = verificationCode;
-        setRole(role);
-        this.Date_de_Creation = date_de_Creation;
-        this.Email = email;
-        this.Password = password;
-        this.name = name;
-        this.Status = status;
+    public Boolean getVerified() {
+        return isVerified;
     }
+
+    public void setVerified(Boolean verified) {
+        this.isVerified = verified;
+    }
+
 
     public User(){}
+    public User(int id, String Email , String Password, String Name , int age , int Phone , String address , Roles role , String image ) throws Exception {
+        this.id = id;
+        this.Email = Email;
+        this.Password = Password;
+        this.name = Name;
+        this.age = age;
+        this.Phone = Phone;
+        this.Address = address;
+        this.role = role;
+        this.image = image;
+        this.Status = false ;
+        this.Date_de_Creation = CurrentTime.GetCurrentTime() ;
+        this.VerificationCode = VerificationCodeGenerator.generateVerificationCode(Phone);
+        this.isVerified = false;
+
+    }
+    public User( String Email , String Password, String Name , int age , int Phone  , Roles role ) throws Exception {
+        this.Email = Email;
+        this.Password = Password;
+        this.name = Name;
+        this.age = age;
+        this.Phone = Phone;
+        this.role = role;
+        this.Status = true ;
+        this.Date_de_Creation = CurrentTime.GetCurrentTime() ;
+        this.VerificationCode = VerificationCodeGenerator.generateVerificationCode(Phone);
+        this.isVerified = false;
+    }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", age=" + age +
+                "age=" + age +
                 ", image='" + image + '\'' +
                 ", Phone=" + Phone +
-                ", role='" + role + '\'' +
-                ", Date_de_Creation=" + Date_de_Creation +'\''+
+                ", role=" + role +
+                ", VerificationCode='" + VerificationCode + '\'' +
+                ", isVerified=" + isVerified +
+                ", Date_de_Creation='" + Date_de_Creation + '\'' +
                 ", Email='" + Email + '\'' +
                 ", Address='" + Address + '\'' +
                 ", Password='" + Password + '\'' +
                 ", name='" + name + '\'' +
-                ", Status='" + Status + '\'' +
+                ", Status=" + Status +
                 '}';
     }
-
-
 }

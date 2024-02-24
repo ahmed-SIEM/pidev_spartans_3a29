@@ -1,9 +1,9 @@
-package test;
+package services.GestionUser;
 import java.net.*;
 import java.util.Base64;
 import java.io.*;
 public class SMSAPI {
-    void sms(String to , String message) throws Exception {
+    void SendCode(String to , String message) throws Exception {
 
         // This URL is used for sending messages
         String myURI = "https://api.bulksms.com/v1/messages";

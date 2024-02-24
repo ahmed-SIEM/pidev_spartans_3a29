@@ -12,17 +12,13 @@ public class Fournisseur extends User{
         Nom_Societe = nom_Societe;
     }
 
-    public Fournisseur(int id, int age, int phone, String role, String date_de_Creation, String email, String address, String password, String name, String nom_Societe) {
-        super(id, age, phone, role, date_de_Creation, email, address, password, name);
-        this.Nom_Societe = nom_Societe;
+    public Fournisseur(int id, String Email, String Password, String Name, int age, int Phone, String address, Roles role, String image) throws Exception {
+        super(id, Email, Password, Name, age, Phone, address, role, image);
+        this.Nom_Societe = "";
     }
 
-    public Fournisseur(int age, int phone, String role, String date_de_Creation, String email, String password, String name, String status, String nom_Societe) {
-        super(age, phone, role, date_de_Creation, email, password, name, status);
-        this.Nom_Societe = nom_Societe;
-    }
-
-    public Fournisseur(String nom_Societe) {
-        this.Nom_Societe = nom_Societe;
+    public Fournisseur(String Email, String Password, String Name, int age, int Phone, Roles role) throws Exception {
+        super(Email, Password, Name, age, Phone, role);
+        Nom_Societe = "";
     }
 }
