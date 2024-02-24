@@ -66,14 +66,14 @@ public class User {
 
         //convert string to role with switch case
         switch (role) {
-            case "Admin":
+            case "Fournisseur":
                 this.role = Roles.Fournisseur;
                 break;
-            case "Client":
+            case "Joueur":
 
                 this.role = Roles.Joueur;
                 break;
-            case "Fournisseur":
+            case "Organisateur":
 
                 this.role = Roles.Organisateur;
                 break;
@@ -142,6 +142,10 @@ public class User {
 
     public String getName() {
         return name ;   }
+
+    public boolean isStatus() {
+        return Status;
+    }
 
     public void setName(String name) {
         this.name = name;    }

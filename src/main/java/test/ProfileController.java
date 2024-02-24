@@ -257,7 +257,7 @@ public class ProfileController {
                 InputAge.getText().isEmpty() ? 0 : Integer.parseInt(InputAge.getText())
 
         );
-        us.update(UpdateUser,CurrentUser.getEmail());
+        us.update(UpdateUser);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Profil mis à jour avec succès\n");
         alert.setHeaderText("votre compte a été mis à jour");

@@ -9,11 +9,13 @@ import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
 
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.text.Text;
 
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import models.*;
 import services.GestionUser.SMSAPI;
@@ -22,9 +24,7 @@ import services.GestionUser.VerificationCodeGenerator;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Optional;
+
 import java.util.function.UnaryOperator;
 
 
@@ -128,6 +128,7 @@ public class LoginRegistrationPageController {
     private PasswordField registerPass2;
 
     UserService us = new UserService();
+    CAlert cAlert = new CAlert();
 
     private User CurrentUser ;
     public void setData(User us) {
@@ -155,6 +156,8 @@ public class LoginRegistrationPageController {
             }
             return null;
         };
+        
+
 
           
              
@@ -283,36 +286,24 @@ public class LoginRegistrationPageController {
         gotoSeconnecter();
 
     }
-CAlert Al = new CAlert();
     @FXML
     public void Oublietlemotdepass(ActionEvent event) throws Exception {
-        if(Seconnecterfield1.getText().isEmpty()){
-            Al.generateAlert("WARNING","Tous les champs sont requis");
-            return;
-
-        }
-        if(!us.userExist(Seconnecterfield1.getText())){
-            Al.generateAlert("WARNING","Aucun utilisateur avec cet e-mail");
-            return;
-        }
-        User u = us.getByEmail(Seconnecterfield1.getText());
-        if( Al.generateConfirmation("Un code de vérification sera envoyé à votre teléphone Voulez-vous continuer?")){
-            Al.generateConfirmation("Un code de vérification a été envoyé à votre teléphone");
-            // i want a new scene to be generatd with a textfield to enter the code
-            // if the code is correct then we can get the user and change the password
-            // if the code is incorrect we can generate an alert
-            // if the user wants to cancel the operation we can go back to the login page
-            // if the user wants to resend the code we can resend the code
-            SMSAPI sms = new SMSAPI();
-            String code = VerificationCodeGenerator.generateVerificationCode();
-            sms.SendCode(String.valueOf(u.getPhone()), code);
+       
+       
+      
+           
+          
 
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("VerificationCode.fxml"));
             AnchorPane root = loader.load();
             VerificationCodeController verificationCodeController = loader.getController();
-            verificationCodeController.setData(u,code);
-            MainPane.getChildren().setAll(root);
+         //   verificationCodeController.setData(u,code);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            
 
 
 
@@ -320,33 +311,31 @@ CAlert Al = new CAlert();
 
        
 
-    }
+    
     }
 
     @FXML
     public void Seconnecter(ActionEvent event) throws SQLException {
 
         if(Seconnecterfield1.getText().isEmpty() || SeconnecterPass1.getText().isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Champ vide");
-            alert.setHeaderText("Tous les champs sont requis");
-            alert.showAndWait();
+
+            cAlert.generateAlert("WARNING","Tous les champs sont requis");
+            
             return;
         }
 
 
         if (!us.Login(Seconnecterfield1.getText(),SeconnecterPass1.getText())) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Champ invalid");
-            alert.setHeaderText("L'un des champs est incorrect");
-            alert.showAndWait();
+
+            cAlert.generateAlert("WARNING","Email ou mot de passe incorrect");
+            
             return;
         }
 
 
         User u = us.getByEmail(Seconnecterfield1.getText());
         if( !u.getStatus()){
-            if( Al.generateConfirmation("Your account is currently deactivated. Do you want to reactivate and log in?")){
+            if( cAlert.generateConfirmation("Your account is currently deactivated. Do you want to reactivate and log in?")){
                 us.InvertStatus(u.getEmail());
                 try {
 
@@ -421,103 +410,47 @@ CAlert Al = new CAlert();
                 || Registerfield21age.getText().isEmpty()
 
         ){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Champ vide");
-            alert.setContentText("vous pouvez les remplir soigneusement");
-            alert.setHeaderText("Tous les champs sont requis");
-            alert.showAndWait();
-            Registerfield1.setText("");
-            Registerfield2.setText("");
-            registerPass2.setText("");
-            Registerpass1.setText("");
-            Registerfield21age.setText("");
-            Registerfield111numero.setText("");
+
+            cAlert.generateAlert("WARNING","Tous les champs sont requis");
             return;
         }
 
         if(!isValidName(Registerfield1.getText())){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Nom invalide");
-            alert.setContentText("le nom ne doit contenir que des lettres");
-            alert.setHeaderText("CAlert Alert");
-            alert.showAndWait();
-            Registerfield1.setText("");
-            Registerfield2.setText("");
-            registerPass2.setText("");
-            Registerpass1.setText("");
-            Registerfield21age.setText("");
-            Registerfield111numero.setText("");
+
+            cAlert.generateAlert("WARNING","le nom ne doit contenir que des lettres");
             return;
             
         }
         if(!isValidEmail(Registerfield2.getText())){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Email invalide");
-            alert.setContentText("l'email doit être valide");
-            alert.setHeaderText("CAlert Alert");
-            alert.showAndWait();
-            Registerfield1.setText("");
-            Registerfield2.setText("");
-            registerPass2.setText("");
-            Registerpass1.setText("");
-            Registerfield21age.setText("");
-            Registerfield111numero.setText("");
+
+            cAlert.generateAlert("WARNING","l'email doit être valide");
+           
             return;
         }
 
         if(!isValidPassword(Registerpass1.getText())){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Mot de passe invalide");
-            alert.setContentText("le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial");
-            alert.setHeaderText("CAlert Alert");
-            alert.showAndWait();
-            Registerfield1.setText("");
-            Registerfield2.setText("");
-            registerPass2.setText("");
-            Registerpass1.setText("");
-            Registerfield21age.setText("");
-            Registerfield111numero.setText("");
+
+            cAlert.generateAlert("WARNING","le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial");
             return;
            
         }
         if(Integer.parseInt(Registerfield21age.getText()) < 12){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle(" Age invalide");
-             
-           
-            alert.setContentText(" L'age doit être supérieur à 12 ans");
-            alert.setHeaderText("CAlert Alert");
-            alert.showAndWait();
+
+            cAlert.generateAlert("WARNING","L'age doit être supérieur à 12 ans");
+            
             return;
         }
 
         if(!registerPass2.getText().equals(Registerpass1.getText()) ){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("mots de passe ne correspondent pas");
-            alert.setContentText("mot de passe et confirmer le mot de mot de passe devraient avoir le même contenu");
-            alert.setHeaderText("CAlert Alert");
-            alert.showAndWait();
-            Registerfield1.setText("");
-            Registerfield2.setText("");
-            registerPass2.setText("");
-            Registerpass1.setText("");
-            Registerfield21age.setText("");
-            Registerfield111numero.setText("");
+
+            cAlert.generateAlert("WARNING","mot de passe et confirmer le mot de mot de passe devraient avoir le même contenu");
+           
+
 
             return;
         }
         if(us.userExist(Registerfield2.getText())){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("l'utilisateur existe déjà");
-            alert.setContentText("Il y a déjà un utilisateur avec cet e-mail");
-            alert.setHeaderText("CAlert Alert");
-            alert.showAndWait();
-            Registerfield1.setText(""); // nom
-            Registerfield2.setText(""); // address
-            registerPass2.setText(""); // confirm pass
-            Registerpass1.setText(""); // pass
-            Registerfield21age.setText("");
-            Registerfield111numero.setText("");
+            cAlert.generateAlert("WARNING","l'utilisateur existe déjà");
             return;
         }
 
@@ -579,10 +512,8 @@ CAlert Al = new CAlert();
 
 
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Compte créé avec succès");
-        alert.setHeaderText("Votre Compte a été créé avec succès");
-        alert.showAndWait();
+        cAlert.generateAlert("INFORMATION","Votre Compte a été créé avec succès");
+        
 
         gotoSeconnecter();
         Seconnecterfield1.setText(Registerfield2.getText());

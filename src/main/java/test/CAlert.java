@@ -9,7 +9,7 @@ import javafx.scene.control.ButtonType;
 public class CAlert {
     public void generateAlert( String type  , String Content ){
         switch(type) {
-            case "WARN":
+            case "WARNING":
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("CAlert");
                 alert.setHeaderText("CAlert");
@@ -17,7 +17,7 @@ public class CAlert {
                 alert.showAndWait();
 
                 break;
-            case "INFO":
+            case "INFORMATION":
                 Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                 alert2.setTitle("Information");
                 alert2.setHeaderText("Information");
