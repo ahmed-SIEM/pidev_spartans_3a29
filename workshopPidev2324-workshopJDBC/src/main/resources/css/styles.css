@@ -1,36 +1,70 @@
-.title{
-    -fx-font-size: 2em;
-    -fx-text-fill: #539101;
+/* Style de l'interface principale */
+.form_container {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 20px;
+}
+
+/* Style des libellés */
+#tfnom-label, #tfaddress-label, #tfgradin-label, #tfvestiaire-label, #tfstatus-label, #tfprix-label, #tfduree-label, #tfemplacement-label {
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
+    -fx-text-fill: #333333;
 }
-.form_container{
-    -fx-background-color: #EEEEEE;
+
+/* Style des champs de texte */
+#tfnom, #tfaddress, #tfgradin, #tfvestiaire, #tfstatus, #tfprix, #tfduree,#tfemplacement{
+    -fx-pref-width: 200px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 14px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
 }
-.form_container Text{
-    -fx-font-size: 1.2em;
-    -fx-fill: #121111;
+
+
+/* Style des champs de texte */
+.text-field {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 14px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
 }
-.form_container VBox{
-    -fx-border-width: 0 0 0 1;
-    -fx-border-color: #000000;
-    -fx-padding: 10;
-    -fx-spacing: 10;
+
+/* Style des boutons */
+.button {
+    -fx-background-color: #0a2f55;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-pref-width: 120px;
+    -fx-pref-height: 40px;
+    -fx-border-radius: 5px;
 }
-.form_container TextField{
-    -fx-pref-height: 250;
-    -fx-pref-height: 30;
-    -fx-background-color: #FFFFFF;
-    -fx-font-size: 1.3em;
-    -fx-effect: dropshadow(three-pass-box,#AAAAAA, 3, 0,0,3);
+
+/* Style des boutons au survol */
+.button:hover {
+    -fx-background-color: #0a2f55;
 }
-.form_container Button{
-    /*-fx-background-color: linear-gradient(to right,#A3353, #016A91);*/
-    -fx-effect: dropshadow(three-pass-box, #121111, 3, 0,0,3);
-    -fx-pref-width: 200;
-    -fx-font-size: 1.5em;
-    -fx-font-family: "Calibri Light";
-    -fx-text-fill: #121111;
+
+/* Style de la barre de boutons */
+.button-bar {
+    -fx-spacing: 20px;
 }
-.form_container Button:hover{
-    -fx-cursor: hand;
+
+/* Style des zones d'ancrage */
+.anchor-pane {
+    -fx-padding: 10px;
+}
+
+/* Style de la vue vidéo */
+.media-view {
+    -fx-pref-width: 400px;
+    -fx-pref-height: 300px;
+}
+
+/* Style de l'ID */
+#id {
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
 }

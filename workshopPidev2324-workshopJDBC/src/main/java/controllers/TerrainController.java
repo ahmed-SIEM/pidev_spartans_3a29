@@ -6,9 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -23,6 +21,7 @@ import services.TerrainService;
 import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class TerrainController {
@@ -116,20 +115,57 @@ public class TerrainController {
         if (videoPath == null) {
             videoPath = "";
         }
+        if (isValidTerrain()) {
         Terrain terrain = new Terrain(tfaddress.getText(), Boolean.parseBoolean(tfgradin.getText()), Boolean.parseBoolean(tfvestiaire.getText()), Boolean.parseBoolean(tfstatus.getText()), tfnom.getText(), Integer.parseInt(tfprix.getText()), Integer.parseInt(tfduree.getText()), tfemplacement.getText(), imagePath, videoPath);
         ts.add(terrain);
         showTerrains(); // Mettre à jour l'affichage après avoir ajouté un nouveau terrain
         clearField(); // Efface les champs après l'ajout
+    }}
+    private boolean isValidTerrain() {
+        if (tfnom.getText().isEmpty() || tfaddress.getText().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Erreur de saisie", "Veuillez remplir tous les champs obligatoires.");
+            return false;
+        }
+
+        try {
+            int prix = Integer.parseInt(tfprix.getText());
+            int duree = Integer.parseInt(tfduree.getText());
+            if (prix <= 0 || duree <= 0) {
+                showAlert(Alert.AlertType.ERROR, "Erreur de saisie", "Le prix et la durée doivent être supérieurs à zéro.");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Erreur de saisie", "Le prix et la durée doivent être des nombres entiers.");
+            return false;
+        }
+
+        return true;
     }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
 
     @FXML
     void deleteTerrain(ActionEvent event) throws SQLException {
         int id = Integer.parseInt(tfID.getText());
-        ts.delete(id);
-        showTerrains();
-    }
-
+        Terrain terrain = ts.getTerrainById(id);
+        if (terrain != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation de suppression");
+            alert.setHeaderText("Voulez-vous vraiment supprimer ce terrain ?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                ts.delete(id);
+                showTerrains();
+            }
+        }}
 
     @FXML
     void updateTerrain(ActionEvent event) throws SQLException {
