@@ -26,12 +26,20 @@
     -fx-border-width: 2px;
     -fx-background-color: #3AA261;
 }
-#tableview1{
+#tableview1 , #tableview2{
  -fx-background-color: rgba(76, 175, 80,0.90);
        -fx-background-radius : 7px
 }
 
 #tableview1 .column-header {
+    -fx-background-color: #48A14D;
+    -fx-text-fill: #02365c;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius : 3px
+}
+
+#tableview2 .column-header {
     -fx-background-color: #48A14D;
     -fx-text-fill: #02365c;
     -fx-font-size: 14px;

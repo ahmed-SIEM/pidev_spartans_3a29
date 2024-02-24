@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import services.PaiementService;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -54,5 +56,16 @@ public class PaimentController {
         paiementService.payer(paiement);
 
 
+    }
+    public void initiatePayment() {
+        // Construisez votre objet JSON avec les détails du paiement
+        String jsonData = "{ \"receiverWalletId\": \"65da01394e8dd3df3f8b75cc\", \"token\": \"TND\", ... }";
+
+        try {
+            String response = PaiementService.initiatePayment(jsonData);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

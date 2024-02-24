@@ -93,7 +93,9 @@ public class HistoriqueService {
                 }
             }
         }
-            return historiques;}
+
+            return historiques;
+    }
 
 
 

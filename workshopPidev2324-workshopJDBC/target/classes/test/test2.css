@@ -8,7 +8,7 @@
 -fx-background-size : cover ;
 -fx-background-position:centre ;
 }
-#label3{
+#label3 , #button41 {
         -fx-background-color: rgba(2, 54, 92,0.80);
        -fx-background-radius : 7px
        }

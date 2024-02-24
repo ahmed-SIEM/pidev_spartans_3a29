@@ -4,104 +4,90 @@ import java.util.Objects;
 
 public class Terrain {
     private int id;
-    private String nomTerrain ;
     private String address;
-    private boolean gardin;
+    private boolean gradin;
     private boolean vestiaire;
     private boolean status;
+    private String nomTerrain;
     private int prix;
     private  int duree;
+    private  String gouvernorat;
+    private String  image;
+    private String video;
 
-    public Terrain(String nomTerrain, String address, boolean gardin, boolean vestiaire, boolean status, int prix, int duree) {
 
-        this.nomTerrain = nomTerrain;
+    public Terrain(String address, boolean gradin, boolean vestiaire, boolean status, String nomTerrain, int prix, int duree, String gouvernorat, String image, String video) {
         this.address = address;
-        this.gardin = gardin;
+        this.gradin = gradin;
         this.vestiaire = vestiaire;
         this.status = status;
+        this.nomTerrain = nomTerrain;
         this.prix = prix;
         this.duree = duree;
-    }
-
-    public Terrain() {
-
+        this.gouvernorat = gouvernorat;
+        this.image = image;
+        this.video = video;
     }
 
     @Override
     public String toString() {
         return "Terrain{" +
-                "id=" + id +
+                ", id='" + id + '\'' +
                 ", nomTerrain='" + nomTerrain + '\'' +
                 ", address='" + address + '\'' +
-                ", gardin=" + gardin +
-                ", vestiaire=" + vestiaire +
-                ", status=" + status +
+                ", gradin='" + gradin + '\'' +
+                ", vestiaire='" + vestiaire + '\'' +
+                ", status='" + status + '\'' +
                 ", prix=" + prix +
                 ", duree=" + duree +
-                '}';
-    }
+                ", gouvernorat=" + gouvernorat +
+                ", image=" + image +
+                ", video=" + video +
+                '}';}
 
-    public int getId() {
-        return id;
-    }
+    public Terrain() {}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public String getNomTerrain() {return nomTerrain;}
 
-    public String getNomTerrain() {
-        return nomTerrain;
-    }
+    public void setNomTerrain(String nomTerrain) {this.nomTerrain = nomTerrain;}
+    public int getPrix() {return prix;}
 
-    public void setNomTerrain(String nomTerrain) {
-        this.nomTerrain = nomTerrain;
-    }
+    public void setPrix(int prix) {this.prix = prix;}
 
-    public String getAddress() {
-        return address;
-    }
+    public int getDuree() {return duree;}
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+    public void setDuree(int duree) {this.duree = duree;}
 
-    public boolean isGardin() {
-        return gardin;
-    }
+    public String getAddress() {return address;}
 
-    public void setGardin(boolean gardin) {
-        this.gardin = gardin;
-    }
+    public void setAddress(String address) {this.address = address;}
 
-    public boolean isVestiaire() {
-        return vestiaire;
-    }
+    public boolean getGradin() {return gradin;}
 
-    public void setVestiaire(boolean vestiaire) {
-        this.vestiaire = vestiaire;
-    }
+    public int getId() {return id;}
 
-    public boolean isStatus() {
-        return status;
-    }
+    public void setId(int id) {this.id = id;}
 
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
+    public void setGradin(boolean gardin) {this.gradin = gardin;}
 
-    public int getPrix() {
-        return prix;
-    }
+    public boolean getVestiaire() {return vestiaire;}
 
-    public void setPrix(int prix) {
-        this.prix = prix;
-    }
+    public void setVestiaire(boolean vestiaire) {this.vestiaire = vestiaire;}
 
-    public int getDuree() {
-        return duree;
-    }
+    public boolean getStatus() {return status;}
 
-    public void setDuree(int duree) {
-        this.duree = duree;
-    }
+    public void setStatus(boolean status) {this.status = status;}
+
+    public String getGouvernorat() {return gouvernorat;}
+
+    public void setGouvernorat(String gouvernort) {this.gouvernorat = gouvernort;}
+
+    public String getImage() {return image;}
+
+    public void setImage(String image) {this.image = image;}
+
+    public String getVideo() {return video;}
+
+    public void setVideo(String video) {this.video = video;}
+
 }

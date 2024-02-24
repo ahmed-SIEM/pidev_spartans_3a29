@@ -27,7 +27,7 @@ public class ReservationService {
     }
 
 
-    public void ajouterReservation(Reservation reservation  /*,int idTerrain , List<Terrain> terrains */) throws SQLException {
+    public void ajouterReservation(Reservation reservation) throws SQLException {
         /*
         ********************************************************true
         for (int i = 0; i < terrains.size(); i++) {
@@ -66,7 +66,7 @@ public class ReservationService {
             PreparedStatement ps = connection.prepareStatement(query);
 
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 Reservation reservation = new Reservation();
                 reservation.setIdReservation(rs.getInt("idReservation"));
                 reservation.setConfirm(rs.getBoolean("isConfirm"));
@@ -126,6 +126,8 @@ public class ReservationService {
 
         }
         //************************** appel de la partie blacklist dans la classe blacklistServices            a faire !
+    // a changer apres modification db
+    /*
         public  void annulerReservation(int idReservation , int idMembre) throws SQLException {
             ReservationService reservationService =  new ReservationService();
             Reservation reservation = reservationService.getReservationByIdReservation(idReservation);
@@ -137,6 +139,7 @@ public class ReservationService {
             if(dateTransformee.isEqual(dateActuelle)){
                 BlackList blackList = new BlackList();
                 blackList.setReservation(reservation);
+                /*
                 blackList.setIdTerrain(reservation.getIdTerrain());
                 blackList.setCause("annulation apres 24h");
                 blackList.setDuree(30);
@@ -156,6 +159,8 @@ public class ReservationService {
             }
 
         }
+
+     */
         // appel de l historique
         public void supprimerReservation(int idreservation) throws SQLException {
 

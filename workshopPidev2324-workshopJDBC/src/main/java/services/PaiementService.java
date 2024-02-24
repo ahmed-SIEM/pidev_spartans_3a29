@@ -3,6 +3,14 @@ package services;
 import models.Paiement;
 import utils.MyDatabase;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,6 +20,39 @@ public class PaiementService {
     public PaiementService(){
         connection = MyDatabase.getInstance().getConnection();
     }
+
+
+    private static final String API_KEY = "65da01394e8dd3df3f8b75c8:dK6rN27wwEjg7L9vA8tC";
+    private static final String API_URL = "https://api.preprod.konnect.network/api/v2/payments/init-payment";
+
+    public static String initiatePayment(String jsonData) throws IOException, MalformedURLException {
+        URL url = new URL(API_URL);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setRequestProperty("x-api-key", API_KEY);
+        connection.setDoOutput(true);
+
+        try (OutputStream os = connection.getOutputStream()) {
+            byte[] input = jsonData.getBytes(StandardCharsets.UTF_8);
+            os.write(input, 0, input.length);
+        }
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+            StringBuilder response = new StringBuilder();
+            String responseLine;
+            while ((responseLine = br.readLine()) != null) {
+                response.append(responseLine.trim());
+            }
+            return response.toString();
+        } finally {
+            connection.disconnect();
+        }
+    }
+
+
+
     public boolean payer(Paiement paiement) throws SQLException {
         String query = "INSERT INTO Payment (idMembre, idReservation, datePayment, horairePayment) VALUES (?,?,?,?);";
         PreparedStatement ps = connection.prepareStatement(query);

@@ -14,55 +14,62 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="822.0" prefWidth="850.0" style="test2.c" stylesheets="@test2.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
- <HBox layoutX="301.0" layoutY="46.0" prefHeight="47.0" prefWidth="381.0" spacing="10">
-     <Button fx:id="buttonAccueil" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 15px; -fx-background-color: #4CAF50;" text="Accueil" textFill="#02365c">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="test2.c" stylesheets="@test2.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+ <HBox layoutX="483.0" layoutY="39.0" prefHeight="61.0" prefWidth="572.0" spacing="10" AnchorPane.bottomAnchor="780.0" AnchorPane.rightAnchor="225.0">
+     <Button fx:id="buttonAccueil" prefHeight="40.0" prefWidth="105.0" style="-fx-background-radius: 15px; -fx-background-color: #4CAF50;" text="Accueil" textFill="#02365c">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font>
       </Button>
-     <Button fx:id="buttonActualites" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 15px; -fx-background-color: #4CAF50;" text="Actualités" textFill="#02365c">
+     <Button fx:id="buttonActualites" prefHeight="40.0" prefWidth="105.0" style="-fx-background-radius: 15px; -fx-background-color: #4CAF50;" text="Actualités" textFill="#02365c">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font>
       </Button>
-     <Button fx:id="buttonReservation" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 15px; -fx-background-color: #4CAF50;" text="Réservation" textFill="#02365c">
+     <Button fx:id="buttonReservation" prefHeight="40.0" prefWidth="105.0" style="-fx-background-radius: 15px; -fx-background-color: #4CAF50;" text="Réservation" textFill="#02365c">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font>
       </Button>
-     <Button fx:id="buttonEvenement" prefHeight="35.0" prefWidth="90.0" style="-fx-background-radius: 15px; -fx-background-color: #4CAF50;" text="Événement" textFill="#02365c">
+     <Button fx:id="buttonEvenement" prefHeight="40.0" prefWidth="105.0" style="-fx-background-radius: 15px; -fx-background-color: #4CAF50;" text="Événement" textFill="#02365c">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font>
       </Button>
+      <SplitMenuButton id="split-menu-button" mnemonicParsing="false" prefHeight="40.0" prefWidth="105.0" style="-fx-background-color: #4CAF50; -fx-text-fill: #02365C; -fx-border-color: #02365C; -fx-background-radius: 7px; -fx-border-radius: 10px; -fx-padding: 2px 8px;" stylesheets="splitMenuButton.css">
+        <items>
+          <MenuItem mnemonicParsing="false" text="parametre" />
+            <MenuItem mnemonicParsing="false" text="historique" />
+          <MenuItem mnemonicParsing="false" text="se déconnecter" />
+        </items>
+      </SplitMenuButton>
  </HBox>
-   <AnchorPane id="anchro1" layoutX="20.0" layoutY="114.0" prefHeight="742.0" prefWidth="810.0" stylesheets="@test2.css">
+   <AnchorPane id="anchro1" layoutX="130.0" layoutY="125.0" prefHeight="755.0" prefWidth="1041.0" style="-fx-padding: 0;" stylesheets="@test2.css" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
       <children>
-         <Label id="label1" layoutX="33.0" layoutY="32.0" prefHeight="82.0" prefWidth="677.0" stylesheets="@test2.css" text="                            Créez votre légende" textAlignment="CENTER" textFill="#4caf50" AnchorPane.bottomAnchor="684.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="32.0">
+         <Label id="label1" layoutX="162.0" layoutY="32.0" prefHeight="39.0" prefWidth="760.0" stylesheets="@test2.css" text="                 Créez votre légende" textAlignment="CENTER" textFill="#4caf50" AnchorPane.bottomAnchor="684.0" AnchorPane.leftAnchor="162.0" AnchorPane.rightAnchor="158.0" AnchorPane.topAnchor="32.0">
             <font>
-               <Font name="Arial Black" size="26.0" />
+               <Font name="Arial Black" size="34.0" />
             </font>
          </Label>
-         <VBox id="vbox1" layoutX="33.0" layoutY="140.0" prefHeight="570.0" prefWidth="226.0" stylesheets="vbox.css">
+         <VBox id="vbox1" layoutX="124.0" layoutY="137.0" prefHeight="600.0" prefWidth="263.0" stylesheets="vbox.css" AnchorPane.topAnchor="130.0">
             <children>
-               <Label id="label3" prefHeight="35.0" prefWidth="222.0" stylesheets="@test2.css" text="    Créez votre partie !" textFill="#4caf50">
+               <Label id="label3" prefHeight="35.0" prefWidth="271.0" stylesheets="@test2.css" text="        Créez votre partie !" textFill="#4caf50">
                   <font>
                      <Font name="Arial Black" size="17.0" />
                   </font></Label>
                <AnchorPane id="anchrocreation1" prefHeight="529.0" prefWidth="226.0">
                   <children>
-                     <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="63.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="80.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                            <Image url="@367401473_585490203796779_7106352973885908640_n.png" />
                         </image>
                      </ImageView>
-                     <Text fill="#4caf50" layoutX="25.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Participez à un événement palpitant où vous créez, défiez des rivaux et attendez avec anticipation les confirmations des propriétaires de terrains pour une expérience de jeu captivante. Formulaire à la conquête : Remplissez-le avec flair! Choix stratégiques : Sélectionnez vos terrains favoris! Affrontez l'inconnu : Attendez qu'un adversaire se manifeste pour le défi! Confirmation en suspense : Attendez le feu vert du propriétaire du terrain!" textAlignment="CENTER" wrappingWidth="176.24568557739258">
+                     <Text fill="#4caf50" layoutX="29.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Participez à un événement palpitant où vous créez, défiez des rivaux et attendez avec anticipation les confirmations des propriétaires de terrains pour une expérience de jeu captivante. Formulaire à la conquête : Remplissez-le avec flair! Choix stratégiques : Sélectionnez vos terrains favoris! Affrontez l'inconnu : Attendez qu'un adversaire se manifeste pour le défi! Confirmation en suspense : Attendez le feu vert du propriétaire du terrain!" textAlignment="CENTER" wrappingWidth="213.57902908325195">
                         <font>
-                           <Font name="Arial Black" size="12.0" />
+                           <Font name="Arial Black" size="14.0" />
                         </font>
                      </Text>
-                     <Button id="Button11" layoutX="86.0" layoutY="473.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="58.0" stylesheets="@button.css" text="choisir" textOverrun="CLIP" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="82.0">
+                     <Button id="Button11" layoutX="95.0" layoutY="490.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="58.0" stylesheets="@button.css" text="choisir" textOverrun="CLIP" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="73.0">
                         <font>
                            <Font name="Arial Black" size="12.0" />
                         </font></Button>
@@ -72,7 +79,7 @@
                   </VBox.margin></AnchorPane>
             </children>
          </VBox>
-         <VBox id="vbox2" layoutX="300.0" layoutY="140.0" prefHeight="570.0" prefWidth="226.0" stylesheets="vbox.css">
+         <VBox id="vbox2" layoutX="428.0" layoutY="137.0" prefHeight="570.0" prefWidth="226.0" stylesheets="vbox.css">
             <children>
                <Label id="label3" prefHeight="35.0" prefWidth="222.0" stylesheets="@test2.css" text=" En quête d'adversaires" textFill="#4caf50">
                   <font>
@@ -103,7 +110,7 @@
                </AnchorPane>
             </children>
          </VBox>
-         <VBox id="vbox3" layoutX="571.0" layoutY="140.0" prefHeight="579.0" prefWidth="226.0" stylesheets="vbox.css">
+         <VBox id="vbox3" layoutX="699.0" layoutY="137.0" prefHeight="579.0" prefWidth="226.0" stylesheets="vbox.css">
             <children>
                <Label id="label3" prefHeight="30.0" prefWidth="222.0" stylesheets="@test2.css" text="        Lansez un defi" textFill="#4caf50">
                   <font>
@@ -135,15 +142,9 @@
             </children>
          </VBox>
       </children></AnchorPane>
-   <ImageView fitHeight="91.0" fitWidth="95.0" layoutX="53.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="96.0" fitWidth="103.0" layoutX="236.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="250.0">
       <image>
          <Image url="@playmateLogo.png" />
       </image>
    </ImageView>
-   <SplitMenuButton id="split-menu-button" layoutX="703.0" layoutY="46.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="60.0" style="-fx-background-color: #4CAF50; -fx-text-fill: #02365C; -fx-border-color: #02365C; -fx-background-radius: 7px; -fx-border-radius: 10px; -fx-padding: 2px 8px;" stylesheets="splitMenuButton.css">
-     <items>
-       <MenuItem mnemonicParsing="false" text="parametre" />
-       <MenuItem mnemonicParsing="false" text="se déconnecter" />
-     </items>
-   </SplitMenuButton>
 </AnchorPane>
