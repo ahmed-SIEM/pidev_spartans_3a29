@@ -39,6 +39,8 @@ public class TerrainController {
     @FXML
     private Button btnupdate;
     @FXML
+    private TextField tfID;
+    @FXML
     private TextField tfnom;
     @FXML
     private TextField tfaddress;
@@ -96,6 +98,7 @@ public class TerrainController {
             terrainContainer.getChildren().add(terrainBox);}}
     @FXML
     void clearField() {
+        tfID.setText("");
         tfnom.setText("");
         tfaddress.setText("");
         tfgradin.setText("");
@@ -122,21 +125,20 @@ public class TerrainController {
 
     @FXML
     void deleteTerrain(ActionEvent event) throws SQLException {
-        String nom = tfnom.getText();
-        Terrain terrain = ts.getTerrainByNom(nom);
-        if (terrain != null) {
-            ts.delete(terrain.getId());
-            showTerrains();
-        } else {
-            System.out.println("Terrain non trouvé.");
-        }
+        int id = Integer.parseInt(tfID.getText());
+        ts.delete(id);
+        showTerrains();
     }
+
 
     @FXML
     void updateTerrain(ActionEvent event) throws SQLException {
-        String nom = tfnom.getText();
-        Terrain terrain = ts.getTerrainByNom(nom);
+        int id = Integer.parseInt(tfID.getText());
+        Terrain terrain = ts.getTerrainById(id);
         if (terrain != null) {
+            if (!tfnom.getText().isEmpty()) {
+                terrain.setNomTerrain(tfnom.getText());
+            }
             if (!tfaddress.getText().isEmpty()) {
                 terrain.setAddress(tfaddress.getText());
             }
@@ -158,37 +160,30 @@ public class TerrainController {
             if (!tfemplacement.getText().isEmpty()) {
                 terrain.setGouvernorat(tfemplacement.getText());
             }
-            if (imagePath != null) {
-                terrain.setImage(imagePath);
-            }
-            if (videoPath != null) {
-                terrain.setVideo(videoPath);
-            }
-
+            // Mettre à jour le terrain dans la base de données
             ts.update(terrain);
+            // Mettre à jour l'affichage des terrains
             showTerrains();
-        } else {
-            System.out.println("Terrain non trouvé.");
         }
     }
 
 
-
-
-    @FXML
-    void getData(MouseEvent event) {
-        Node source = (Node) event.getSource();
-        HBox terrainBox = (HBox) source.getParent();
-        Terrain terrain = (Terrain) terrainBox.getUserData();
-        tfaddress.setText(terrain.getAddress());
-        tfgradin.setText(String.valueOf(terrain.getGradin()));
-        tfvestiaire.setText(String.valueOf(terrain.getVestiaire()));
-        tfstatus.setText(String.valueOf(terrain.getStatus()));
-        tfnom.setText(terrain.getNomTerrain());
-        tfprix.setText(String.valueOf(terrain.getPrix()));
-        tfduree.setText(String.valueOf(terrain.getDuree()));
-        tfemplacement.setText(terrain.getGouvernorat());
-
+        @FXML
+        void getData(MouseEvent event) {
+            Node source = (Node) event.getSource();
+            HBox terrainBox = (HBox) source.getParent();
+            Terrain terrain = (Terrain) terrainBox.getUserData();
+            if (terrain != null) {
+                tfID.setText(String.valueOf(terrain.getId()));
+                tfnom.setText(terrain.getNomTerrain());
+                tfaddress.setText(terrain.getAddress());
+                tfgradin.setText(String.valueOf(terrain.getGradin()));
+                tfvestiaire.setText(String.valueOf(terrain.getVestiaire()));
+                tfstatus.setText(String.valueOf(terrain.getStatus()));
+                tfprix.setText(String.valueOf(terrain.getPrix()));
+                tfduree.setText(String.valueOf(terrain.getDuree()));
+                tfemplacement.setText(terrain.getGouvernorat());
+                // Afficher d'autres données si nécessaire
         // Affichage de l'image
         String imagePath = terrain.getImage();
         if (imagePath != null && !imagePath.isEmpty()) {
@@ -196,8 +191,6 @@ public class TerrainController {
             img.setImage(image);
         } else {
             img.setImage(null); // Efface l'image s'il n'y en a pas
-        }
-
         // Affichage de la vidéo
         String videoPath = terrain.getVideo();
         if (videoPath != null && !videoPath.isEmpty()) {
@@ -209,7 +202,7 @@ public class TerrainController {
             vid.setMediaPlayer(null); // Efface la vidéo s'il n'y en a pas
         }
     }
-
+            }}
 
     @FXML
     void addTerrain_imageview(ActionEvent event) {

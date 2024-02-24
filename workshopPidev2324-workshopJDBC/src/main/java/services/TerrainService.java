@@ -104,6 +104,31 @@ public class TerrainService  implements ITerrain<Terrain>{
         }
         return terrain;
     }
+    public Terrain getTerrainById(int id) {
+        Terrain terrain = null;
+        String query = "SELECT * FROM terrain WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                terrain = new Terrain();
+                terrain.setId(rs.getInt("id"));
+                terrain.setNomTerrain(rs.getString("nomTerrain"));
+                terrain.setAddress(rs.getString("address"));
+                terrain.setGradin(rs.getBoolean("gradin"));
+                terrain.setVestiaire(rs.getBoolean("vestiaire"));
+                terrain.setStatus(rs.getBoolean("status"));
+                terrain.setPrix(rs.getInt("prix"));
+                terrain.setDuree(rs.getInt("duree"));
+                terrain.setGouvernorat(rs.getString("gouvernorat"));
+                terrain.setImage((rs.getString("image")));
+                terrain.setVideo((rs.getString("video")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return terrain;
+    }
 
 
 
