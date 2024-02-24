@@ -2,10 +2,10 @@ package entity;
 public class Terrain {
     private int id;
     private String address;
-    private String gradin;
-    private int vestiaire;
-    private String status;
-    private String nomt;
+    private boolean gradin;
+    private boolean vestiaire;
+    private boolean status;
+    private String nomTerrain;
     private int prix;
     private  int duree;
     private  String gouvernorat;
@@ -13,12 +13,12 @@ public class Terrain {
     private String video;
 
 
-    public Terrain(String address, String gradin, int vestiaire, String status, String nomt, int prix, int duree, String gouvernorat, String image, String video) {
+    public Terrain(String address, boolean gradin, boolean vestiaire, boolean status, String nomTerrain, int prix, int duree, String gouvernorat, String image, String video) {
         this.address = address;
         this.gradin = gradin;
         this.vestiaire = vestiaire;
         this.status = status;
-        this.nomt = nomt;
+        this.nomTerrain = nomTerrain;
         this.prix = prix;
         this.duree = duree;
         this.gouvernorat = gouvernorat;
@@ -30,7 +30,7 @@ public class Terrain {
     public String toString() {
         return "Terrain{" +
                 ", id='" + id + '\'' +
-                ", nomt='" + nomt + '\'' +
+                ", nomTerrain='" + nomTerrain + '\'' +
                 ", address='" + address + '\'' +
                 ", gradin='" + gradin + '\'' +
                 ", vestiaire='" + vestiaire + '\'' +
@@ -44,9 +44,9 @@ public class Terrain {
 
     public Terrain() {}
 
-    public String getNomt() {return nomt;}
+    public String getNomTerrain() {return nomTerrain;}
 
-    public void setNomt(String nomt) {this.nomt = nomt;}
+    public void setNomTerrain(String nomt) {this.nomTerrain = nomTerrain;}
     public int getPrix() {return prix;}
 
     public void setPrix(int prix) {this.prix = prix;}
@@ -59,21 +59,21 @@ public class Terrain {
 
     public void setAddress(String address) {this.address = address;}
 
-    public String getGradin() {return gradin;}
+    public boolean getGradin() {return gradin;}
 
     public int getId() {return id;}
 
     public void setId(int id) {this.id = id;}
 
-    public void setGradin(String gardin) {this.gradin = gardin;}
+    public void setGradin(boolean gardin) {this.gradin = gardin;}
 
-    public int getVestiaire() {return vestiaire;}
+    public boolean getVestiaire() {return vestiaire;}
 
-    public void setVestiaire(int vestiaire) {this.vestiaire = vestiaire;}
+    public void setVestiaire(boolean vestiaire) {this.vestiaire = vestiaire;}
 
-    public String getStatus() {return status;}
+    public boolean getStatus() {return status;}
 
-    public void setStatus(String status) {this.status = status;}
+    public void setStatus(boolean status) {this.status = status;}
 
     public String getGouvernorat() {return gouvernorat;}
 

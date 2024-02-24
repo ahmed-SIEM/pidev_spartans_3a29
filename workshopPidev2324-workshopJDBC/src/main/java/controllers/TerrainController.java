@@ -75,7 +75,7 @@ public class TerrainController {
             HBox terrainBox = new HBox();
             terrainBox.setSpacing(10);
             Label idLabel = new Label("Id: " + terrain.getId());
-            Label nomLabel = new Label("Nom: " + terrain.getNomt());
+            Label nomLabel = new Label("Nom: " + terrain.getNomTerrain());
             Label addressLabel = new Label("Address: " + terrain.getAddress());
             Label gradinLabel = new Label("Gradin: " + terrain.getGradin());
             Label vestiaireLabel = new Label("Vestiaire: " + terrain.getVestiaire());
@@ -113,11 +113,13 @@ public class TerrainController {
         if (videoPath == null) {
             videoPath = "";
         }
-        Terrain terrain = new Terrain(tfaddress.getText(), tfgradin.getText(), Integer.parseInt(tfvestiaire.getText()), tfstatus.getText(), tfnom.getText(), Integer.parseInt(tfprix.getText()), Integer.parseInt(tfduree.getText()), tfemplacement.getText(), imagePath, videoPath);
+        Terrain terrain = new Terrain(tfaddress.getText(), Boolean.parseBoolean(tfgradin.getText()), Boolean.parseBoolean(tfvestiaire.getText()), Boolean.parseBoolean(tfstatus.getText()), tfnom.getText(), Integer.parseInt(tfprix.getText()), Integer.parseInt(tfduree.getText()), tfemplacement.getText(), imagePath, videoPath);
         ts.add(terrain);
         showTerrains(); // Mettre à jour l'affichage après avoir ajouté un nouveau terrain
         clearField(); // Efface les champs après l'ajout
     }
+
+
     @FXML
     void deleteTerrain(ActionEvent event) throws SQLException {
         String nom = tfnom.getText();
@@ -132,20 +134,21 @@ public class TerrainController {
 
     @FXML
     void updateTerrain(ActionEvent event) throws SQLException {
-        String nom = tfnom.getText();
-        Terrain terrain = ts.getTerrainByNom(nom);
+        Node source = (Node) event.getSource();
+        HBox terrainBox = (HBox) source.getParent();
+        Terrain terrain = (Terrain) terrainBox.getUserData();
         if (terrain != null) {
             if (!tfaddress.getText().isEmpty()) {
                 terrain.setAddress(tfaddress.getText());
             }
             if (!tfgradin.getText().isEmpty()) {
-                terrain.setGradin(tfgradin.getText());
+                terrain.setGradin(Boolean.parseBoolean(tfgradin.getText()));
             }
             if (!tfvestiaire.getText().isEmpty()) {
-                terrain.setVestiaire(Integer.parseInt(tfvestiaire.getText()));
+                terrain.setVestiaire(Boolean.parseBoolean(tfvestiaire.getText()));
             }
             if (!tfstatus.getText().isEmpty()) {
-                terrain.setStatus(tfstatus.getText());
+                terrain.setStatus(Boolean.parseBoolean(tfstatus.getText()));
             }
             if (!tfprix.getText().isEmpty()) {
                 terrain.setPrix(Integer.parseInt(tfprix.getText()));
@@ -172,28 +175,41 @@ public class TerrainController {
 
 
     @FXML
-    void getData() {
-        Terrain terrain = (Terrain) terrainContainer.getChildren().get(terrainContainer.getChildren().size() - 1).getUserData();
+    void getData(MouseEvent event) {
+        Node source = (Node) event.getSource();
+        HBox terrainBox = (HBox) source.getParent();
+        Terrain terrain = (Terrain) terrainBox.getUserData();
         tfaddress.setText(terrain.getAddress());
-        tfgradin.setText(terrain.getGradin());
+        tfgradin.setText(String.valueOf(terrain.getGradin()));
         tfvestiaire.setText(String.valueOf(terrain.getVestiaire()));
-        tfstatus.setText(terrain.getStatus());
-        tfnom.setText(terrain.getNomt());
+        tfstatus.setText(String.valueOf(terrain.getStatus()));
+        tfnom.setText(terrain.getNomTerrain());
         tfprix.setText(String.valueOf(terrain.getPrix()));
         tfduree.setText(String.valueOf(terrain.getDuree()));
         tfemplacement.setText(terrain.getGouvernorat());
-        imagePath = terrain.getImage();
+
+        // Affichage de l'image
+        String imagePath = terrain.getImage();
         if (imagePath != null && !imagePath.isEmpty()) {
             Image image = new Image(imagePath);
             img.setImage(image);
+        } else {
+            img.setImage(null); // Efface l'image s'il n'y en a pas
         }
-        videoPath = terrain.getVideo();
+
+        // Affichage de la vidéo
+        String videoPath = terrain.getVideo();
         if (videoPath != null && !videoPath.isEmpty()) {
             Media media = new Media(videoPath);
             MediaPlayer mediaPlayer = new MediaPlayer(media);
             vid.setMediaPlayer(mediaPlayer);
             mediaPlayer.play();
-        }}
+        } else {
+            vid.setMediaPlayer(null); // Efface la vidéo s'il n'y en a pas
+        }
+    }
+
+
     @FXML
     void addTerrain_imageview(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -228,10 +244,10 @@ public class TerrainController {
         Terrain terrain = ts.getTerrainByNom(nom);
         if (terrain != null) {
             tfaddress.setText(terrain.getAddress());
-            tfgradin.setText(terrain.getGradin());
+            tfgradin.setText(String.valueOf(terrain.getGradin()));
             tfvestiaire.setText(String.valueOf(terrain.getVestiaire()));
-            tfstatus.setText(terrain.getStatus());
-            tfnom.setText(terrain.getNomt());
+            tfstatus.setText(String.valueOf(terrain.getStatus()));
+            tfnom.setText(terrain.getNomTerrain());
             tfprix.setText(String.valueOf(terrain.getPrix()));
             tfduree.setText(String.valueOf(terrain.getDuree()));
             tfemplacement.setText(terrain.getGouvernorat());
@@ -249,5 +265,6 @@ public class TerrainController {
             }
         }
     }
+
 
 }
