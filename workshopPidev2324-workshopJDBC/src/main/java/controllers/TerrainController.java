@@ -87,11 +87,16 @@ public class TerrainController {
             ImageView imageView = new ImageView(new Image(terrain.getImage()));
             imageView.setFitWidth(50);
             imageView.setFitHeight(50);
-            Media media = new Media(terrain.getVideo());
-            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            Media media = null;
+            MediaPlayer mediaPlayer = null;
+            if (terrain.getVideo() != null && !terrain.getVideo().isEmpty()) {
+                media = new Media(terrain.getVideo());
+                mediaPlayer = new MediaPlayer(media);
+            }
             MediaView mediaView = new MediaView(mediaPlayer);
             mediaView.setFitWidth(50);
             mediaView.setFitHeight(50);
+
 
             terrainBox.getChildren().addAll(idLabel,nomLabel, addressLabel, gradinLabel, vestiaireLabel, statusLabel, prixLabel, dureeLabel, gouvernoratLabel, imageView, mediaView);
             terrainContainer.getChildren().add(terrainBox);}}

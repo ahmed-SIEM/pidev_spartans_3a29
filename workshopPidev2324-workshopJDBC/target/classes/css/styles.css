@@ -68,3 +68,23 @@
     -fx-font-weight: bold;
     -fx-font-size: 18px;
 }
+/* Sélecteur pour le VBox */
+#terrainContainer {
+    -fx-spacing: 10px; /* Espacement entre les éléments */
+}
+
+/* Sélecteur pour les éléments enfants du VBox */
+#terrainContainer > * {
+    -fx-padding: 5px; /* Espacement interne des éléments */
+}
+
+/* Sélecteur pour les labels */
+#terrainContainer Label {
+    -fx-font-weight: bold; /* Texte en gras */
+    -fx-min-width: 80px; /* Largeur minimale pour les labels */
+}
+
+/* Sélecteur pour les textfields */
+#terrainContainer TextField {
+    -fx-pref-width: 200px; /* Largeur préférée pour les champs de texte */
+}
