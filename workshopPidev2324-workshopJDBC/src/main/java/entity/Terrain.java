@@ -46,7 +46,7 @@ public class Terrain {
 
     public String getNomTerrain() {return nomTerrain;}
 
-    public void setNomTerrain(String nomt) {this.nomTerrain = nomTerrain;}
+    public void setNomTerrain(String nomTerrain) {this.nomTerrain = nomTerrain;}
     public int getPrix() {return prix;}
 
     public void setPrix(int prix) {this.prix = prix;}
