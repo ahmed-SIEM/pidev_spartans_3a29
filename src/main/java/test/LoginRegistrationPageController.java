@@ -317,12 +317,10 @@ public class LoginRegistrationPageController {
             alert.setTitle("Code envoyé");
             alert.setHeaderText("Un code de vérification a été envoyé à votre e-mail");
             alert.showAndWait();
-            try {
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("VerificationCode.fxml"));
-                AnchorPane root = loader.load();
        
 
+    }
     }
 
     @FXML
