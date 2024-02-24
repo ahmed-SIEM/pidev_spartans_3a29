@@ -8,6 +8,7 @@
 #tfnom-label, #tfaddress-label, #tfgradin-label, #tfvestiaire-label, #tfstatus-label, #tfprix-label, #tfduree-label, #tfemplacement-label {
     -fx-font-size: 16px;
     -fx-font-weight: bold;
+    
     -fx-text-fill: #333333;
 }
 
