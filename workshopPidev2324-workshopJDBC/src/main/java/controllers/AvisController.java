@@ -1,182 +1,134 @@
 package controllers;
 import entity.AvisTerrain;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import services.AvisService;
-import services.TerrainService;
-import utils.MyDatabase;
-import java.awt.event.MouseEvent;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AvisController  {
-    Connection connection ;
-    PreparedStatement t;
-    ResultSet rs;
-
+public class AvisController {
+    @FXML
+    private Button btannuler;
     @FXML
     private Button btndelete;
-
     @FXML
     private Button btnsave;
-
     @FXML
     private Button btnupdate;
+    @FXML
+    private TextField tfID_avis;
 
     @FXML
-    private TextField tfnom;
+    private TextField tfcommentaire;
+    @FXML
+    private TextField tfnote;
+    @FXML
+    private TextField tfdate;
+
+
+    private AvisService as = new AvisService();
+    @FXML
+    private VBox AvisContainer;
 
     @FXML
-    private TextField tfaddress;
-
-    @FXML
-    private TextField tfgradin;
-
-    @FXML
-    private TextField tfvestiaire;
-
-    @FXML
-    private TextField tfstatus;
-
-    @FXML
-    private TextField tfduree;
-
-    @FXML
-    private TextField tfprix;
-
-    @FXML
-    private TableColumn<AvisTerrain, Integer> idc;
-
-    @FXML
-    private TableColumn<AvisTerrain,String> cnom;
-
-    @FXML
-    private TableColumn<AvisTerrain, String> caddress;
-
-    @FXML
-    private TableColumn<AvisTerrain, String> cgradin;
-
-    @FXML
-    private TableColumn<AvisTerrain, Integer> cvestiaire;
-
-    @FXML
-    private TableColumn<AvisTerrain, String> cstatus;
-
-    @FXML
-    private TableColumn<AvisTerrain,Integer> cprix;
-
-    @FXML
-    private TableColumn<AvisTerrain,Integer> cduree;
-
-    @FXML
-    private TableView<AvisTerrain> table;
-
-    private AvisService at=new AvisService();
-    @FXML
-    public void Initialize(URL url, ResourceBundle resourceBundle ){showTerrains();}
-    private void showTerrains() {
-        ObservableList<AvisTerrain> list = getTerrain();
-        table.setItems(list);
-        idc.setCellValueFactory(new PropertyValueFactory<AvisTerrain,Integer>("id"));
-        cnom.setCellValueFactory(new PropertyValueFactory<AvisTerrain,String>("nomt"));
-        caddress.setCellValueFactory(new PropertyValueFactory<AvisTerrain,String>("address"));
-        cgradin.setCellValueFactory(new PropertyValueFactory<AvisTerrain,String>("gradin"));
-        cvestiaire.setCellValueFactory(new PropertyValueFactory<AvisTerrain,Integer>("vestiaire"));
-        cstatus.setCellValueFactory(new PropertyValueFactory<AvisTerrain,String>("status"));
-        cprix.setCellValueFactory(new PropertyValueFactory<AvisTerrain,Integer>("prix"));
-        cduree.setCellValueFactory(new PropertyValueFactory<AvisTerrain,Integer>("duree"));}
-    public ObservableList<AvisTerrain> getTerrain(){
-        ObservableList<AvisTerrain> terrains = FXCollections.observableArrayList();
-        String query = "select* from terrain";
-        connection = MyDatabase.getInstance().getConnection();
-        try {
-            t = connection.prepareStatement(query);
-            rs = t.executeQuery();
-            while (rs.next()){
-                AvisTerrain t = new AvisTerrain();
-                t.setId(rs.getInt("id"));
-                t.setNomt(rs.getString("nom"));
-                t.setAddress(rs.getString("address"));
-                t.setGradin(rs.getString("gradin"));
-                t.setVestiaire(rs.getInt("vestiaire"));
-                t.setStatus(rs.getString("status"));
-                t.setPrix(rs.getInt("prix"));
-                t.setDuree(rs.getInt("duree"));
-                terrains.add(t);}
-        }catch (SQLException e){
-            throw  new RuntimeException(e);}
-        return terrains;}
-    @FXML
-    void clearField() {
-        tfnom.setText(null);
-        tfaddress.setText(null);
-        tfgradin.setText(null);
-        tfvestiaire.setText(null);
-        tfstatus.setText(null);
-        tfduree.setText(null);
-        tfprix.setText(null);
-        btnsave.setDisable(false);}
-    @FXML
-    void createTerrain(ActionEvent event) throws SQLException {
-        AvisTerrain terrain = new AvisTerrain(tfaddress.getText(), tfgradin.getText(), Integer.parseInt(tfvestiaire.getText()), tfstatus.getText(), tfnom.getText(), Integer.parseInt(tfprix.getText()), Integer.parseInt(tfduree.getText()));
-        at.add(terrain);
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         showTerrains();
-        clearField(); //Efface les champs après l'ajout
     }
-    @FXML
-    void deleteTerrain(ActionEvent event) throws SQLException {
 
-        AvisTerrain terrain = table.getSelectionModel().getSelectedItem(); // Récupère le terrain sélectionné dans la TableView
+    private void showTerrains() {
+        AvisContainer.getChildren().clear();
+        ObservableList<AvisTerrain> terrains = as.getAllTerrains();
+        for (AvisTerrain avis : terrains) {
+            HBox terrainBox = new HBox();
+            terrainBox.setSpacing(10);
+            Label id_avisLabel = new Label("idAvis: " + avis.getIdAvis());
+            Label commentairelabel = new Label("commentaire: " + avis.getCommentaire());
+            Label notelabel = new Label("note: " + avis.getNote());
+            Label datelabel = new Label("date_avis: " + avis.getDate_avis());
+            terrainBox.getChildren().addAll(id_avisLabel, commentairelabel, notelabel, datelabel);
+            AvisContainer.getChildren().add(terrainBox);
+        }
+    }
+
+    @FXML
+    void Annuler() {
+        tfID_avis.setText("");
+        tfcommentaire.setText("");
+        tfnote.setText("");
+        tfdate.setText("");
+    }
+
+    @FXML
+    void annulerAvis(ActionEvent event) {
+        Annuler();
+    }
+
+    @FXML
+    void ajouterAvis(ActionEvent event) throws SQLException {
+        AvisTerrain terrain = new AvisTerrain(tfcommentaire.getText(), Integer.parseInt(tfnote.getText()), tfdate.getText());
+        as.add(terrain);
+        showTerrains(); // Mettre à jour l'affichage après avoir ajouté un nouveau terrain
+        Annuler(); // Efface les champs après l'ajout}
+    }
+
+
+    @FXML
+    void SupprimerAvis(ActionEvent event) throws SQLException {
+        int id = Integer.parseInt(tfID_avis.getText());
+        AvisTerrain terrain = as.getTerrainById(id);
         if (terrain != null) {
-            at.delete(terrain.getId()); // Appel de la méthode delete du TerrainService avec l'ID du terrain sélectionné
-            showTerrains(); // Rafraîchit la TableView
-        } else {
-            // Afficher un message d'erreur car aucun terrain n'est sélectionné
-            System.out.println("erreeuuuuuuuuuur");}}
-    @FXML
-    void updateTerrain(ActionEvent event) throws SQLException {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation de suppression");
+            alert.setHeaderText("Voulez-vous vraiment supprimer cet avis ?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                as.delete(id);
+                showTerrains();
+            }
+        }
+    }
 
-        AvisTerrain terrain = table.getSelectionModel().getSelectedItem(); // Récupère le terrain sélectionné dans la TableView
+
+    @FXML
+    void modifierAvis(ActionEvent event) throws SQLException {
+        int id = Integer.parseInt(tfID_avis.getText());
+        AvisTerrain terrain = as.getTerrainById(id);
         if (terrain != null) {
-            terrain.setAddress(tfaddress.getText());
-            terrain.setGradin(tfgradin.getText());
-            terrain.setVestiaire(Integer.parseInt(tfvestiaire.getText()));
-            terrain.setStatus(tfstatus.getText());
-            terrain.setNomt(tfnom.getText());
-            terrain.setPrix(Integer.parseInt(tfprix.getText()));
-            terrain.setDuree(Integer.parseInt(tfduree.getText()));
+            if (!tfcommentaire.getText().isEmpty()) {
+                terrain.setCommentaire(tfcommentaire.getText());
+            }
+            if (!tfnote.getText().isEmpty()) {
+                terrain.setNote(Integer.parseInt(tfnote.getText()));
+            }
+            if (!tfdate.getText().isEmpty()) {
+                terrain.setDate_avis(tfdate.getText());
+            }
+            // Mettre à jour le terrain dans la base de données
+            as.update(terrain);
+            // Mettre à jour l'affichage des terrains
+            showTerrains();
+        }
+    }
 
-            at.update(terrain); // Appel de la méthode update du TerrainService
-            showTerrains(); // Rafraîchit la TableView
-        }else {
-            // Afficher un message d'erreur car aucun terrain n'est sélectionné
-            System.out.println("erreeuuuuuuuuuur");}}
+
     @FXML
-    public void getData() {
-        AvisTerrain terrain = table.getSelectionModel().getSelectedItem();
-        tfaddress.setText(terrain.getAddress());
-        tfgradin.setText(terrain.getGradin());
-        tfvestiaire.setText(String.valueOf(terrain.getVestiaire()));
-        tfstatus.setText(terrain.getStatus());
-        tfnom.setText(terrain.getNomt());
-        tfprix.setText(String.valueOf(terrain.getPrix()));
-        tfduree.setText(String.valueOf(terrain.getDuree()));
-        btnsave.setDisable(false);}
-    @FXML
-    void getData(MouseEvent event) {getData();}
-    @FXML
-    void showTerrain(ActionEvent event) {showTerrains();}
+    void getData(MouseEvent event) {
+        Node source = (Node) event.getSource();
+        HBox terrainBox = (HBox) source.getParent();
+        AvisTerrain terrain = (AvisTerrain) terrainBox.getUserData();
+        if (terrain != null) {
+            tfID_avis.setText(String.valueOf(terrain.getIdAvis()));
+            tfcommentaire.setText(terrain.getCommentaire());
+            tfnote.setText(String.valueOf(terrain.getNote()));
+            tfdate.setText(terrain.getDate_avis());
+        }
+    }
 }
-
-

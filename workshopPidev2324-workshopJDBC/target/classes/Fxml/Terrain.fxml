@@ -24,14 +24,14 @@
                 <TextField fx:id="tfgradin" />
                 <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="vestiaire" />
                 <TextField fx:id="tfvestiaire" prefHeight="62.0" prefWidth="328.0" />
-            <Label text="status" />
-            <TextField fx:id="tfstatus" />
-            <Label text="prix" />
-            <TextField fx:id="tfprix" />
-            <Label text="duree" />
-            <TextField fx:id="tfduree" />
-            <Label text="gouvernorat" />
-            <TextField fx:id="tfemplacement" />
+                <Label text="status" />
+                <TextField fx:id="tfstatus" />
+                <Label text="prix" />
+                <TextField fx:id="tfprix" />
+                <Label text="duree" />
+                <TextField fx:id="tfduree" />
+                <Label text="gouvernorat" />
+                <TextField fx:id="tfemplacement" />
 
             </children>
         </VBox>
@@ -48,22 +48,22 @@
                 <Button fx:id="btnsave" mnemonicParsing="false" onAction="#createTerrain" prefHeight="35.0" prefWidth="206.0" text="Enregistrer" textFill="#10215e" />
                 <Button fx:id="btnupdate" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#updateTerrain" text="Modifier" />
                 <Button fx:id="btndelete" layoutX="351.0" layoutY="17.0" mnemonicParsing="false" onAction="#deleteTerrain" text="Supprimer" />
-            <Button fx:id="btannuler" mnemonicParsing="false" onAction="#clearField" text="Annuler" />
+                <Button fx:id="btannuler" mnemonicParsing="false" onAction="#clearField" text="Annuler" />
             </buttons>
         </ButtonBar>
-      <AnchorPane layoutX="248.0" layoutY="155.0" prefHeight="222.0" prefWidth="200.0">
-         <children>
-            <ImageView fx:id="img" fitHeight="207.0" fitWidth="200.0" layoutX="3.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="btinserer" layoutX="42.0" layoutY="168.0" mnemonicParsing="false" onAction="#addTerrain_imageview" prefHeight="34.0" text="Inserer" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="248.0" layoutY="377.0" prefHeight="200.0" prefWidth="200.0">
-         <children>
-            <MediaView fx:id="vid" fitHeight="200.0" fitWidth="200.0" layoutX="3.0" layoutY="15.0" />
-            <Button fx:id="btninserervid" layoutX="42.0" layoutY="161.0" mnemonicParsing="false" onAction="#addvid" text="InsererVideo" />
-         </children></AnchorPane>
-      <VBox fx:id="terrainContainer" layoutX="477.0" layoutY="82.0" prefHeight="554.0" prefWidth="878.0" />
-      <Text fx:id="id" layoutX="331.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
-      <TextField fx:id="tfID" layoutX="250.0" layoutY="108.0" prefHeight="31.0" prefWidth="94.0" />
+        <AnchorPane layoutX="248.0" layoutY="155.0" prefHeight="222.0" prefWidth="200.0">
+            <children>
+                <ImageView fx:id="img" fitHeight="207.0" fitWidth="200.0" layoutX="3.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
+                <Button fx:id="btinserer" layoutX="42.0" layoutY="168.0" mnemonicParsing="false" onAction="#addTerrain_imageview" prefHeight="34.0" text="Inserer" />
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="248.0" layoutY="377.0" prefHeight="200.0" prefWidth="200.0">
+            <children>
+                <MediaView fx:id="vid" fitHeight="200.0" fitWidth="200.0" layoutX="3.0" layoutY="15.0" />
+                <Button fx:id="btninserervid" layoutX="42.0" layoutY="161.0" mnemonicParsing="false" onAction="#addvid" text="InsererVideo" />
+            </children></AnchorPane>
+        <VBox fx:id="terrainContainer" layoutX="477.0" layoutY="82.0" prefHeight="554.0" prefWidth="878.0" />
+        <Text fx:id="id" layoutX="331.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+        <TextField fx:id="tfID" layoutX="250.0" layoutY="108.0" prefHeight="31.0" prefWidth="94.0" />
     </children>
 </AnchorPane>
