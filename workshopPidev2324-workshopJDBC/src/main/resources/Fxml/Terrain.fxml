@@ -35,7 +35,7 @@
 
             </children>
         </VBox>
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="583.0" layoutY="17.0" text="GESTION TERRAIN" textAlignment="CENTER" textFill="#0b0b0b" textOverrun="CLIP">
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="583.0" layoutY="17.0" text="GESTION TERRAIN" textAlignment="CENTER" textFill="#0b0b0b" textOverrun="CLIP" underline="true">
             <font>
                 <Font name="System Bold" size="26.0" />
             </font>
@@ -62,7 +62,7 @@
             <MediaView fx:id="vid" fitHeight="200.0" fitWidth="200.0" layoutX="3.0" layoutY="15.0" />
             <Button fx:id="btninserervid" layoutX="42.0" layoutY="161.0" mnemonicParsing="false" onAction="#addvid" text="InsererVideo" />
          </children></AnchorPane>
-      <VBox fx:id="terrainContainer" layoutX="476.0" layoutY="67.0" prefHeight="566.0" prefWidth="878.0" />
+      <VBox fx:id="terrainContainer" layoutX="477.0" layoutY="82.0" prefHeight="554.0" prefWidth="878.0" />
       <Text fx:id="id" layoutX="331.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
       <TextField fx:id="tfID" layoutX="250.0" layoutY="108.0" prefHeight="31.0" prefWidth="94.0" />
     </children>
