@@ -6,4 +6,5 @@ public interface ITerrain<T> {
 
     void update(T t) throws SQLException;
 
-    void delete(int id) throws SQLException;}
+    void delete(int id) throws SQLException;
+}

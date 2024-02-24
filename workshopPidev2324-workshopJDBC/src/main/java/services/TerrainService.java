@@ -1,5 +1,7 @@
 package services;
 import entity.Terrain;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import utils.MyDatabase;
 import java.sql.*;
 
@@ -50,4 +52,58 @@ public class TerrainService  implements ITerrain<Terrain>{
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, id);
         ps.executeUpdate();}
+    public ObservableList<Terrain> getAllTerrains() {
+        ObservableList<Terrain> terrains = FXCollections.observableArrayList();
+        String query = "SELECT * FROM terrain";
+        Connection connection = MyDatabase.getInstance().getConnection();
+        try {
+            PreparedStatement t = connection.prepareStatement(query);
+            ResultSet rs = t.executeQuery();
+            while (rs.next()) {
+                Terrain terrain = new Terrain();
+                terrain.setId(rs.getInt("id"));
+                terrain.setNomt(rs.getString("nom"));
+                terrain.setAddress(rs.getString("address"));
+                terrain.setGradin(rs.getString("gradin"));
+                terrain.setVestiaire(rs.getInt("vestiaire"));
+                terrain.setStatus(rs.getString("status"));
+                terrain.setPrix(rs.getInt("prix"));
+                terrain.setDuree(rs.getInt("duree"));
+                terrain.setGouvernorat(rs.getString("gouvernorat"));
+                terrain.setImage((rs.getString("image")));
+                terrain.setVideo((rs.getString("video")));
+                terrains.add(terrain);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return terrains;}
+    public Terrain getTerrainByNom(String nom) {
+        Terrain terrain = null;
+        String query = "SELECT * FROM terrain WHERE nom = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, nom);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                terrain = new Terrain();
+                terrain.setId(rs.getInt("id"));
+                terrain.setNomt(rs.getString("nom"));
+                terrain.setAddress(rs.getString("address"));
+                terrain.setGradin(rs.getString("gradin"));
+                terrain.setVestiaire(rs.getInt("vestiaire"));
+                terrain.setStatus(rs.getString("status"));
+                terrain.setPrix(rs.getInt("prix"));
+                terrain.setDuree(rs.getInt("duree"));
+                terrain.setGouvernorat(rs.getString("gouvernorat"));
+                terrain.setImage((rs.getString("image")));
+                terrain.setVideo((rs.getString("video")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return terrain;
+    }
+
+
+
 }
