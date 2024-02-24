@@ -1,0 +1,22 @@
+/* styles.css */
+
+.anchor-pane-style {
+ -fx-background-color: rgba(76, 175, 80, 0.5);
+-fx-border-radius: 7px ;
+    -fx-border-color: #02365c;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 30px;
+}
+
+.label-style {
+    -fx-font-size: 20px; /* Taille de la police */
+    -fx-text-fill: #333; /* Couleur du texte */
+    -fx-font-weight: bold; /* Police en gras */
+    -fx-padding: 5px 5px 5px 20px;
+}
+
+
+.vbox-spacing {
+    -fx-spacing: 10px;
+}
