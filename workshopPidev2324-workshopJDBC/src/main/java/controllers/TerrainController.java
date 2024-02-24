@@ -97,9 +97,23 @@ public class TerrainController {
             mediaView.setFitWidth(50);
             mediaView.setFitHeight(50);
 
+            // Ajout du symbole '|' entre chaque texte
+            String separator = " | ";
+            idLabel.setText("Id: " + terrain.getId() + separator);
+            nomLabel.setText("Nom: " + terrain.getNomTerrain() + separator);
+            addressLabel.setText("Address: " + terrain.getAddress() + separator);
+            gradinLabel.setText("Gradin: " + terrain.getGradin() + separator);
+            vestiaireLabel.setText("Vestiaire: " + terrain.getVestiaire() + separator);
+            statusLabel.setText("Status: " + terrain.getStatus() + separator);
+            prixLabel.setText("Prix: " + terrain.getPrix() + separator);
+            dureeLabel.setText("Durée: " + terrain.getDuree() + separator);
+            gouvernoratLabel.setText("Gouvernorat: " + terrain.getGouvernorat());
 
-            terrainBox.getChildren().addAll(idLabel,nomLabel, addressLabel, gradinLabel, vestiaireLabel, statusLabel, prixLabel, dureeLabel, gouvernoratLabel, imageView, mediaView);
-            terrainContainer.getChildren().add(terrainBox);}}
+            terrainBox.getChildren().addAll(idLabel, nomLabel, addressLabel, gradinLabel, vestiaireLabel, statusLabel, prixLabel, dureeLabel, gouvernoratLabel, imageView, mediaView);
+            terrainContainer.getChildren().add(terrainBox);
+        }
+    }
+
     @FXML
     void clearField() {
         tfID.setText("");

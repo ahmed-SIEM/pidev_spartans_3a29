@@ -14,7 +14,7 @@ public class MainFX extends Application {
         Parent root = loader.load();
         //scene bordure de l'app change selon l'interface
         Scene scene = new Scene(root);
-        primaryStage.setTitle("");
+        primaryStage.setTitle("Gestion ");
         primaryStage.setScene(scene);
         primaryStage.show();}
     public static void main(String[] args) {

@@ -1,4 +1,5 @@
 package controllers;
+
 import entity.AvisTerrain;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +12,7 @@ import javafx.scene.layout.VBox;
 import services.AvisService;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -25,18 +27,16 @@ public class AvisController {
     private Button btnupdate;
     @FXML
     private TextField tfID_avis;
-
     @FXML
     private TextField tfcommentaire;
     @FXML
     private TextField tfnote;
     @FXML
-    private TextField tfdate;
-
-
-    private AvisService as = new AvisService();
+    private DatePicker datePicker;
     @FXML
     private VBox AvisContainer;
+
+    private AvisService as = new AvisService();
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,32 +53,46 @@ public class AvisController {
             Label commentairelabel = new Label("commentaire: " + avis.getCommentaire());
             Label notelabel = new Label("note: " + avis.getNote());
             Label datelabel = new Label("date_avis: " + avis.getDate_avis());
-            terrainBox.getChildren().addAll(id_avisLabel, commentairelabel, notelabel, datelabel);
+            terrainBox.getChildren().addAll(id_avisLabel, new Label("|"), commentairelabel, new Label("|"), notelabel, new Label("|"), datelabel);
             AvisContainer.getChildren().add(terrainBox);
         }
     }
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();} 
 
     @FXML
     void Annuler() {
         tfID_avis.setText("");
         tfcommentaire.setText("");
         tfnote.setText("");
-        tfdate.setText("");
+        datePicker.setValue(null);
     }
 
     @FXML
-    void annulerAvis(ActionEvent event) {
+    void annuleravis(ActionEvent event) {
         Annuler();
     }
 
     @FXML
     void ajouterAvis(ActionEvent event) throws SQLException {
-        AvisTerrain terrain = new AvisTerrain(tfcommentaire.getText(), Integer.parseInt(tfnote.getText()), tfdate.getText());
-        as.add(terrain);
-        showTerrains(); // Mettre à jour l'affichage après avoir ajouté un nouveau terrain
-        Annuler(); // Efface les champs après l'ajout}
-    }
+        // Récupérer la note saisie
+        int note = Integer.parseInt(tfnote.getText());
 
+        // Vérifier si la note est comprise entre 0 et 5
+        if (note < 0 || note > 5) {
+            showAlert(Alert.AlertType.ERROR, "Erreur de saisie", "La note doit être comprise entre 0 et 5.");
+            return;
+        }
+        String date = datePicker.getValue() != null ? datePicker.getValue().toString() : "";
+        AvisTerrain terrain = new AvisTerrain(tfcommentaire.getText(), Integer.parseInt(tfnote.getText()), date);
+        as.add(terrain);
+        showTerrains();
+        Annuler();
+    }
 
     @FXML
     void SupprimerAvis(ActionEvent event) throws SQLException {
@@ -96,7 +110,6 @@ public class AvisController {
         }
     }
 
-
     @FXML
     void modifierAvis(ActionEvent event) throws SQLException {
         int id = Integer.parseInt(tfID_avis.getText());
@@ -108,8 +121,8 @@ public class AvisController {
             if (!tfnote.getText().isEmpty()) {
                 terrain.setNote(Integer.parseInt(tfnote.getText()));
             }
-            if (!tfdate.getText().isEmpty()) {
-                terrain.setDate_avis(tfdate.getText());
+            if (datePicker.getValue() != null) {
+                terrain.setDate_avis(datePicker.getValue().toString());
             }
             // Mettre à jour le terrain dans la base de données
             as.update(terrain);
@@ -128,7 +141,7 @@ public class AvisController {
             tfID_avis.setText(String.valueOf(terrain.getIdAvis()));
             tfcommentaire.setText(terrain.getCommentaire());
             tfnote.setText(String.valueOf(terrain.getNote()));
-            tfdate.setText(terrain.getDate_avis());
+            datePicker.setValue(terrain.getDate_avis() != null ? LocalDate.parse(terrain.getDate_avis()) : null);
         }
     }
 }

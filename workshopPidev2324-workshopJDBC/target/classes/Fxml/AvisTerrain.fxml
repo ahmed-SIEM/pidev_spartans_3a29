@@ -2,7 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="720" prefWidth="1280.0" styleClass="form_container" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AvisController">
+<AnchorPane prefHeight="720" prefWidth="1280.0" styleClass="form_container" stylesheets="@../css/styles1.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AvisController">
     <children>
         <VBox layoutX="24.0" layoutY="250.0" prefHeight="218.0" prefWidth="200.0" spacing="10.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="250.0">
             <children>
@@ -19,7 +21,6 @@
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="note" />
                 <TextField fx:id="tfnote" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="date" />
-                <TextField fx:id="tfdate" />
             </children>
         </VBox>
         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="583.0" layoutY="17.0" text="GESTION AvisTerrain" textAlignment="CENTER" textFill="#0b0b0b" textOverrun="CLIP" underline="true">
@@ -30,16 +31,18 @@
                 <Glow />
             </effect>
         </Label>
-        <ButtonBar layoutX="14.0" layoutY="622.0" prefHeight="91.0" prefWidth="487.0">
+        <ButtonBar layoutX="-48.0" layoutY="628.0" prefHeight="91.0" prefWidth="722.0">
             <buttons>
                 <Button fx:id="btnsave" mnemonicParsing="false" onAction="#ajouterAvis" prefHeight="35.0" prefWidth="206.0" text="Enregistrer" textFill="#10215e" />
                 <Button fx:id="btnupdate" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#modifierAvis" text="Modifier" />
                 <Button fx:id="btndelete" layoutX="351.0" layoutY="17.0" mnemonicParsing="false" onAction="#SupprimerAvis" text="Supprimer" />
-                <Button fx:id="btannuler" mnemonicParsing="false" onAction="#annulerAvis" text="Annuler" />
+                <Button fx:id="btannuler" mnemonicParsing="false" onAction="#annuleravis" text="Annuler" />
             </buttons>
         </ButtonBar>
-        <VBox fx:id="AvisContainer" layoutX="452.0" layoutY="82.0" prefHeight="554.0" prefWidth="937.0" />
         <Text fx:id="id" layoutX="331.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
         <TextField fx:id="tfID_avis" layoutX="250.0" layoutY="108.0" prefHeight="31.0" prefWidth="94.0" />
+      <DatePicker fx:id="datePicker" layoutX="24.0" layoutY="469.0" prefHeight="39.0" prefWidth="200.0" />
+      <Separator layoutX="484.0" layoutY="116.0" orientation="VERTICAL" prefHeight="505.0" prefWidth="0.0" />
+        <VBox fx:id="AvisContainer" alignment="CENTER" layoutX="490.0" layoutY="91.0" prefHeight="554.0" prefWidth="779.0" />
     </children>
 </AnchorPane>
