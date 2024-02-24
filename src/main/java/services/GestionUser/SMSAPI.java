@@ -3,7 +3,7 @@ import java.net.*;
 import java.util.Base64;
 import java.io.*;
 public class SMSAPI {
-    void SendCode(String to , String message) throws Exception {
+    public void SendCode(String to , String message) throws Exception {
 
         // This URL is used for sending messages
         String myURI = "https://api.bulksms.com/v1/messages";

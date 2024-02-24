@@ -136,11 +136,7 @@ public class LoginRegistrationPageController {
         Seconnecterfield1.setText(us.getEmail());
         SeconnecterPass1.setText(us.getPassword());
     }
-    public void sendSMS(String to , String message) throws Exception {
-        SMSAPI sms = new SMSAPI();
-        sms.sms(to,message);
 
-    }
     public void initialize() throws SQLException {
 
 
@@ -287,39 +283,40 @@ public class LoginRegistrationPageController {
         gotoSeconnecter();
 
     }
-    public boolean showConfirmationDialog(String message) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-
-
-        Optional<ButtonType> result = alert.showAndWait();
-        return result.isPresent() && result.get() == ButtonType.OK;
-    }
+CAlert Al = new CAlert();
     @FXML
     public void Oublietlemotdepass(ActionEvent event) throws Exception {
         if(Seconnecterfield1.getText().isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Champ vide");
-            alert.setHeaderText("Tous les champs sont requis");
-            alert.showAndWait();
+            Al.generateAlert("WARNING","Tous les champs sont requis");
             return;
+
         }
         if(!us.userExist(Seconnecterfield1.getText())){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Utilisateur non trouvé");
-            alert.setHeaderText("Aucun utilisateur avec cet e-mail");
-            alert.showAndWait();
+            Al.generateAlert("WARNING","Aucun utilisateur avec cet e-mail");
             return;
         }
         User u = us.getByEmail(Seconnecterfield1.getText());
-        if( showConfirmationDialog("Un code de vérification sera envoyé à votre e-mail. Voulez-vous continuer?")){
-         //   sendSMS(u.getEmail(),"Votre code de vérification est : " + u.getVerificationCode());
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Code envoyé");
-            alert.setHeaderText("Un code de vérification a été envoyé à votre e-mail");
-            alert.showAndWait();
+        if( Al.generateConfirmation("Un code de vérification sera envoyé à votre teléphone Voulez-vous continuer?")){
+            Al.generateConfirmation("Un code de vérification a été envoyé à votre teléphone");
+            // i want a new scene to be generatd with a textfield to enter the code
+            // if the code is correct then we can get the user and change the password
+            // if the code is incorrect we can generate an alert
+            // if the user wants to cancel the operation we can go back to the login page
+            // if the user wants to resend the code we can resend the code
+            SMSAPI sms = new SMSAPI();
+            String code = VerificationCodeGenerator.generateVerificationCode();
+            sms.SendCode(String.valueOf(u.getPhone()), code);
+
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("VerificationCode.fxml"));
+            AnchorPane root = loader.load();
+            VerificationCodeController verificationCodeController = loader.getController();
+            verificationCodeController.setData(u,code);
+            MainPane.getChildren().setAll(root);
+
+
+
+
 
        
 
@@ -348,8 +345,8 @@ public class LoginRegistrationPageController {
 
 
         User u = us.getByEmail(Seconnecterfield1.getText());
-        if( u.getStatus().equals("Desactive")){
-            if( showConfirmationDialog("Your account is currently deactivated. Do you want to reactivate and log in?")){
+        if( !u.getStatus()){
+            if( Al.generateConfirmation("Your account is currently deactivated. Do you want to reactivate and log in?")){
                 us.InvertStatus(u.getEmail());
                 try {
 
@@ -394,39 +391,7 @@ public class LoginRegistrationPageController {
         }
 
     }
-    /*
 
-
- Seconnecterheader
-        SeconnecterLabel1
-        Seconnecterfield1
-        SeconnecterLabel2
-        SeconnecterPass1
-        Seconnecterbtn1
-        Seconnecterbtn2
-        SeconnecterTxt1
-        SeconnecterTxt2
-        BtnSinscrire
-
-
-        RegisterBtnSinscrire
-        RegisterHeader
-        RegisterLabel1
-        RegisterLabel2
-        RegisteraddressLabel
-        Registerfield1
-        Registerfield2
-        Registerlabel12
-        Registerpass1
-        Registertxt2
-        Registrertxt1
-        btnSeconnecter
-        rbtn1
-        rbtn2
-        rbtn3
-        rbtn4
-        registerPass2
-*/
 
 
 
@@ -446,7 +411,7 @@ public class LoginRegistrationPageController {
 
 
     @FXML
-    void sinscrire(ActionEvent event) throws SQLException {
+    void sinscrire(ActionEvent event) throws Exception {
 
 
         if (Registerfield2.getText().isEmpty()
@@ -474,7 +439,7 @@ public class LoginRegistrationPageController {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Nom invalide");
             alert.setContentText("le nom ne doit contenir que des lettres");
-            alert.setHeaderText("Warning Alert");
+            alert.setHeaderText("CAlert Alert");
             alert.showAndWait();
             Registerfield1.setText("");
             Registerfield2.setText("");
@@ -489,7 +454,7 @@ public class LoginRegistrationPageController {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Email invalide");
             alert.setContentText("l'email doit être valide");
-            alert.setHeaderText("Warning Alert");
+            alert.setHeaderText("CAlert Alert");
             alert.showAndWait();
             Registerfield1.setText("");
             Registerfield2.setText("");
@@ -504,7 +469,7 @@ public class LoginRegistrationPageController {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Mot de passe invalide");
             alert.setContentText("le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial");
-            alert.setHeaderText("Warning Alert");
+            alert.setHeaderText("CAlert Alert");
             alert.showAndWait();
             Registerfield1.setText("");
             Registerfield2.setText("");
@@ -521,7 +486,7 @@ public class LoginRegistrationPageController {
              
            
             alert.setContentText(" L'age doit être supérieur à 12 ans");
-            alert.setHeaderText("Warning Alert");
+            alert.setHeaderText("CAlert Alert");
             alert.showAndWait();
             return;
         }
@@ -530,7 +495,7 @@ public class LoginRegistrationPageController {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("mots de passe ne correspondent pas");
             alert.setContentText("mot de passe et confirmer le mot de mot de passe devraient avoir le même contenu");
-            alert.setHeaderText("Warning Alert");
+            alert.setHeaderText("CAlert Alert");
             alert.showAndWait();
             Registerfield1.setText("");
             Registerfield2.setText("");
@@ -545,7 +510,7 @@ public class LoginRegistrationPageController {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("l'utilisateur existe déjà");
             alert.setContentText("Il y a déjà un utilisateur avec cet e-mail");
-            alert.setHeaderText("Warning Alert");
+            alert.setHeaderText("CAlert Alert");
             alert.showAndWait();
             Registerfield1.setText(""); // nom
             Registerfield2.setText(""); // address
@@ -557,54 +522,58 @@ public class LoginRegistrationPageController {
         }
 
 
-        String role;
+        Roles role;
         User u1;
         if(rbtn1.isSelected()){
-            role = "Fournisseur" ;
-            LocalDate currentDate = LocalDate.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            String dateString = currentDate.format(formatter);
+            role = Roles.Fournisseur ;
+
 
 
             u1 = new Fournisseur(
-                    Integer.parseInt(Registerfield21age.getText()),
-                    Integer.parseInt(Registerfield111numero.getText()),
-                    role,
-                    VerificationCodeGenerator.generateVerificationCode(),
-                    dateString,
                     Registerfield2.getText(),
                     registerPass2.getText(),
                     Registerfield1.getText(),
-                    "Active",
-                    "");
+                    Integer.parseInt(Registerfield21age.getText()),
+                    Integer.parseInt(Registerfield111numero.getText()),
+                    role
+            );
             us.addFournisseur((Fournisseur) u1);
         } else if (rbtn2.isSelected()) {
-            role = "Proprietaire_de_Terrain";
+            role = Roles.Proprietaire_de_Terrain;
 
 
             u1 = new Proprietaire_de_terrain(
-                    Integer.parseInt(Registerfield21age.getText()),
-                    Integer.parseInt(Registerfield111numero.getText()),
-                    role,dateString,Registerfield2.getText(),
+                    Registerfield2.getText(),
                     registerPass2.getText(),
                     Registerfield1.getText(),
-                    "Active");
+                    Integer.parseInt(Registerfield21age.getText()),
+                    Integer.parseInt(Registerfield111numero.getText()),
+                    role);
             us.addProprietairedeTerarin((Proprietaire_de_terrain) u1);
         } else if (rbtn3.isSelected()) {
-            role = "Organisateur";
-            LocalDate currentDate = LocalDate.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            String dateString = currentDate.format(formatter);
+            role = Roles.Organisateur;
 
-            u1 = new Organisateur(Integer.parseInt(Registerfield21age.getText()),Integer.parseInt(Registerfield111numero.getText()),role,dateString,Registerfield2.getText(),registerPass2.getText(),Registerfield1.getText(),"Active","");
+
+            u1 = new Organisateur(
+                    Registerfield2.getText(),
+                    registerPass2.getText(),
+                    Registerfield1.getText(),
+                    Integer.parseInt(Registerfield21age.getText()),
+                    Integer.parseInt(Registerfield111numero.getText()),
+                    role);
+
             us.addOrganisateur((Organisateur)u1);
         }else{
-            role = "Joueur";
-            LocalDate currentDate = LocalDate.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            String dateString = currentDate.format(formatter);
+            role = Roles.Joueur;
 
-            u1 = new Joueur(Integer.parseInt(Registerfield21age.getText()),Integer.parseInt(Registerfield111numero.getText()),role,dateString,Registerfield2.getText(),registerPass2.getText(),Registerfield1.getText(),"Active");
+
+            u1 = new Joueur(
+                    Registerfield2.getText(),
+                    registerPass2.getText(),
+                    Registerfield1.getText(),
+                    Integer.parseInt(Registerfield21age.getText()),
+                    Integer.parseInt(Registerfield111numero.getText()),
+                    role);
             us.addJoueur((Joueur)u1);
         }
 

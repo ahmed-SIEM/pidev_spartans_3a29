@@ -176,7 +176,7 @@ public class User {
         this.image = image;
         this.Status = false ;
         this.Date_de_Creation = CurrentTime.GetCurrentTime() ;
-        this.VerificationCode = VerificationCodeGenerator.generateVerificationCode(Phone);
+        this.VerificationCode = VerificationCodeGenerator.generateVerificationCode();
         this.isVerified = false;
 
     }
@@ -189,7 +189,7 @@ public class User {
         this.role = role;
         this.Status = true ;
         this.Date_de_Creation = CurrentTime.GetCurrentTime() ;
-        this.VerificationCode = VerificationCodeGenerator.generateVerificationCode(Phone);
+        this.VerificationCode = VerificationCodeGenerator.generateVerificationCode();
         this.isVerified = false;
     }
 

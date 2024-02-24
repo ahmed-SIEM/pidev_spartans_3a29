@@ -87,7 +87,7 @@ public class ProfileController {
         UserService us = new UserService();
         CurrentUser = us.getByEmail(u.getEmail());
 
-        tfRoleAffichage.setText(CurrentUser.getRole());
+        tfRoleAffichage.setText(CurrentUser.getRole().toString());
         tfDatedecreation.setText(CurrentUser.getDate_de_Creation());
         tdNomaffichage.setText(CurrentUser.getName());
         inputPassword.setText(CurrentUser.getPassword());
@@ -231,7 +231,7 @@ public class ProfileController {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("mots de passe ne correspondent pas");
             alert.setContentText("mot de passe et confirmer le mot de mot de passe devraient avoir le même contenu");
-            alert.setHeaderText("Warning Alert");
+            alert.setHeaderText("CAlert Alert");
             alert.showAndWait();
             return ;
         }
@@ -239,7 +239,7 @@ public class ProfileController {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("mots de passe invalid");
             alert.setContentText("le mot de passe ne peut pas être vide");
-            alert.setHeaderText("Warning Alert");
+            alert.setHeaderText("CAlert Alert");
             alert.showAndWait();
             return ;
         }
