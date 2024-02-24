@@ -17,8 +17,8 @@ public class Fournisseur extends User{
         this.Nom_Societe = nom_Societe;
     }
 
-    public Fournisseur(String role, String date_de_Creation, String email, String password, String name, String nom_Societe) {
-        super(role, date_de_Creation, email, password, name);
+    public Fournisseur(int age, int phone, String role, String date_de_Creation, String email, String password, String name, String status, String nom_Societe) {
+        super(age, phone, role, date_de_Creation, email, password, name, status);
         this.Nom_Societe = nom_Societe;
     }
 

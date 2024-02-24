@@ -17,13 +17,15 @@ public class UserService implements IService<User> {
 
 
 
-    public User getByEmail(String e) throws SQLException{
-        User user = new User();
+    public User getByEmail(String e) throws SQLException {
+        User user = null; // Initialize user as null
         String query = "SELECT * FROM user WHERE email = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setString(1, e);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
+            // If a user is found, populate the user object
+            user = new User();
             user.setId(rs.getInt("id"));
             user.setAge(rs.getInt("age"));
             user.setName(rs.getString("name"));
@@ -36,8 +38,9 @@ public class UserService implements IService<User> {
             user.setImage(rs.getString("Image"));
             user.setStatus(rs.getString("Status"));
         }
-        return user;
+        return user; // Return either the populated user or null if no user is found
     }
+
 
 
 
@@ -231,9 +234,13 @@ public class UserService implements IService<User> {
         return users;
     }
 
-    public boolean Login(String e , String P) throws SQLException{
+    public boolean Login(String e, String P) throws SQLException {
         User U1 = getByEmail(e);
+        if (U1 == null || U1.getPassword() == null || U1.getPassword().isEmpty()) {
+            return false;
+        }
         return U1.getPassword().equals(P);
     }
+
 
 }

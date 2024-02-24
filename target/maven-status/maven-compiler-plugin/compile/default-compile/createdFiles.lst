@@ -3,13 +3,12 @@ test\Main.class
 utils\MyDatabase.class
 models\User.class
 test\LoginRegistrationPageController.class
-test\SeconnecterController.class
+test\SMSAPI.class
 module-info.class
 services\GestionUser\IService.class
 services\GestionUser\UserService.class
 models\Organisateur.class
 test\AcceuilController.class
-test\RegistrationController.class
 models\Fournisseur.class
 models\Joueur.class
 models\Proprietaire_de_terrain.class

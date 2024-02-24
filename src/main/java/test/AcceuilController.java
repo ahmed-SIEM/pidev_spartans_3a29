@@ -64,13 +64,13 @@ public class AcceuilController {
         try {
             UserService us = new UserService();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("SeConnecter.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginRegistrationPage.fxml"));
             Parent root = loader.load();
 
-            SeconnecterController seconnectercontroller = loader.getController();
+            LoginRegistrationPageController Registrationcontroller = loader.getController();
 
 
-            seconnectercontroller.setData(us.getByEmail(CurrentUser.getEmail()));
+            Registrationcontroller.setData(us.getByEmail(CurrentUser.getEmail()));
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));

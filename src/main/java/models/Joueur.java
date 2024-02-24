@@ -5,8 +5,8 @@ public class Joueur extends User{
         super(id, age, phone, role, date_de_Creation, email, address, password, name);
     }
 
-    public Joueur(String role, String date_de_Creation, String email, String password, String name) {
-        super(role, date_de_Creation, email, password, name);
+    public Joueur(int age, int phone, String role, String date_de_Creation, String email, String password, String name, String status) {
+        super(age, phone, role, date_de_Creation, email, password, name, status);
     }
 
     public Joueur() {

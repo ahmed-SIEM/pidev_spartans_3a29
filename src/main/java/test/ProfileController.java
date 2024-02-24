@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -28,6 +29,7 @@ import java.util.Optional;
 import java.util.function.UnaryOperator;
 
 public class ProfileController {
+    public AnchorPane profileRoot;
     @FXML
     private Button Btnback;
 
@@ -154,7 +156,7 @@ public class ProfileController {
     }
     @FXML
     void DesactiverProfile(ActionEvent event) {
-        if (showConfirmationDialog("Are you sure you want to deactivate the profile?")) {
+        if (showConfirmationDialog("Etes-vous sûr de vouloir désactiver votre compte?")) {
             try {
                 UserService us = new UserService();
 
@@ -167,18 +169,13 @@ public class ProfileController {
             try {
                 UserService us = new UserService();
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("SeConnecter.fxml"));
-                Parent root = loader.load();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginRegistrationPage.fxml"));
+                AnchorPane root = loader.load();
 
-                SeconnecterController seconnectercontroller = loader.getController();
+                LoginRegistrationPageController controller = loader.getController();
+                profileRoot.getChildren().setAll(root);
 
 
-
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-
-                ((Stage) btnDesactiver.getScene().getWindow()).close();
 
             } catch (IOException e) {
                 e.printStackTrace();

@@ -3,10 +3,13 @@ package models;
 
 public class User {
     private int id;
+
     private int age;
     private String image ;
     private int Phone ;
     private String role ;
+
+    private String VerificationCode;
 
     private String Date_de_Creation;
     private String Email ;
@@ -15,7 +18,7 @@ public class User {
     private String Password;
     private String name;
 
-    private String Status = "Active" ;
+    private String Status ;
 
     public String getImage() {
         return image;
@@ -40,6 +43,10 @@ public class User {
             }
         }
         return false;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.VerificationCode = verificationCode;
     }
 
     public String getStatus() {
@@ -119,10 +126,11 @@ public class User {
         this.name = name;    }
 
 
-    public User(int id, int age, int phone, String role, String date_de_Creation, String email, String address, String password, String name) {
+    public User(int id, int age, int phone, String role, String verificationCode, String date_de_Creation, String email, String address, String password, String name) {
         this.id = id;
         this.age = age;
         this.Phone = phone;
+        this.VerificationCode = verificationCode;
         setRole(role);
         this.Date_de_Creation = date_de_Creation;
         this.Email = email;
@@ -132,15 +140,17 @@ public class User {
 
     }
 
-    public User(String role, String date_de_Creation, String email, String password, String name) {
+    public User(int age, int phone, String role, String verificationCode, String date_de_Creation, String email, String password, String name, String status) {
+        this.age = age;
+        this.Phone = phone;
+        this.VerificationCode = verificationCode;
         setRole(role);
         this.Date_de_Creation = date_de_Creation;
         this.Email = email;
         this.Password = password;
         this.name = name;
-
+        this.Status = status;
     }
-
 
     public User(){}
 
@@ -160,4 +170,6 @@ public class User {
                 ", Status='" + Status + '\'' +
                 '}';
     }
+
+
 }
