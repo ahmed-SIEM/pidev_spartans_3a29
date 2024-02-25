@@ -1,11 +1,21 @@
 package services;
 import entity.AvisTerrain;
+import entity.Terrain;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.MyDatabase;
 import java.sql.*;
 //*******************************************************************************************
 public class AvisService  implements ITerrain<AvisTerrain>{
+    public void addAvis(int terrainId, String commentaire, int note) throws SQLException {
+        String sql = "INSERT INTO avis (terrain_id, commentaire, note) VALUES (?, ?, ?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, terrainId);
+            statement.setString(2, commentaire);
+            statement.setInt(3, note);
+            statement.executeUpdate();
+        }
+    }
     private Connection connection;
     public AvisService() {connection = MyDatabase.getInstance().getConnection();}
     //*******************************************************************************************
@@ -42,21 +52,34 @@ public class AvisService  implements ITerrain<AvisTerrain>{
         ps.executeUpdate();}
     //*******************************************************************************************
     public ObservableList<AvisTerrain> getAllTerrains() {
-        ObservableList<AvisTerrain> terrains = FXCollections.observableArrayList();
-        String query = "SELECT * FROM avis";
+        ObservableList<AvisTerrain> avisTerrains = FXCollections.observableArrayList();
+        String query = "SELECT avis.*, terrain.* FROM avis JOIN terrain ON avis.id = terrain.id";
         try (PreparedStatement ps = connection.prepareStatement(query);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                AvisTerrain terrain = new AvisTerrain();
-                terrain.setIdAvis(rs.getInt("idAvis"));
-                terrain.setId(rs.getInt("id")); // Utilisez la colonne "id" pour l'ID du terrain
-                terrain.setCommentaire(rs.getString("commentaire"));
-                terrain.setNote(rs.getInt("note"));
-                terrain.setDate_avis(rs.getString("date_avis"));
-                terrains.add(terrain);}
+                AvisTerrain avisTerrain = new AvisTerrain();
+                avisTerrain.setIdAvis(rs.getInt("idAvis"));
+                avisTerrain.setCommentaire(rs.getString("commentaire"));
+                avisTerrain.setNote(rs.getInt("note"));
+                avisTerrain.setDate_avis(rs.getString("date_avis"));
+
+                // Créer un objet Terrain avec les données de la jointure
+                Terrain terrain = new Terrain();
+                terrain.setId(rs.getInt("id"));
+                terrain.setNomTerrain(rs.getString("nomTerrain"));
+                // Ajouter d'autres attributs de Terrain si nécessaire
+
+                // Assigner l'objet Terrain à l'objet AvisTerrain
+                avisTerrain.setTerrain(terrain);
+
+                avisTerrains.add(avisTerrain);
+            }
         } catch (SQLException e) {
-            e.printStackTrace();}
-        return terrains;}
+            e.printStackTrace();
+        }
+        return avisTerrains;
+    }
+
     //*******************************************************************************************
     public AvisTerrain getTerrainById(int id) {
         AvisTerrain terrain = null;

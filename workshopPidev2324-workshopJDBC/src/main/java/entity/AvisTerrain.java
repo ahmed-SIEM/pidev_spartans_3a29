@@ -5,6 +5,7 @@ public class AvisTerrain {
     private int note;
     private String commentaire;
     private String date_avis;
+    private Terrain terrain; // Référence à un objet Terrain
     //*******************************************************************************************
     public AvisTerrain(int id, String commentaire, int note, String date_avis) {
         this.id = id;
@@ -13,6 +14,8 @@ public class AvisTerrain {
         this.date_avis = date_avis;}
     public AvisTerrain() {}
     //*******************************************************************************************
+    public Terrain getTerrain() {return terrain;}
+    public void setTerrain(Terrain terrain) {this.terrain = terrain;}
     public int getIdAvis() {
         return idAvis;
     }
