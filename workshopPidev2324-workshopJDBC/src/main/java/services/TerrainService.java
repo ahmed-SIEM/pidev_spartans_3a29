@@ -4,6 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.MyDatabase;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TerrainService  implements ITerrain<Terrain>{
     private Connection connection;
@@ -55,8 +57,8 @@ public class TerrainService  implements ITerrain<Terrain>{
         ps.setInt(1, id);
         ps.executeUpdate();}
     //*******************************************************************************************
-    public ObservableList<Terrain> getAllTerrains() {
-        ObservableList<Terrain> terrains = FXCollections.observableArrayList();
+    public List<Terrain> getAllTerrains() {
+        List<Terrain> terrains = new ArrayList<>();
         String query = "SELECT * FROM terrain";
         try (PreparedStatement ps = connection.prepareStatement(query);
              ResultSet rs = ps.executeQuery()) {
