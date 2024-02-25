@@ -9,6 +9,7 @@ public class TerrainService  implements ITerrain<Terrain>{
     private Connection connection;
     public TerrainService() {
         connection = MyDatabase.getInstance().getConnection();}
+    //*******************************************************************************************
     public void add(Terrain t) throws SQLException {
         String query = "INSERT INTO terrain (address, gradin, vestiaire, status, nomTerrain, prix, duree, gouvernorat, image, video) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
@@ -27,7 +28,7 @@ public class TerrainService  implements ITerrain<Terrain>{
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
                     t.setId(rs.getInt(1));}}}}
-
+    //*******************************************************************************************
     public void update(Terrain t) {
         String query = "UPDATE `terrain` SET  `address` = ?, `gradin` = ?, `vestiaire` = ?, `status` = ?, `nomTerrain` = ?, `duree` = ?, `prix` = ?, `gouvernorat` = ?, `image` = ?,  `video` = ? WHERE `id` = ?";
         PreparedStatement ps = null;
@@ -47,11 +48,13 @@ public class TerrainService  implements ITerrain<Terrain>{
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());}}
+    //*******************************************************************************************
     public void delete(int id) throws SQLException{
         String query = "DELETE FROM terrain WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, id);
         ps.executeUpdate();}
+    //*******************************************************************************************
     public ObservableList<Terrain> getAllTerrains() {
         ObservableList<Terrain> terrains = FXCollections.observableArrayList();
         String query = "SELECT * FROM terrain";
@@ -70,15 +73,11 @@ public class TerrainService  implements ITerrain<Terrain>{
                 terrain.setGouvernorat(rs.getString("gouvernorat"));
                 terrain.setImage(rs.getString("image"));
                 terrain.setVideo(rs.getString("video"));
-                terrains.add(terrain);
-            }
+                terrains.add(terrain);}
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return terrains;
-    }
-
-
+            e.printStackTrace();}
+        return terrains;}
+//*******************************************************************************************
     public Terrain getTerrainByNom(String nom) {
         Terrain terrain = null;
         String query = "SELECT * FROM terrain WHERE nomTerrain = ?";
@@ -97,13 +96,11 @@ public class TerrainService  implements ITerrain<Terrain>{
                 terrain.setDuree(rs.getInt("duree"));
                 terrain.setGouvernorat(rs.getString("gouvernorat"));
                 terrain.setImage((rs.getString("image")));
-                terrain.setVideo((rs.getString("video")));
-            }
+                terrain.setVideo((rs.getString("video")));}
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return terrain;
-    }
+            e.printStackTrace();}
+        return terrain;}
+    //*******************************************************************************************
     public Terrain getTerrainById(int id) {
         Terrain terrain = null;
         String query = "SELECT * FROM terrain WHERE id = ?";
@@ -122,14 +119,7 @@ public class TerrainService  implements ITerrain<Terrain>{
                 terrain.setDuree(rs.getInt("duree"));
                 terrain.setGouvernorat(rs.getString("gouvernorat"));
                 terrain.setImage((rs.getString("image")));
-                terrain.setVideo((rs.getString("video")));
-            }
+                terrain.setVideo((rs.getString("video")));}
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return terrain;
-    }
-
-
-
-}
+            e.printStackTrace();}
+        return terrain;}}

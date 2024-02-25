@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -10,8 +9,7 @@
       <VBox fx:id="ListContainer" layoutX="3.0" layoutY="71.0" prefHeight="614.0" prefWidth="918.0" />
       <Text layoutX="293.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des terrains">
          <font>
-            <Font name="System Bold" size="42.0" />
-         </font>
+            <Font name="System Bold" size="42.0" /></font>
       </Text>
    </children>
 </AnchorPane>

@@ -31,4 +31,5 @@ public class TerrainDAO {
                     terrains.add(terrain);}
             } catch (SQLException e) {
                 e.printStackTrace();}
-            return terrains;}}
+            return terrains;}
+}

@@ -9,11 +9,11 @@ public class MainFX extends Application {
     @Override
     //throw exception pour verifier si le path de fichier fxml existe pour fair le load
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/AvisTerrain.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Terrain.fxml"));
         Parent root = loader.load();         //parent is the first page to be load
         //scene bordure de l'app change selon l'interface
         Scene scene = new Scene(root);
-        primaryStage.setTitle("Gestion");
+        primaryStage.setTitle("");
         primaryStage.setScene(scene);
         primaryStage.show();}
     //*******************************************************************************************
