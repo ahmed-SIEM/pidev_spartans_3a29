@@ -7,11 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import services.TerrainService;
-import utils.MyDatabase;
-import utils.TerrainDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +93,6 @@ public class PageTerrainController  {
         @FXML
         private Text nom3;
 
-    List<Terrain> terrains = new ArrayList<>();
         /*
 
         BOX1 :
@@ -116,49 +112,10 @@ public class PageTerrainController  {
 
     public void initialize() {
 
-        actualise();
-
-         terrains = Ts.getAllTerrains();
-
-
-
-
-        // initialize box1
-        if(!terrains.isEmpty()){
-            if(terrains.get(i*3) != null){
-
-                nom1.setText(terrains.get(i).getNomTerrain());
-                address1.setText(terrains.get(i).getAddress());
-                Img1.setImage(new Image(terrains.get(i).getImage()));
-            }else{
-
-                BOX1.setVisible(false);
-            }
-            if(terrains.get(1+i*3) != null){
-                nom2.setText(terrains.get(1+i).getNomTerrain());
-                address2.setText(terrains.get(1+i).getAddress());
-                Img2.setImage(new Image(terrains.get(1+i).getImage()));
-            }else{
-                BOX2.setVisible(false);
-
-            }
-
-            if(terrains.get(2+i*3) != null){
-                nom3.setText(terrains.get(2+i).getNomTerrain());
-                address3.setText(terrains.get(2+i).getAddress());
-                Img3.setImage(new Image(terrains.get(2+i).getImage()));
-            }else{
-                BOX3.setVisible(false);
-
-            }
-
-
-        }
-
-
+         actualise(Ts.getAllTerrains());
     }
 
-    void actualise(){
+    void actualise(List<Terrain> terrains){
         if(terrains.size()-1-i*3>0){
             btnsuivant.setVisible(true);
         }
@@ -173,17 +130,48 @@ public class PageTerrainController  {
         if(i == 0){
             btnretour.setVisible(false);
         }
+        if(!terrains.isEmpty()){
+            if(terrains.size()-1-i*3>=0){
+                BOX1.setVisible(true);
+                nom1.setText(terrains.get(i*3).getNomTerrain());
+                address1.setText(terrains.get(i*3).getAddress());
+                Img1.setImage(new Image(terrains.get(i*3).getImage()));
+
+            }else{
+
+                BOX1.setVisible(false);
+            }
+            if(terrains.size()-2-i*3>=0){
+                BOX2.setVisible(true);
+                nom2.setText(terrains.get(1+i*3).getNomTerrain());
+                address2.setText(terrains.get(1+i*3).getAddress());
+                Img2.setImage(new Image(terrains.get(1+i*3).getImage()));
+            }else{
+                BOX2.setVisible(false);
+            }
+            if(terrains.size()-3-i*3>=0){
+                BOX3.setVisible(true);
+                nom3.setText(terrains.get(2+i*3).getNomTerrain());
+                address3.setText(terrains.get(2+i*3).getAddress());
+                Img3.setImage(new Image(terrains.get(2+i*3).getImage()));
+            }else{
+                BOX3.setVisible(false);
+
+            }
+
+
+        }
     }
     @FXML
     void retour(ActionEvent event) {
             i -=1;
-      actualise();
+      actualise(Ts.getAllTerrains());
     }
 
     @FXML
     void suivant(ActionEvent event) {
         i +=1;
-        actualise();
+        actualise(Ts.getAllTerrains());
 
     }
         @FXML
