@@ -12,7 +12,9 @@ import java.awt.*;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -170,6 +172,75 @@ public class ReservationService {
             ps.executeUpdate();
 
         }
+
+    // verfier disponibilter de teerain
+
+
+    public boolean VerfierDisponibleTerrain(int idTerrain, int dureeAnnoce, String heure, String date) throws SQLException {
+        Reservation reservation = new Reservation();
+
+        String query = "SELECT * FROM reservation WHERE idTerrain  = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, idTerrain);
+        ResultSet rs = ps.executeQuery();
+
+        if (!rs.next()) {
+            return true;
+        } else {
+            do {
+                reservation.setIdReservation(rs.getInt("idReservation"));
+                reservation.setConfirm(rs.getBoolean("isConfirm"));
+                reservation.setDateReservation(rs.getString("dateReservation"));
+                reservation.setHeureReservation(rs.getString("heureReservation"));
+                reservation.setType(TypeReservation.valueOf(rs.getString("type")));
+
+                if (reservation.getDateReservation() != null && sontMemesDates(reservation.getDateReservation(), date)) {
+                    LocalTime heureMatchReserve = LocalTime.parse(reservation.getHeureReservation());
+                    Duration dureeReservation = Duration.ofHours(dureeAnnoce / 60).plusMinutes(dureeAnnoce % 60);
+                    LocalTime heureNouveauMatch = LocalTime.parse(heure);
+
+                    boolean seCroisent = verifCroisementHoraire(heureMatchReserve, dureeReservation, heureNouveauMatch);
+                    if (seCroisent) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            } while (rs.next());
+
+            return true;
+        }
+    }
+
+    public boolean sontMemesDates(String dateStr1, String dateStr2) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        LocalDate date1 = LocalDate.parse(dateStr1, formatter);
+        LocalDate date2 = LocalDate.parse(dateStr2, formatter);
+
+        return date1.equals(date2);
+    }
+
+    private boolean verifCroisementHoraire(LocalTime heureMatchReserve, Duration dureeReservation, LocalTime heureNouveauMatch) {
+        LocalTime finReserve = heureMatchReserve.plus(dureeReservation);
+        LocalTime finNouveau = heureNouveauMatch.plus(dureeReservation);
+        return !finReserve.isBefore(heureNouveauMatch) && !finNouveau.isBefore(heureMatchReserve);
+    }
+
+    public int getLastIdReservationAddRecently() throws SQLException {
+        Reservation reservation = new Reservation();
+        String query = "SELECT idReservation FROM reservation ORDER BY idReservation DESC LIMIT 1;";
+        PreparedStatement ps = connection.prepareStatement(query);
+        int dernierIdAjouter = 0;
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            dernierIdAjouter = rs.getInt(1);
+        }
+        return dernierIdAjouter;
+
+
+    }
 
     }
 

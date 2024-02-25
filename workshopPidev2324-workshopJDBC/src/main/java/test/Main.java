@@ -23,6 +23,9 @@ public class Main {
         for (Terrain t : terrains){
             System.out.println(t.toString());
         }
+        ReservationService reservationService = new ReservationService();
+        boolean x = reservationService.VerfierDisponibleTerrain(5, 120, "19:00", "2024-02-26");
+        System.out.println(x);
 
 
 

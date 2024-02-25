@@ -1,6 +1,8 @@
 package services;
 
+import com.alibaba.fastjson.JSONObject;
 import models.Paiement;
+import models.PaymentRequest;
 import utils.MyDatabase;
 
 import java.io.BufferedReader;
@@ -20,38 +22,34 @@ public class PaiementService {
     public PaiementService(){
         connection = MyDatabase.getInstance().getConnection();
     }
+/*
 
+    private static final String API_BASE_URL = "https://api.preprod.konnect.network/api/v2/";
+    private static final String API_KEY = "65db3ac24e8dd3df3f9691d4:gLTHG7FIRGzdO8QLe5";
 
-    private static final String API_KEY = "65da01394e8dd3df3f8b75c8:dK6rN27wwEjg7L9vA8tC";
-    private static final String API_URL = "https://api.preprod.konnect.network/api/v2/payments/init-payment";
+    public String initiatePayment(PaymentRequest paymentRequest) throws IOException {
+        OkHttpClient client = new OkHttpClient();
 
-    public static String initiatePayment(String jsonData) throws IOException, MalformedURLException {
-        URL url = new URL(API_URL);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), paymentRequest.toJson().toString());
+        Request request = new Request.Builder()
+                .url(API_BASE_URL + "payments/init-payment")
+                .addHeader("x-api-key", API_KEY)
+                .post(requestBody)
+                .build();
 
-        connection.setRequestMethod("POST");
-        connection.setRequestProperty("Content-Type", "application/json");
-        connection.setRequestProperty("x-api-key", API_KEY);
-        connection.setDoOutput(true);
-
-        try (OutputStream os = connection.getOutputStream()) {
-            byte[] input = jsonData.getBytes(StandardCharsets.UTF_8);
-            os.write(input, 0, input.length);
-        }
-
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
-            StringBuilder response = new StringBuilder();
-            String responseLine;
-            while ((responseLine = br.readLine()) != null) {
-                response.append(responseLine.trim());
+        try (Response response = client.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                JSONObject jsonResponse = new JSONObject(response.body().string());
+                return jsonResponse.getString("payUrl");
             }
-            return response.toString();
-        } finally {
-            connection.disconnect();
         }
+
+        return null;
     }
 
 
+
+ */
 
     public boolean AjouterPaiement(Paiement paiement) throws SQLException {
         String query = "INSERT INTO Payment (idMembre, idReservation, datePayment, horairePayment,Payed) VALUES (?,?,?,?);";
