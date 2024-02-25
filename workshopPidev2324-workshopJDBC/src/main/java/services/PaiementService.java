@@ -53,13 +53,14 @@ public class PaiementService {
 
 
 
-    public boolean payer(Paiement paiement) throws SQLException {
-        String query = "INSERT INTO Payment (idMembre, idReservation, datePayment, horairePayment) VALUES (?,?,?,?);";
+    public boolean AjouterPaiement(Paiement paiement) throws SQLException {
+        String query = "INSERT INTO Payment (idMembre, idReservation, datePayment, horairePayment,Payed) VALUES (?,?,?,?);";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, paiement.getIdmembre());
         ps.setInt(2, paiement.getIdreservation());
         ps.setString(3, paiement.getDate());
         ps.setString(4, paiement.getHeure());
+        ps.setBoolean(5,false);
 
         ps.setInt(5, 1);
 
@@ -69,5 +70,19 @@ public class PaiementService {
         return lignesAffectees > 0;
 
 
+    }
+    public boolean confirmerPaiment(int idpaiement){
+        String query = "UPDATE payment SET Payed = TRUE WHERE idPayment = ?;";
+        PreparedStatement ps = null;
+        try {
+            ps = connection.prepareStatement(query);
+
+            ps.setInt(1, idpaiement);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 }
