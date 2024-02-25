@@ -20,6 +20,7 @@ import services.TerrainService;
 import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 //*******************************************************************************************
@@ -72,7 +73,7 @@ public class TerrainController {
     //*******************************************************************************************
     private void showTerrains() {
         terrainContainer.getChildren().clear();
-        ObservableList<Terrain> terrains = ts.getAllTerrains();
+        List<Terrain> terrains = ts.getAllTerrains();
         for (Terrain terrain : terrains) {
             HBox terrainBox = new HBox();
             terrainBox.setSpacing(10);
