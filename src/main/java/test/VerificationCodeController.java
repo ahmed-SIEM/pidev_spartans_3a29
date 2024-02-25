@@ -81,8 +81,8 @@ public class VerificationCodeController {
     void renvoyerCode(ActionEvent event) throws Exception {
         if(count < 5){
             count++;
-            SMSAPI sms = new SMSAPI();
-            sms.SendCode(String.valueOf(CurrentUser.getPhone()), Code);
+           SMSAPI sms = new SMSAPI();
+            sms.run(String.valueOf(CurrentUser.getPhone()), Code);
         }else{
             cAlert.generateAlert("WARNING","Vous avez atteint le nombre maximal de tentatives");
         }
@@ -192,7 +192,7 @@ public class VerificationCodeController {
             verifierbtn.setVisible(true);
             SMSAPI sms = new SMSAPI();
 
-            sms.SendCode(String.valueOf(u.getPhone()), Code);
+            sms.run(String.valueOf(u.getPhone()), Code);
 
 
     }
