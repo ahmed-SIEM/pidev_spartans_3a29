@@ -6,105 +6,86 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane fx:id="MainPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PageTerrainController">
-   <AnchorPane fx:id="BOX1" layoutX="196.0" layoutY="102.0" prefHeight="500.0" prefWidth="300.0"
-               style="-fx-background-color: grey;">
-      <ImageView fx:id="Img1" fitHeight="116.0" fitWidth="150.0" layoutX="75.0" layoutY="43.0" pickOnBounds="true"
-                 preserveRatio="true"/>
-      <Button fx:id="btnModif1" layoutX="109.0" layoutY="336.0" mnemonicParsing="false" onAction="#Modif1"
-              text="Modification"/>
-      <Button fx:id="btnSupp1" layoutX="110.0" layoutY="400.0" mnemonicParsing="false" onAction="#supp1"
-              text="Suppression"/>
-      <Button fx:id="btnDetail1" layoutX="113.0" layoutY="281.0" mnemonicParsing="false" onAction="#detail1"
-              text="View detail"/>
+<AnchorPane fx:id="MainPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PageTerrainController">
+   <AnchorPane fx:id="BOX1" layoutX="196.0" layoutY="102.0" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: grey;">
+      <ImageView fx:id="Img1" fitHeight="116.0" fitWidth="150.0" layoutX="75.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btnModif1" layoutX="109.0" layoutY="336.0" mnemonicParsing="false" onAction="#Modif1" text="Modification" />
+      <Button fx:id="btnSupp1" layoutX="110.0" layoutY="400.0" mnemonicParsing="false" onAction="#supp1" text="Suppression" />
+      <Button fx:id="btnDetail1" layoutX="113.0" layoutY="281.0" mnemonicParsing="false" onAction="#detail1" text="View detail" />
       <Text layoutX="54.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :">
          <font>
-            <Font size="20.0"/>
+            <Font size="20.0" />
          </font>
       </Text>
       <Text layoutX="41.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address :">
          <font>
-            <Font size="20.0"/>
+            <Font size="20.0" />
          </font>
       </Text>
       <Text fx:id="address1" layoutX="148.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="tfaddress">
          <font>
-            <Font name="System Bold" size="20.0"/>
+            <Font name="System Bold" size="20.0" />
          </font>
       </Text>
       <Text fx:id="nom1" layoutX="156.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TfNOM">
          <font>
-            <Font name="System Bold" size="20.0"/>
+            <Font name="System Bold" size="20.0" />
          </font>
       </Text>
    </AnchorPane>
-   <AnchorPane fx:id="BOX3" layoutX="552.0" layoutY="110.0" prefHeight="500.0" prefWidth="300.0"
-               style="-fx-background-color: grey;">
-      <ImageView fx:id="Img2" fitHeight="116.0" fitWidth="150.0" layoutX="75.0" layoutY="43.0" pickOnBounds="true"
-                 preserveRatio="true"/>
-      <Button fx:id="btnModif2" layoutX="109.0" layoutY="336.0" mnemonicParsing="false" onAction="#modif2"
-              text="Modification"/>
-      <Button fx:id="btnSupp2" layoutX="110.0" layoutY="400.0" mnemonicParsing="false" onAction="#supp2"
-              text="Suppression"/>
-      <Button fx:id="btndetail2" layoutX="113.0" layoutY="281.0" mnemonicParsing="false" onAction="#detail2"
-              text="View detail"/>
+   <AnchorPane fx:id="BOX3" layoutX="552.0" layoutY="110.0" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: grey;">
+      <ImageView fx:id="Img2" fitHeight="116.0" fitWidth="150.0" layoutX="75.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btnModif2" layoutX="109.0" layoutY="336.0" mnemonicParsing="false" onAction="#modif2" text="Modification" />
+      <Button fx:id="btnSupp2" layoutX="110.0" layoutY="400.0" mnemonicParsing="false" onAction="#supp2" text="Suppression" />
+      <Button fx:id="btndetail2" layoutX="113.0" layoutY="281.0" mnemonicParsing="false" onAction="#detail2" text="View detail" />
       <Text layoutX="54.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :">
          <font>
-            <Font size="20.0"/>
+            <Font size="20.0" />
          </font>
       </Text>
       <Text layoutX="41.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address :">
          <font>
-            <Font size="20.0"/>
+            <Font size="20.0" />
          </font>
       </Text>
       <Text fx:id="address2" layoutX="148.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="tfaddress">
          <font>
-            <Font name="System Bold" size="20.0"/>
+            <Font name="System Bold" size="20.0" />
          </font>
       </Text>
       <Text fx:id="nom2" layoutX="156.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TfNOM">
          <font>
-            <Font name="System Bold" size="20.0"/>
+            <Font name="System Bold" size="20.0" />
          </font>
       </Text>
    </AnchorPane>
-   <AnchorPane fx:id="BOX2" layoutX="898.0" layoutY="110.0" prefHeight="500.0" prefWidth="300.0"
-               style="-fx-background-color: grey;">
-      <ImageView fx:id="Img3" fitHeight="116.0" fitWidth="150.0" layoutX="73.0" layoutY="41.0" pickOnBounds="true"
-                 preserveRatio="true"/>
-      <Button fx:id="btnModif3" layoutX="109.0" layoutY="336.0" mnemonicParsing="false" onAction="#modif3"
-              text="Modification"/>
-      <Button fx:id="btnsupp3" layoutX="110.0" layoutY="400.0" mnemonicParsing="false" onAction="#supp3"
-              text="Suppression"/>
-      <Button fx:id="btndetail3" layoutX="113.0" layoutY="281.0" mnemonicParsing="false" onAction="#detail3"
-              text="View detail"/>
+   <AnchorPane fx:id="BOX2" layoutX="898.0" layoutY="110.0" prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: grey;">
+      <ImageView fx:id="Img3" fitHeight="116.0" fitWidth="150.0" layoutX="73.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btnModif3" layoutX="109.0" layoutY="336.0" mnemonicParsing="false" onAction="#modif3" text="Modification" />
+      <Button fx:id="btnsupp3" layoutX="110.0" layoutY="400.0" mnemonicParsing="false" onAction="#supp3" text="Suppression" />
+      <Button fx:id="btndetail3" layoutX="113.0" layoutY="281.0" mnemonicParsing="false" onAction="#detail3" text="View detail" />
       <Text layoutX="54.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :">
          <font>
-            <Font size="20.0"/>
+            <Font size="20.0" />
          </font>
       </Text>
       <Text layoutX="41.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address :">
          <font>
-            <Font size="20.0"/>
+            <Font size="20.0" />
          </font>
       </Text>
       <Text fx:id="address3" layoutX="148.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="tfaddress">
          <font>
-            <Font name="System Bold" size="20.0"/>
+            <Font name="System Bold" size="20.0" />
          </font>
       </Text>
       <Text fx:id="nom3" layoutX="156.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TfNOM">
          <font>
-            <Font name="System Bold" size="20.0"/>
+            <Font name="System Bold" size="20.0" />
          </font>
       </Text>
    </AnchorPane>
-   <Button fx:id="btnajout" layoutX="1085.0" layoutY="658.0" mnemonicParsing="false" onAction="#Ajout" text="Ajout"/>
-   <Button fx:id="btnretour" layoutX="584.0" layoutY="622.0" mnemonicParsing="false" onAction="#retour"
-           prefWidth="100.0" text="&lt;"/>
-   <Button fx:id="btnsuivant" layoutX="684.0" layoutY="622.0" mnemonicParsing="false" onAction="#suivant"
-           prefWidth="100.0" text="&gt;"/>
+   <Button fx:id="btnajout" layoutX="1085.0" layoutY="658.0" mnemonicParsing="false" onAction="#Ajout" text="Ajout" />
+   <Button fx:id="btnretour" layoutX="584.0" layoutY="622.0" mnemonicParsing="false" onAction="#retour" prefWidth="100.0" text="&lt;" />
+   <Button fx:id="btnsuivant" layoutX="684.0" layoutY="622.0" mnemonicParsing="false" onAction="#suivant" prefWidth="100.0" text="&gt;" />
 </AnchorPane>
