@@ -158,16 +158,16 @@ public class UserService implements IService<User> {
 
 
 
-    public void delete(String email) throws SQLException{
-        if(!userExist(email)){
-            System.out.println("User does not exist");
-            return;
-        }
-        String query = "DELETE FROM user WHERE email = ?";
-        PreparedStatement ps = connection.prepareStatement(query);
-        ps.setString(1, email);
-        ps.executeUpdate();
-    }
+//    public void delete(String email) throws SQLException{
+//        if(!userExist(email)){
+//            System.out.println("User does not exist");
+//            return;
+//        }
+//        String query = "DELETE FROM user WHERE email = ?";
+//        PreparedStatement ps = connection.prepareStatement(query);
+//        ps.setString(1, email);
+//        ps.executeUpdate();
+//    }
 
 
 
@@ -194,7 +194,7 @@ public class UserService implements IService<User> {
         ps.executeUpdate();
     }
 
-    public void UpdateNom_Sociéte(Fournisseur t ) throws SQLException{
+    public void UpdateNom_Societe(Fournisseur t ) throws SQLException{
 
         String query = "UPDATE fournisseur SET Nom_Sociéte = ?  WHERE email = ?";
 
@@ -219,9 +219,9 @@ public class UserService implements IService<User> {
         String query = "UPDATE user SET Status = ?  WHERE email = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         if (getByEmail(email).getStatus()) {
-            ps.setString(1, "Desactive");
+            ps.setBoolean(1, false);
         } else {
-            ps.setString(1, "Active");
+            ps.setBoolean(1, true);
         }
         ps.setString(2,email);
         ps.executeUpdate();

@@ -1,60 +1,63 @@
 package services.GestionUser;
-import java.net.*;
-import java.util.Base64;
-import java.io.*;
+
+
+
+import com.sinch.sdk.SinchClient;
+import com.sinch.sdk.domains.sms.models.BatchText;
+import com.sinch.sdk.domains.sms.models.requests.SendSmsBatchTextRequest;
+import com.sinch.sdk.models.Configuration;
+import com.sinch.sdk.models.SMSRegion;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.logging.Logger;
 public class SMSAPI {
-    public void SendCode(String to , String message) throws Exception {
+    private static final Logger LOGGER = Logger.getLogger(SMSAPI.class.getName());
 
-        // This URL is used for sending messages
-        String myURI = "https://api.bulksms.com/v1/messages";
+    public SMSAPI() throws IOException {}
 
-        // change these values to match your own account
-
-        // the details of the message we want to send
-        String myData = "{to: \""+"+216"+to+"\", encoding: \"UNICODE\", body: \""+ message+"\"}";
-
-        // if your message does not contain unicode, the "encoding" is not required:
-        // String myData = "{to: \"1111111\", body: \"Hello Mr. Smith!\"}";
-
-        // build the request based on the supplied settings
-        URL url = new URL(myURI);
-        HttpURLConnection request = (HttpURLConnection) url.openConnection();
-        request.setDoOutput(true);
-
-        // supply the credentials
-        String authStr = "pidevmontassar" + ":" + "Mon147147";
-        String authEncoded = Base64.getEncoder().encodeToString(authStr.getBytes());
-        request.setRequestProperty("Authorization", "Basic " + authEncoded);
-
-        // we want to use HTTP POST
-        request.setRequestMethod("POST");
-        request.setRequestProperty( "Content-Type", "application/json");
-
-        // write the data to the request
-        OutputStreamWriter out = new OutputStreamWriter(request.getOutputStream());
-        out.write(myData);
-        out.close();
-
-        // try ... catch to handle errors nicely
+    public static void main(String[] args) {
         try {
-            // make the call to the API
-            InputStream response = request.getInputStream();
-            BufferedReader in = new BufferedReader(new InputStreamReader(response));
-            String replyText;
-            while ((replyText = in.readLine()) != null) {
-                System.out.println(replyText);
-            }
-            in.close();
-        } catch (IOException ex) {
-            System.out.println("An error occurred:" + ex.getMessage());
-            BufferedReader in = new BufferedReader(new InputStreamReader(request.getErrorStream()));
-            // print the detail that comes with the error
-            String replyText;
-            while ((replyText = in.readLine()) != null) {
-                System.out.println(replyText);
-            }
-            in.close();
+            String recipientPhoneNumber = "RECIPIENT_PHONE_NUMBER";
+            String messageBody = "This is a test SMS message using the Sinch Java SDK.";
+
+
+            new SMSAPI().run(recipientPhoneNumber, messageBody);
+        } catch (Exception e) {
+            LOGGER.severe(e.getMessage());
+            e.printStackTrace();
         }
-        request.disconnect();
     }
+
+
+    public void run(String recipientPhoneNumber, String messageBody) {
+
+//        String senderPhoneNumber = "28153435"; // Constant sender phone number
+//
+//        SinchClient client = new SinchClient(Configuration.builder()
+//                .setKeyId("b4b6dc23-3a41-445a-aa72-dd90c3573619")
+//                .setKeySecret("dkmUVvomAZdJsaZm--SHBek8AC")
+//                .setProjectId("70f05c72-e4b8-4738-b2dc-dab477ac431d")
+//                .setSmsRegion(SMSRegion.US)
+//                .build());
+//
+//
+//        LOGGER.info("Send Text");
+//        BatchText value =
+//                client
+//                        .sms()
+//                        .batches()
+//                        .send(
+//                                SendSmsBatchTextRequest.builder()
+//                                        .setTo(Collections.singletonList(recipientPhoneNumber))
+//                                        .setBody(messageBody)
+//                                        .setFrom(senderPhoneNumber)
+//                                        .build());
+//
+//        LOGGER.info("Response: " + value);
+        System.out.println( "header : message sent to " + recipientPhoneNumber + " body : code ->" + messageBody);
+    }
+
+
+
 }

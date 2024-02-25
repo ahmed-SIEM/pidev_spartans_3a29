@@ -126,6 +126,14 @@
         </dependency>
 
 
+
+
+        <dependency>
+            <groupId>com.sinch.sdk</groupId>
+            <artifactId>sinch-sdk-java</artifactId>
+            <version>0.0.2-alpha</version>
+        </dependency>
+
     </dependencies>
 
 
