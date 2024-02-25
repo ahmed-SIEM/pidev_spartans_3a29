@@ -167,7 +167,7 @@ public class ProfileController {
             try {
                 UserService us = new UserService();
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginRegistrationPage.fxml"));
+                FXMLLoader loader = new FXMLLoader(MainFx.class.getResource("LoginRegistrationPage.fxml"));
                 AnchorPane root = loader.load();
 
                 LoginRegistrationPageController controller = loader.getController();
