@@ -1,37 +1,29 @@
-/* styles.css */
 .form_container {
     -fx-background-color: #f4f4f4; /* Couleur de fond */
 }
-
 Text {
     -fx-font-size: 14pt; /* Taille de la police */
 }
-
 TextField {
     -fx-font-size: 14pt; /* Taille de la police */
     -fx-pref-width: 200px; /* Largeur préférée */
 }
-
 Button {
     -fx-font-size: 14pt; /* Taille de la police */
     -fx-pref-width: 150px; /* Largeur préférée */
     -fx-text-fill: #ffffff; /* Couleur du texte */
     -fx-background-color: #0a2f55; /* Couleur de fond */
 }
-
 Button:hover {
     -fx-background-color: #0a2f55; /* Couleur de fond au survol */
 }
-
 Button:pressed {
     -fx-background-color: #0a2f55; /* Couleur de fond lorsque pressé */
 }
-
 Label {
     -fx-font-size: 15pt; /* Taille de la police */
     -fx-text-fill: #0b0b0b; /* Couleur du texte */
 }
-
 ButtonBar {
     -fx-background-color: #f4f4f4; /* Couleur de fond */
 }
@@ -45,9 +37,8 @@ ButtonBar {
 /* Sélecteur pour les labels */
 #AvisContainer Label {
     -fx-font-weight: bold; /* Texte en gras */
-    -fx-min-width: 30px; /* Largeur minimale pour les labels */
+    -fx-min-width: 20px; /* Largeur minimale pour les labels */
 }
-
 /* Sélecteur pour les textfields */
 #AvisContainer TextField {
     -fx-pref-width: 20px; /* Largeur préférée pour les champs de texte */

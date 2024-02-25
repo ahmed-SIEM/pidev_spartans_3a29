@@ -1,34 +1,50 @@
 package entity;
 public class AvisTerrain {
     private int idAvis;
-    private String commentaire;
+    private int id; // étrangère
     private int note;
+    private String commentaire;
     private String date_avis;
-
-    public AvisTerrain(String commentaire, int note, String date_avis) {
+    //*******************************************************************************************
+    public AvisTerrain(int id, String commentaire, int note, String date_avis) {
+        this.id = id;
         this.commentaire = commentaire;
         this.note = note;
         this.date_avis = date_avis;}
-
-    public AvisTerrain() {
-
+    public AvisTerrain() {}
+    //*******************************************************************************************
+    public int getIdAvis() {
+        return idAvis;
     }
-
-    public int getIdAvis() {return idAvis;}
-    public void setIdAvis(int idAvis) {this.idAvis = idAvis;}
-    public String getCommentaire() {return commentaire;}
-    public void setCommentaire(String commentaire) {this.commentaire = commentaire;}
+    public void setIdAvis(int idAvis) {
+        this.idAvis = idAvis;
+    }
+    public int getId() {return id;}
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getCommentaire() {
+        return commentaire;
+    }
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
     public int getNote() {return note;}
-    public void setNote(int note) {this.note = note;}
-    public String getDate_avis() {return date_avis;}
-    public void setDate_avis(String date_avis) {this.date_avis = date_avis;}
+    public void setNote(int note) {
+        this.note = note;
+    }
+    public String getDate_avis() {
+        return date_avis;
+    }
+    public void setDate_avis(String date_avis) {
+        this.date_avis = date_avis;
+    }
+    //*******************************************************************************************
     @Override
     public String toString() {
         return "AvisTerrain{" +
                 "idAvis=" + idAvis +
+                ", id=" + id +
                 ", commentaire='" + commentaire + '\'' +
                 ", note=" + note +
-                ", date_avis='" + date_avis + '\'' +
-                '}';
-    }
-}
+                ", date_avis='" + date_avis + '\'' + '}';}}
