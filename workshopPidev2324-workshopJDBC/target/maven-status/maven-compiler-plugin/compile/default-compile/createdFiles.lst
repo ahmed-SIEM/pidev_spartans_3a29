@@ -1,0 +1,7 @@
+test\Controllers\FirstController.class
+models\Tournoi.class
+models\Equipe.class
+services\GestionEvenement\ServiceTournoi.class
+models\membre.class
+models\Participation.class
+services\GestionEvenement\ServiceParticipation.class
