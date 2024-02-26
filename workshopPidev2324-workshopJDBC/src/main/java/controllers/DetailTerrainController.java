@@ -53,6 +53,7 @@ public class DetailTerrainController {
         return price + " DT";
     }
 
+
     //*******************************************************************************************
     public void initData(Terrain terrain) {
         terrainActuel = terrain;
@@ -79,6 +80,7 @@ public class DetailTerrainController {
         Parent root = loader.load();
         TerrainController controller = loader.getController();
         controller.initData(terrainActuel);
+        controller.setajouterButtonVisibility(false); // Masquer le bouton "Modifier"
         Stage stage = new Stage();
         stage.setTitle("Modifier");
         stage.setScene(new Scene(root));

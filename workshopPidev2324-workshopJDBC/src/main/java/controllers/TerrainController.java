@@ -43,6 +43,8 @@ public class TerrainController {
     @FXML
     private Button btnsave;
     @FXML
+    private Button btupdate;
+    @FXML
     private Button btvoir;
     @FXML
     private TextField tfnom;
@@ -81,6 +83,13 @@ public class TerrainController {
         cbStatus.setSelected(false);
         pageTerrain = new ArrayList<>();}
     //*******************************************************************************************
+    public void setModifierButtonVisibility(boolean visible) {
+        btupdate.setVisible(visible); // Modifier 'btnsave' pour correspondre à l'ID de votre bouton "Modifier"
+    }
+    public void setajouterButtonVisibility(boolean visible) {
+        btnsave.setVisible(visible); // Modifier 'btnsave' pour correspondre à l'ID de votre bouton "Modifier"
+    }
+
     private void showTerrains() {
         List<Terrain> terrains = ts.getAllTerrains();
         for (Terrain terrain : terrains) {
@@ -253,7 +262,7 @@ public class TerrainController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/PageTerrain.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
-        stage.setTitle("Gestion_Terrain");
+        stage.setTitle("Liste des terrains");
         stage.setScene(new Scene(root));
         stage.show();
         // Récupérer la fenêtre actuelle et la cacher

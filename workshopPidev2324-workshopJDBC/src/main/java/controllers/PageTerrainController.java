@@ -115,6 +115,8 @@ public class PageTerrainController  {
     void Ajout(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Terrain.fxml"));
         Parent root = loader.load();
+        TerrainController controller = loader.getController();
+        controller.setModifierButtonVisibility(false); // Masquer le bouton "Modifier"
         Stage stage = new Stage();
         stage.setTitle("Gestion_Terrain");
         stage.setScene(new Scene(root));
