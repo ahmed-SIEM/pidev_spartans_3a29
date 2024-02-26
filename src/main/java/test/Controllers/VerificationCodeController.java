@@ -14,7 +14,7 @@ import test.Controllers.Common.CAlert;
 import java.sql.SQLException;
 import java.util.function.UnaryOperator;
 
-public class VerificationCodeController {
+public class   VerificationCodeController {
 
     public Text motdepasstxt1;
     public Text napasrecutext;
