@@ -23,7 +23,7 @@ public class TerrainService {
             ps.setBoolean(3, t.getVestiaire());
             ps.setBoolean(4, t.getStatus());
             ps.setString(5, t.getNomTerrain());
-            ps.setInt(6, t.getPrix());
+            ps.setFloat(6, t.getPrix());
             ps.setInt(7, t.getDuree());
             ps.setString(8, t.getGouvernorat());
             ps.setString(9, t.getImage());
@@ -46,7 +46,7 @@ public class TerrainService {
             ps.setBoolean(4, t.getStatus());
             ps.setString(5, t.getNomTerrain());
             ps.setInt(6, t.getDuree());
-            ps.setInt(7, t.getPrix());
+            ps.setFloat(7, t.getPrix());
             ps.setString(8, t.getGouvernorat());
             ps.setString(9, t.getImage());
             ps.setString(10, t.getVideo());
@@ -122,7 +122,7 @@ public class TerrainService {
         terrain.setGradin(rs.getBoolean("gradin"));
         terrain.setVestiaire(rs.getBoolean("vestiaire"));
         terrain.setStatus(rs.getBoolean("status"));
-        terrain.setPrix(rs.getInt("prix"));
+        terrain.setPrix(rs.getFloat("prix"));
         terrain.setDuree(rs.getInt("duree"));
         terrain.setGouvernorat(rs.getString("gouvernorat"));
         terrain.setImage(rs.getString("image"));

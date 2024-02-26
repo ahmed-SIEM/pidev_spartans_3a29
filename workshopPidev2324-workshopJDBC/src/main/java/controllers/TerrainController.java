@@ -27,6 +27,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.stage.FileChooser;
+import java.io.File;
+
 //*******************************************************************************************
 public class TerrainController {
 
@@ -89,19 +92,9 @@ public class TerrainController {
             Label vestiaireLabel = new Label("Vestiaire: " + terrain.getVestiaire());
             Label statusLabel = new Label("Status: " + terrain.getStatus());
             Label prixLabel = new Label("Prix: " + terrain.getPrix());
-            Label dureeLabel = new Label("Durée: " + terrain.getDuree());
+            Label dureeLabel = new Label("Durée: " + "minutes" + terrain.getDuree());
             Label gouvernoratLabel = new Label("Gouvernorat: " + terrain.getGouvernorat());
-            ImageView imageView = new ImageView(new Image(terrain.getImage()));
-            imageView.setFitWidth(50);
-            imageView.setFitHeight(50);
-            Media media = null;
-            MediaPlayer mediaPlayer = null;
-            if (terrain.getVideo() != null && !terrain.getVideo().isEmpty()) {
-                media = new Media(terrain.getVideo());
-                mediaPlayer = new MediaPlayer(media);}
-            MediaView mediaView = new MediaView(mediaPlayer);
-            mediaView.setFitWidth(50);
-            mediaView.setFitHeight(50);}}
+        }}
     //*******************************************************************************************
     @FXML
     void clearField() {
@@ -124,26 +117,34 @@ public class TerrainController {
             videoPath = "";
         }
         if (isValidTerrain()) {
-            Terrain terrain = new Terrain(tfaddress.getText(), cbGradin.isSelected(), cbVestiaire.isSelected(), cbStatus.isSelected(), tfnom.getText(), Integer.parseInt(tfprix.getText()), Integer.parseInt(tfduree.getText()), tfemplacement.getText(), imagePath, videoPath);
+            if (imagePath == null) {
+                showAlert(Alert.AlertType.ERROR, "Erreur de saisie", "Veuillez sélectionner une image.");}
+            float prixValue = Float.parseFloat(tfprix.getText());
+            Terrain terrain = new Terrain(tfaddress.getText(), cbGradin.isSelected(), cbVestiaire.isSelected(), cbStatus.isSelected(), tfnom.getText(), prixValue, Integer.parseInt(tfduree.getText()), tfemplacement.getText(), imagePath, videoPath);
             ts.add(terrain);
             showTerrains(); // Mettre à jour l'affichage après avoir ajouté un nouveau terrain
             clearField(); // Efface les champs après l'ajout
             ((Button) event.getSource()).getScene().getWindow().hide();
-            voirlist(new ActionEvent());
-        }}
+            voirlist();
+        }
+    }
+
     //*******************************************************************************************
     private boolean isValidTerrain() {
-        if (tfnom.getText().isEmpty() || tfaddress.getText().isEmpty()) {
+        if (tfnom.getText().isEmpty() || tfaddress.getText().isEmpty() || tfprix.getText().isEmpty() || tfduree.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Erreur de saisie", "Veuillez remplir tous les champs obligatoires.");
             return false;}
         try {
-            int prix = Integer.parseInt(tfprix.getText());
+            float prix = Float.parseFloat(tfprix.getText());
             int duree = Integer.parseInt(tfduree.getText());
             if (prix <= 0 || duree <= 0) {
                 showAlert(Alert.AlertType.ERROR, "Erreur de saisie", "Le prix et la durée doivent être supérieurs à zéro.");
                 return false;}
         } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "Erreur de saisie", "Le prix et la durée doivent être des nombres entiers.");
+            showAlert(Alert.AlertType.ERROR, "Erreur de saisie", "Le prix doit être un nombre décimal et la durée doit être un nombre entier.");
+            return false;}
+        if (imagePath == null || imagePath.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Erreur de saisie", "Veuillez sélectionner une image.");
             return false;}
         return true;}
     //*******************************************************************************************
@@ -155,14 +156,15 @@ public class TerrainController {
         alert.showAndWait();}
     //*******************************************************************************************
     @FXML
-    void updateTerrain(ActionEvent event) {
+    void updateTerrain(ActionEvent event) throws IOException {
         if (isValidTerrain()) {
+            float prixValue = Float.parseFloat(tfprix.getText());
             terrainActuel.setNomTerrain(tfnom.getText());
             terrainActuel.setAddress(tfaddress.getText());
             terrainActuel.setGradin(cbGradin.isSelected());
             terrainActuel.setVestiaire(cbVestiaire.isSelected());
             terrainActuel.setStatus(cbStatus.isSelected());
-            terrainActuel.setPrix(Integer.parseInt(tfprix.getText()));
+            terrainActuel.setPrix(prixValue);
             terrainActuel.setDuree(Integer.parseInt(tfduree.getText()));
             terrainActuel.setGouvernorat(tfemplacement.getText());
             terrainActuel.setImage(imagePath);
@@ -171,7 +173,12 @@ public class TerrainController {
             terrainService.update(terrainActuel);
             // Mise à jour de la liste des terrains affichés
             showTerrains();
-            clearField();}}
+            clearField();
+            ((Button) event.getSource()).getScene().getWindow().hide();
+            voirlist();
+        }
+    }
+
     //*******************************************************************************************
     @FXML
     void getData(MouseEvent event) {
@@ -228,27 +235,26 @@ public class TerrainController {
             vid.setMediaPlayer(mediaPlayer);
             mediaPlayer.play();}}
     //*******************************************************************************************
-   @FXML
-    void voirlist(ActionEvent event) throws IOException {
+    @FXML
+    void voirlist() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/PageTerrain.fxml"));
-       Parent root = loader.load();
-       Stage stage = new Stage();
-       stage.setTitle("Gestion_Terrain");
-       stage.setScene(new Scene(root));
-       stage.show();
-       ((Button) event.getSource()).getScene().getWindow().hide();}
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Gestion_Terrain");
+        stage.setScene(new Scene(root));
+        stage.show();
+        // Récupérer la fenêtre actuelle et la cacher
+        ((Stage) btvoir.getScene().getWindow()).hide();
+    }
+
+
+
     //*******************************************************************************************
     @FXML
     void showTerrainDetails(Terrain terrain) {
-        tfnom.setText(terrain.getNomTerrain());
-        tfaddress.setText(terrain.getAddress());
-        cbGradin.setSelected(terrain.getGradin());
-        cbVestiaire.setSelected(terrain.getVestiaire());
-        cbStatus.setSelected(terrain.getStatus());
-        tfprix.setText(String.valueOf(terrain.getPrix()));
-        tfduree.setText(String.valueOf(terrain.getDuree()));
-        tfemplacement.setText(terrain.getGouvernorat());}
-    //*******************************************************************************************
+        initData(terrain);
+    }
+
     public void initData(Terrain terrain) {
         this.terrainActuel = terrain;
         tfnom.setText(terrain.getNomTerrain());
@@ -263,9 +269,12 @@ public class TerrainController {
         videoPath = terrain.getVideo();
         if (imagePath != null && !imagePath.isEmpty()) {
             Image image = new Image(imagePath);
-            img.setImage(image);}
+            img.setImage(image);
+        }
         if (videoPath != null && !videoPath.isEmpty()) {
             Media media = new Media(videoPath);
             MediaPlayer mediaPlayer = new MediaPlayer(media);
             vid.setMediaPlayer(mediaPlayer);
-            mediaPlayer.play();}}}
+            mediaPlayer.play();
+        }
+    }}

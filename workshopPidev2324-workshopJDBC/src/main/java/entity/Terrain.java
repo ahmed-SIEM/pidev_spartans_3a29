@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Terrain {
     private int id;
-    private int prix;
+    private float prix;
     private int duree;
     private String address;
     private String nomTerrain;
@@ -19,10 +19,14 @@ public class Terrain {
     private String imagePath;
     //*******************************************************************************************
     private List<AvisTerrain> avisList; //Jointure
-    public List<AvisTerrain> getAvisList() {return avisList;}
-    public void setAvisList(List<AvisTerrain> avisList) {this.avisList = avisList;}
+    public List<AvisTerrain> getAvisList() {
+        return avisList;
+    }
+    public void setAvisList(List<AvisTerrain> avisList) {
+        this.avisList = avisList;
+    }
     //*******************************************************************************************
-    public Terrain(String address, boolean gradin, boolean vestiaire, boolean status, String nomTerrain, int prix, int duree, String gouvernorat, String image, String video) {
+    public Terrain(String address, boolean gradin, boolean vestiaire, boolean status, String nomTerrain, float prix, int duree, String gouvernorat, String image, String video) {
         this.address = address;
         this.gradin = gradin;
         this.vestiaire = vestiaire;
@@ -32,7 +36,9 @@ public class Terrain {
         this.duree = duree;
         this.gouvernorat = gouvernorat;
         this.image = image;
-        this.video = video;}
+        this.video = video;
+        this.avisList = new ArrayList<>();
+    }
     public Terrain() {}
     //*******************************************************************************************
     @Override
@@ -65,8 +71,8 @@ public class Terrain {
     }
     public String getNomTerrain() {return nomTerrain;}
     public void setNomTerrain(String nomTerrain) {this.nomTerrain = nomTerrain;}
-    public int getPrix() {return prix;}
-    public void setPrix(int prix) {this.prix = prix;}
+    public float getPrix() {return prix;}
+    public void setPrix(float prix) {this.prix = prix;}
     public int getDuree() {return duree;}
     public void setDuree(int duree) {this.duree = duree;}
     public String getAddress() {return address;}

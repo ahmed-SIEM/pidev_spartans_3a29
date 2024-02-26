@@ -140,7 +140,8 @@ public class PageTerrainController  {
         Stage stage = new Stage();
         stage.setTitle("Détails Terrain");
         stage.setScene(new Scene(root));
-        stage.show();}
+        stage.show();
+        ((Button) event.getSource()).getScene().getWindow().hide();}
     //*******************************************************************************************
     @FXML
     void detail2(ActionEvent event) throws IOException {
@@ -154,7 +155,8 @@ public class PageTerrainController  {
         Stage stage = new Stage();
         stage.setTitle("Détails du Terrain");
         stage.setScene(new Scene(root));
-        stage.show();}
+        stage.show();
+        ((Button) event.getSource()).getScene().getWindow().hide();}
     //*******************************************************************************************
     @FXML
     void detail3(ActionEvent event) throws IOException {
@@ -168,7 +170,8 @@ public class PageTerrainController  {
         Stage stage = new Stage();
         stage.setTitle("Détails du Terrain");
         stage.setScene(new Scene(root));
-        stage.show();}
+        stage.show();
+        ((Button) event.getSource()).getScene().getWindow().hide();}
     //*******************************************************************************************
     @FXML
     void supp1(ActionEvent event) throws SQLException {

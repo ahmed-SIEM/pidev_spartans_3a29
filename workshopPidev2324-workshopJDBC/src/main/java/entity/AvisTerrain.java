@@ -11,7 +11,10 @@ public class AvisTerrain {
         this.id = id;
         this.commentaire = commentaire;
         this.note = note;
-        this.date_avis = date_avis;}
+        this.date_avis = date_avis;
+        this.terrain = new Terrain();
+    }
+
     public AvisTerrain() {}
     //*******************************************************************************************
     public Terrain getTerrain() {return terrain;}

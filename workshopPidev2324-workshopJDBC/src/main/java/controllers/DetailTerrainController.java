@@ -48,13 +48,18 @@ public class DetailTerrainController {
     private String getStatus(boolean value) {
         return value ? "actif" : "en travaux";
     }
+    private String getDuration(int minutes) {return minutes + " minutes";}
+    private String getPrice(float price) {
+        return price + " DT";
+    }
+
     //*******************************************************************************************
     public void initData(Terrain terrain) {
         terrainActuel = terrain;
         nomd.setText(terrain.getNomTerrain());
         gouvd.setText(terrain.getGouvernorat());
-        dureed.setText(String.valueOf(terrain.getDuree()));
-        prixd.setText(String.valueOf(terrain.getPrix()));
+        dureed.setText(getDuration(terrain.getDuree()));
+        prixd.setText(getPrice(terrain.getPrix()));
         addressd.setText(terrain.getAddress());
         gradind.setText(getAvailability(terrain.getGradin()));
         vestd.setText(getAvailability(terrain.getVestiaire()));
@@ -77,4 +82,5 @@ public class DetailTerrainController {
         Stage stage = new Stage();
         stage.setTitle("Modifier");
         stage.setScene(new Scene(root));
-        stage.show();}}
+        stage.show();
+        ((Button) event.getSource()).getScene().getWindow().hide();}}
