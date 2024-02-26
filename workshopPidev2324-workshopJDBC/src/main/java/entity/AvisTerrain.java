@@ -50,4 +50,6 @@ public class AvisTerrain {
                 ", id=" + id +
                 ", commentaire='" + commentaire + '\'' +
                 ", note=" + note +
-                ", date_avis='" + date_avis + '\'' + '}';}}
+                ", date_avis='" + date_avis + '\'' + '}';
+    }
+}

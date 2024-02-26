@@ -10,47 +10,37 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import services.AvisService;
 import javafx.scene.image.Image;
-import services.AvisService;
-
+//*******************************************************************************************
 public class DonnerAvisController {
-
     @FXML
     private VBox terrainBox;
-
     @FXML
     private ImageView terrainImage;
-
     @FXML
     private Label terrainName;
-
     @FXML
     private TextArea commentArea;
-
     @FXML
     private Slider noteSlider;
-
+    //*******************************************************************************************
     private int terrainId;
     private AvisService avisService;
-
+    //*******************************************************************************************
     public void initialize() {
         avisService = new AvisService();
     }
-
-
+//*******************************************************************************************
     public void setTerrain(String terrainName, String terrainImagePath, int terrainId) {
         this.terrainName.setText(terrainName);
         this.terrainId = terrainId;
-
         try {
             // Charger l'image du terrain à partir de terrainImagePath dans terrainImage
             Image image = new Image(terrainImagePath);
             terrainImage.setImage(image);
         } catch (Exception e) {
             // Gérer l'erreur si le chargement de l'image échoue
-            System.err.println("Erreur lors du chargement de l'image : " + e.getMessage());
-        }
-    }
-
+            System.err.println("Erreur lors du chargement de l'image : " + e.getMessage());}}
+    //*******************************************************************************************
     @FXML
     public void submitAvis() {
         // Récupérer le commentaire et la note depuis commentArea et noteSlider
@@ -65,15 +55,11 @@ public class DonnerAvisController {
             Stage stage = (Stage) terrainBox.getScene().getWindow();
             stage.close();
         } catch (Exception e) {
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur est survenue lors de l'ajout de l'avis.");
-        }
-    }
-
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur est survenue lors de l'ajout de l'avis.");}}
+    //*******************************************************************************************
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
-        alert.showAndWait();
-    }
-}
+        alert.showAndWait();}}

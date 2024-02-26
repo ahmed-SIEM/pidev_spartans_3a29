@@ -7,16 +7,16 @@ import utils.MyDatabase;
 import java.sql.*;
 //*******************************************************************************************
 public class AvisService  implements ITerrain<AvisTerrain>{
+    private Connection connection;
+    //*******************************************************************************************
     public void addAvis(int terrainId, String commentaire, int note) throws SQLException {
         String sql = "INSERT INTO avis (terrain_id, commentaire, note) VALUES (?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, terrainId);
             statement.setString(2, commentaire);
             statement.setInt(3, note);
-            statement.executeUpdate();
-        }
-    }
-    private Connection connection;
+            statement.executeUpdate();}}
+    //*******************************************************************************************
     public AvisService() {connection = MyDatabase.getInstance().getConnection();}
     //*******************************************************************************************
     public void add(AvisTerrain t) throws SQLException {
@@ -62,18 +62,13 @@ public class AvisService  implements ITerrain<AvisTerrain>{
                 avisTerrain.setCommentaire(rs.getString("commentaire"));
                 avisTerrain.setNote(rs.getInt("note"));
                 avisTerrain.setDate_avis(rs.getString("date_avis"));
-
                 // Créer un objet Terrain avec les données de la jointure
                 Terrain terrain = new Terrain();
                 terrain.setId(rs.getInt("id"));
                 terrain.setNomTerrain(rs.getString("nomTerrain"));
-                // Ajouter d'autres attributs de Terrain si nécessaire
-
                 // Assigner l'objet Terrain à l'objet AvisTerrain
                 avisTerrain.setTerrain(terrain);
-
-                avisTerrains.add(avisTerrain);
-            }
+                avisTerrains.add(avisTerrain);}
         } catch (SQLException e) {
             e.printStackTrace();}
         return avisTerrains;}
