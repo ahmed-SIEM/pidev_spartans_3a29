@@ -11,9 +11,9 @@ module test {
 
     opens test to javafx.fxml;
     exports test;
-    exports services.GestionUser;
+    exports services.GestionEvenement;
     exports models;
-    opens services.GestionUser to javafx.fxml;
+
     exports test.Controllers;
     opens test.Controllers to javafx.fxml;
 

@@ -23,8 +23,10 @@ public class ServiceTournoi {
         psTournoi.setString(4, J.getAddress());
         psTournoi.setString(5, J.getDatedebut());
         psTournoi.setString(6, J.getDatefin());
-        psTournoi.setInt(7,J.getOrg().getId());
+        psTournoi.setInt(7,J.getOrg());
+
         psTournoi.executeUpdate();
+        System.out.println("tournoi ajoutee avec succés");
     }
 
     public void supprimer(int id) throws SQLException {
@@ -32,7 +34,9 @@ public class ServiceTournoi {
        String query = "DELETE FROM tournoi WHERE id = ?";
        PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, id);
-       ps.executeUpdate();}
+       ps.executeUpdate();
+        System.out.println("tournoi supprimer avec succés");
+    }
 
     public void modifier(Tournoi t) throws SQLException {
         String query = "UPDATE tournoi SET NbmaxEquipe = ?, nom = ?  , affiche = ? , datedebut = ? , datefin = ? , address = ?  WHERE id = ?";
@@ -45,7 +49,9 @@ public class ServiceTournoi {
         ps.setString(4, t.getDatedebut());
         ps.setString(5, t.getDatefin());
         ps.setString(6, t.getAddress());
+        ps.setInt(7, t.getId());
         ps.executeUpdate();
+        System.out.println("tournoi modifieé avec succés");
     }
 public Organisateur getbyidorg(int id) throws SQLException {
     Organisateur org = null; // Initialize Tournoi as null

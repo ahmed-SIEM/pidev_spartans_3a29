@@ -17,9 +17,9 @@ public class Tournoi {
 
     private List<Participation> participationList ;
 
-    private Organisateur org ;
+    private int orgid ;
 
-    public Tournoi(int id, int nbrquipeMax, String nom, String affiche, String address, String datedebut, String datefin, Organisateur org) {
+    public Tournoi(int id, int nbrquipeMax, String nom, String affiche, String address, String datedebut, String datefin, int orgid) {
         this.id = id;
         this.nbrquipeMax = nbrquipeMax;
         this.nom = nom;
@@ -28,12 +28,11 @@ public class Tournoi {
         this.datedebut = datedebut;
         this.datefin = datefin;
         this.participationList = new ArrayList<>();
-        this.org = org;
-    }
-    public Tournoi() {
+        this.orgid = orgid;
     }
 
-    public Tournoi( int nbrquipeMax, String nom, String affiche, String address, String datedebut, String datefin, Organisateur org) {
+    public Tournoi(int id, int nbrquipeMax, String nom, String affiche, String address, String datedebut, String datefin) {
+        this.id = id;
         this.nbrquipeMax = nbrquipeMax;
         this.nom = nom;
         this.affiche = affiche;
@@ -41,7 +40,20 @@ public class Tournoi {
         this.datedebut = datedebut;
         this.datefin = datefin;
         this.participationList = new ArrayList<>();
-        this.org = org;
+    }
+
+    public Tournoi() {
+    }
+
+    public Tournoi( int nbrquipeMax, String nom, String affiche, String address, String datedebut, String datefin, int orgid) {
+        this.nbrquipeMax = nbrquipeMax;
+        this.nom = nom;
+        this.affiche = affiche;
+        this.Address = address;
+        this.datedebut = datedebut;
+        this.datefin = datefin;
+        this.participationList = new ArrayList<>();
+        this.orgid = orgid;
     }
 
     public int getId() {
@@ -108,12 +120,12 @@ public class Tournoi {
         this.participationList = participationList;
     }
 
-    public Organisateur getOrg() {
-        return org;
+    public int getOrg() {
+        return orgid;
     }
 
-    public void setOrg(Organisateur org) {
-        this.org = org;
+    public void setOrg(int org) {
+        this.orgid = org;
     }
 
     @Override
@@ -127,7 +139,7 @@ public class Tournoi {
                 ", datedebut='" + datedebut + '\'' +
                 ", datefin='" + datefin + '\'' +
                 ", participationList=" + participationList +
-                ", org=" + org +
+                ", org=" + orgid +
                 '}';
     }
 }

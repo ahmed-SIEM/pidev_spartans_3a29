@@ -17,14 +17,17 @@ public class ServiceParticipation {
         connection = MyDatabase.getInstance().getConnection();
     }
     public void ajouter(Participation J) throws SQLException {
-        String Query = "INSERT INTO participation ( idequipe, idTournoi, Status, datec) VALUES (?,?,?,?)";
+        String Query = "INSERT INTO participation ( idmembre, idTournoi, Status, datec,NomEquipe ) VALUES (?,?,?,?,?)";
         PreparedStatement psParticipation = connection.prepareStatement(Query);
-        psParticipation.setInt(1, J.getIdEquipe());
+        psParticipation.setInt(1, J.getIdMembre());
         psParticipation.setInt(2, J.getIdTournoi());
         psParticipation.setBoolean(3, J.isStatus());
         psParticipation.setString(4, J.getDateC());
+        psParticipation.setString(5, J.getNomEquipe());
+
 
         psParticipation.executeUpdate();
+        System.out.println("participation ajoutee avec succés");
     }
 
     public void supprimer(int id) throws SQLException {
@@ -33,12 +36,13 @@ public class ServiceParticipation {
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, id);
         ps.executeUpdate();
+        System.out.println("participation supprimer avec succés");
     }
 
 
     public Participation getbyidpart(int id) throws SQLException {
         Participation par = null;
-        String query = "SELECT * FROM user WHERE id = ?";
+        String query = "SELECT * FROM participation WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
@@ -46,10 +50,11 @@ public class ServiceParticipation {
 
             par= new Participation();
             par.setId(rs.getInt("id"));
-            par.setIdEquipe(rs.getInt("idequipe"));
+            par.setIdMembre(rs.getInt("idmembre"));
             par.setIdTournoi(rs.getInt("idTournoi"));
             par.setStatus(rs.getBoolean("Status"));
             par.setDateC(rs.getString("datec"));
+            par.setNomEquipe(rs.getString("NomEquipe"));
 
         }
         return par;
@@ -66,10 +71,12 @@ public class ServiceParticipation {
             Participation pr = new Participation();
 
             pr.setId(rs.getInt("id"));
-            pr.setIdEquipe(rs.getInt("NbmaxEquipe"));
-            pr.setIdTournoi(rs.getInt("nom"));
-            pr.setStatus(rs.getBoolean("affiche"));
-            pr.setDateC(rs.getString("datedebut"));
+            pr.setNomEquipe(rs.getString("NomEquipe"));
+            pr.setDateC(rs.getString("datec"));
+            pr.setStatus(rs.getBoolean("Status"));
+            pr.setIdMembre(rs.getInt("idmembre"));
+            pr.setIdTournoi(rs.getInt("idTournoi"));
+
 
 
             Tournois.add(pr);
