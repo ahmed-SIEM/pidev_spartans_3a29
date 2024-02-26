@@ -1,8 +1,6 @@
 package controllers;
 
 import entity.Terrain;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -129,8 +127,7 @@ public class TerrainController {
     //*******************************************************************************************
     @FXML
     void createTerrain(ActionEvent event) throws SQLException {
-        if (videoPath == null) {
-            videoPath = "";}
+        if (videoPath == null) {videoPath = "";}
         if (isValidTerrain()) {
         Terrain terrain = new Terrain(tfaddress.getText(), Boolean.parseBoolean(tfgradin.getText()), Boolean.parseBoolean(tfvestiaire.getText()), Boolean.parseBoolean(tfstatus.getText()), tfnom.getText(), Integer.parseInt(tfprix.getText()), Integer.parseInt(tfduree.getText()), tfemplacement.getText(), imagePath, videoPath);
         ts.add(terrain);
@@ -250,27 +247,4 @@ public class TerrainController {
             Media media = new Media(videoPath);
             MediaPlayer mediaPlayer = new MediaPlayer(media);
             vid.setMediaPlayer(mediaPlayer);
-            mediaPlayer.play();}}
-    //*******************************************************************************************
-    @FXML
-    void getDataByNom(String nom) {
-        Terrain terrain = ts.getTerrainByNom(nom);
-        if (terrain != null) {
-            tfaddress.setText(terrain.getAddress());
-            tfgradin.setText(String.valueOf(terrain.getGradin()));
-            tfvestiaire.setText(String.valueOf(terrain.getVestiaire()));
-            tfstatus.setText(String.valueOf(terrain.getStatus()));
-            tfnom.setText(terrain.getNomTerrain());
-            tfprix.setText(String.valueOf(terrain.getPrix()));
-            tfduree.setText(String.valueOf(terrain.getDuree()));
-            tfemplacement.setText(terrain.getGouvernorat());
-            imagePath = terrain.getImage();
-            if (imagePath != null && !imagePath.isEmpty()) {
-                Image image = new Image(imagePath);
-                img.setImage(image);}
-            videoPath = terrain.getVideo();
-            if (videoPath != null && !videoPath.isEmpty()) {
-                Media media = new Media(videoPath);
-                MediaPlayer mediaPlayer = new MediaPlayer(media);
-                vid.setMediaPlayer(mediaPlayer);
-                mediaPlayer.play();}}}}
+            mediaPlayer.play();}}}

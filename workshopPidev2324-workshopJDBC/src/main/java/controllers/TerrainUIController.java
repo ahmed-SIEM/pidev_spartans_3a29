@@ -15,7 +15,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import utils.MyDatabase;
 import utils.TerrainDAO;
-
 import java.io.IOException;
 import java.util.List;
 //*******************************************************************************************
@@ -30,7 +29,8 @@ public class TerrainUIController {
         // Créer les boxes pour chaque terrain
         for (Terrain terrain : terrains) {
             HBox terrainBox = createTerrainBox(terrain);
-            ListContainer.getChildren().add(terrainBox);}}
+            ListContainer.getChildren().add(terrainBox);
+        }}
     //*******************************************************************************************
     private HBox createTerrainBox(Terrain terrain) {
         HBox terrainBox = new HBox();
@@ -60,11 +60,10 @@ public class TerrainUIController {
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-        });
+            }});
         terrainBox.getChildren().addAll(reserveButton, detailButton, donnerAvisButton);
-
         return terrainBox;}
+    //*******************************************************************************************
     @FXML
     public void handleDonnerAvis(ActionEvent event) throws IOException {
         // Charger la page de donner un avis
@@ -73,8 +72,4 @@ public class TerrainUIController {
         Stage stage = new Stage();
         stage.setTitle("Donner un avis");
         stage.setScene(new Scene(root));
-        stage.show();
-    }
-
-
-}
+        stage.show();}}

@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.control.Slider?>
+
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.DonnerAvisController" spacing="10">
     <Label text="Donner un avis" style="-fx-font-size: 18px;" />
     <HBox spacing="10">

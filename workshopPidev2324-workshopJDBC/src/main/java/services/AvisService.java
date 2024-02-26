@@ -75,11 +75,8 @@ public class AvisService  implements ITerrain<AvisTerrain>{
                 avisTerrains.add(avisTerrain);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return avisTerrains;
-    }
-
+            e.printStackTrace();}
+        return avisTerrains;}
     //*******************************************************************************************
     public AvisTerrain getTerrainById(int id) {
         AvisTerrain terrain = null;
