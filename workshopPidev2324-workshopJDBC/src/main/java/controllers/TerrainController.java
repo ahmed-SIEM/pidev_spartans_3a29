@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -28,6 +29,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 //*******************************************************************************************
 public class TerrainController {
+
+    public AnchorPane anchorpane;
     @FXML
     private Button btannuler;
     @FXML
@@ -116,7 +119,7 @@ public class TerrainController {
         videoPath = null;}
     //*******************************************************************************************
     @FXML
-    void createTerrain(ActionEvent event) throws SQLException {
+    void createTerrain(ActionEvent event) throws SQLException, IOException {
         if (videoPath == null) {
             videoPath = "";
         }
@@ -125,6 +128,8 @@ public class TerrainController {
             ts.add(terrain);
             showTerrains(); // Mettre à jour l'affichage après avoir ajouté un nouveau terrain
             clearField(); // Efface les champs après l'ajout
+            ((Button) event.getSource()).getScene().getWindow().hide();
+            voirlist(new ActionEvent());
         }}
     //*******************************************************************************************
     private boolean isValidTerrain() {
@@ -223,14 +228,15 @@ public class TerrainController {
             vid.setMediaPlayer(mediaPlayer);
             mediaPlayer.play();}}
     //*******************************************************************************************
-    @FXML
+   @FXML
     void voirlist(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/PageTerrain.fxml"));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setTitle("Liste des terrains");
-        stage.setScene(new Scene(root));
-        stage.show();}
+       Parent root = loader.load();
+       Stage stage = new Stage();
+       stage.setTitle("Gestion_Terrain");
+       stage.setScene(new Scene(root));
+       stage.show();
+       ((Button) event.getSource()).getScene().getWindow().hide();}
     //*******************************************************************************************
     @FXML
     void showTerrainDetails(Terrain terrain) {

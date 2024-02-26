@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="720" prefWidth="1280.0" styleClass="form_container" stylesheets="@../css/styles3.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PageTerrainController">
+<AnchorPane fx:id="main" prefHeight="720" prefWidth="1280.0" styleClass="form_container" stylesheets="@../css/styles3.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PageTerrainController">
    <AnchorPane fx:id="BOX1" layoutX="74.0" layoutY="110.0" prefHeight="509.0" prefWidth="322.0">
       <ImageView fx:id="Img1" fitHeight="286.0" fitWidth="259.0" layoutX="32.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
       <Text layoutX="63.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :">

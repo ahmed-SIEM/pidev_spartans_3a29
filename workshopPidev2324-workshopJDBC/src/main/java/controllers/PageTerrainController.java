@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.util.List;
 //*******************************************************************
 public class PageTerrainController  {
+    public AnchorPane main;
     @FXML
     private AnchorPane BOX1;
     @FXML
@@ -68,28 +69,45 @@ public class PageTerrainController  {
     public void initialize() {actualise(Ts.getAllTerrains());}
     //*******************************************************************
     void actualise(List<Terrain> terrains){
-        if(terrains.size()-1-i*3>0){btnsuivant.setVisible(true);}
-        if(terrains.size()-1-i*3 <= 0){btnsuivant.setVisible(false);}
-        if(i > 0){btnretour.setVisible(true);}
-        if(i == 0){btnretour.setVisible(false);}
+        if(terrains.size()-1-i*3>0){btnsuivant.setVisible(true);
+        }
+
+        if(terrains.size()-1-i*3 <= 0){btnsuivant.setVisible(false);
+        }
+        if(i > 0){btnretour.setVisible(true);
+        }
+        if(i == 0){btnretour.setVisible(false);
+        }
         if(!terrains.isEmpty()){
             if(terrains.size()-1-i*3>=0){
                 BOX1.setVisible(true);
                 nom1.setText(terrains.get(i*3).getNomTerrain());
                 address1.setText(terrains.get(i*3).getAddress());
                 Img1.setImage(new Image(terrains.get(i*3).getImage()));
-            }else{BOX1.setVisible(false);}
-            if(terrains.size()-2-i*3>=0){BOX2.setVisible(true);
+            }
+            else{BOX1.setVisible(false);
+            }
+            if(terrains.size()-2-i*3>=0){
+                BOX2.setVisible(true);
                 nom2.setText(terrains.get(1+i*3).getNomTerrain());
                 address2.setText(terrains.get(1+i*3).getAddress());
                 Img2.setImage(new Image(terrains.get(1+i*3).getImage()));
-            }else{BOX2.setVisible(false);}
+            }
+            else{
+                BOX2.setVisible(false);
+            }
             if(terrains.size()-3-i*3>=0){
                 BOX3.setVisible(true);
                 nom3.setText(terrains.get(2+i*3).getNomTerrain());
                 address3.setText(terrains.get(2+i*3).getAddress());
                 Img3.setImage(new Image(terrains.get(2+i*3).getImage()));
-            }else{BOX3.setVisible(false);}}}
+            }else{BOX3.setVisible(false);}}else{
+            BOX1.setVisible(false);
+            BOX2.setVisible(false);
+            BOX3.setVisible(false);
+        }
+        btnsuivant.setVisible(terrains.size() > 3);
+    }
     //*******************************************************************************************
     @FXML
     void retour(ActionEvent event){
@@ -107,7 +125,8 @@ public class PageTerrainController  {
         Stage stage = new Stage();
         stage.setTitle("Gestion_Terrain");
         stage.setScene(new Scene(root));
-        stage.show();}
+        stage.show();
+        ((Button) event.getSource()).getScene().getWindow().hide();}
     //*******************************************************************************************
     @FXML
     void detail1(ActionEvent event) throws IOException {
