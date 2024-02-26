@@ -5,7 +5,7 @@ public class AvisTerrain {
     private int note;
     private String commentaire;
     private String date_avis;
-    private Terrain terrain; // Référence à un objet Terrain
+    private Terrain terrain; //Jointure
     //*******************************************************************************************
     public AvisTerrain(int id, String commentaire, int note, String date_avis) {
         this.id = id;

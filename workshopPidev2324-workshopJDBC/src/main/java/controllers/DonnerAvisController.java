@@ -8,8 +8,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import services.AvisService;
 import javafx.scene.image.Image;
+import services.AvisService;
+
 //*******************************************************************************************
 public class DonnerAvisController {
     @FXML

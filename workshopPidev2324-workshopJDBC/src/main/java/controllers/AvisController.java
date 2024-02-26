@@ -1,135 +1,142 @@
 package controllers;
-import entity.AvisTerrain;
-import javafx.collections.ObservableList;
+
+import entity.Terrain;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import services.AvisService;
-import java.net.URL;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.Optional;
-import java.util.ResourceBundle;
-//*******************************************************************************************
-public class AvisController {
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import services.TerrainService;
+import java.io.IOException;
+import java.util.List;
+//*******************************************************************
+public class AvisController  {
     @FXML
-    private Button btannuler;
+    private AnchorPane BOX1;
     @FXML
-    private Button btndelete;
+    private AnchorPane BOX2;
     @FXML
-    private Button btnsave;
+    private AnchorPane BOX3;
     @FXML
-    private Button btnupdate;
+    private ImageView Img1;
     @FXML
-    private TextField tfID_avis;
+    private ImageView Img2;
     @FXML
-    private TextField tfid_terrain;
+    private ImageView Img3;
     @FXML
-    private TextField tfcommentaire;
+    private AnchorPane MainPane;
     @FXML
-    private TextField tfnote;
+    private Text address1;
     @FXML
-    private DatePicker datePicker;
+    private Text address2;
     @FXML
-    private VBox AvisContainer;
-    //*******************************************************************************************
-    private AvisService as = new AvisService();
-    //*******************************************************************************************
+    private Text address3;
     @FXML
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        showTerrains();
-    }
-    //*******************************************************************************************
-    private void showTerrains() {
-        AvisContainer.getChildren().clear();
-        ObservableList<AvisTerrain> terrains = as.getAllTerrains();
-        for (AvisTerrain avis : terrains) {
-            HBox terrainBox = new HBox();
-            terrainBox.setSpacing(10);
-            Label idLabel = new Label("idT: " + avis.getId()); // Utilisez l'ID du terrain ici
-            Label id_avisLabel = new Label("idAvis: " + avis.getIdAvis());
-            Label commentairelabel = new Label("commentaire: " + avis.getCommentaire());
-            Label notelabel = new Label("note: " + avis.getNote());
-            Label datelabel = new Label("date_avis: " + avis.getDate_avis());
-            terrainBox.getChildren().addAll(id_avisLabel, new Label("|"), idLabel, new Label("|"), commentairelabel, new Label("|"), notelabel, new Label("|"), datelabel);
-            AvisContainer.getChildren().add(terrainBox);}}
-//*******************************************************************************************
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();}
-    //*******************************************************************************************
+    private Button btnDetail1;
     @FXML
-    void Annuler() {
-        tfID_avis.setText("");
-        tfid_terrain.setText("");
-        tfcommentaire.setText("");
-        tfnote.setText("");
-        datePicker.setValue(null);}
-    //*******************************************************************************************
+    private Button btndetail2;
     @FXML
-    void annuleravis(ActionEvent event) {
-        Annuler();}
-    //*******************************************************************************************
+    private Button btndetail3;
     @FXML
-    void ajouterAvis(ActionEvent event) throws SQLException {
-        // Récupérer l'ID du terrain à partir du champ tfid_terrain
-        int idTerrain = Integer.parseInt(tfid_terrain.getText());
-        if (idTerrain == 0) {
-            showAlert(Alert.AlertType.ERROR, "Erreur de saisie", "Veuillez sélectionner un terrain.");
-            return;}
-        // Vérifier si la note est comprise entre 0 et 5
-        int note = Integer.parseInt(tfnote.getText());
-        if (note < 0 || note > 5) {
-            showAlert(Alert.AlertType.ERROR, "Erreur de saisie", "La note doit être comprise entre 0 et 5.");
-            return;}
-        String date = datePicker.getValue() != null ? datePicker.getValue().toString() : "";
-        AvisTerrain terrain = new AvisTerrain(idTerrain, tfcommentaire.getText(), note, date);
-        as.add(terrain);
-        showTerrains();
-        Annuler();}
-//*******************************************************************************************
+    private Button btnretour;
     @FXML
-    void SupprimerAvis(ActionEvent event) throws SQLException {
-        int id = Integer.parseInt(tfID_avis.getText());
-        AvisTerrain terrain = as.getTerrainById(id);
-        if (terrain != null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation de suppression");
-            alert.setHeaderText("Voulez-vous vraiment supprimer cet avis ?");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                as.delete(id);
-                showTerrains();}}}
+    private Button btnsuivant;
+    @FXML
+    private Text nom1;
+    @FXML
+    private Text nom2;
+    @FXML
+    private Text nom3;
+    int i= 0;
+    TerrainService Ts = new TerrainService();
+    //*******************************************************************
+    public void initialize() {actualise(Ts.getAllTerrains());}
+    //*******************************************************************
+    void actualise(List<Terrain> terrains){
+        if(terrains.size()-1-i*3>0){btnsuivant.setVisible(true);}
+        if(terrains.size()-1-i*3 <= 0){btnsuivant.setVisible(false);}
+        if(i > 0){btnretour.setVisible(true);}
+        if(i == 0){btnretour.setVisible(false);}
+        if(!terrains.isEmpty()){
+            if(terrains.size()-1-i*3>=0){
+                BOX1.setVisible(true);
+                nom1.setText(terrains.get(i*3).getNomTerrain());
+                address1.setText(terrains.get(i*3).getAddress());
+                Img1.setImage(new Image(terrains.get(i*3).getImage()));
+            }else{BOX1.setVisible(false);}
+            if(terrains.size()-2-i*3>=0){BOX2.setVisible(true);
+                nom2.setText(terrains.get(1+i*3).getNomTerrain());
+                address2.setText(terrains.get(1+i*3).getAddress());
+                Img2.setImage(new Image(terrains.get(1+i*3).getImage()));
+            }else{BOX2.setVisible(false);}
+            if(terrains.size()-3-i*3>=0){
+                BOX3.setVisible(true);
+                nom3.setText(terrains.get(2+i*3).getNomTerrain());
+                address3.setText(terrains.get(2+i*3).getAddress());
+                Img3.setImage(new Image(terrains.get(2+i*3).getImage()));
+            }else{BOX3.setVisible(false);}}}
     //*******************************************************************************************
     @FXML
-    void modifierAvis(ActionEvent event) throws SQLException {
-        int id = Integer.parseInt(tfID_avis.getText());
-        AvisTerrain terrain = as.getTerrainById(id);
-        if (terrain != null) {
-            if (!tfcommentaire.getText().isEmpty()) {
-                terrain.setCommentaire(tfcommentaire.getText());}
-            if (!tfnote.getText().isEmpty()) {
-                terrain.setNote(Integer.parseInt(tfnote.getText()));}
-            if (datePicker.getValue() != null) {
-                terrain.setDate_avis(datePicker.getValue().toString());}
-            as.update(terrain);            // Mettre à jour le terrain dans la base de données
-            showTerrains();            // Mettre à jour l'affichage des terrains
-        }}
+    void retour(ActionEvent event){
+        i -=1;
+        actualise(Ts.getAllTerrains());}
     //*******************************************************************************************
     @FXML
-    void getData(MouseEvent event) {
-        Node source = (Node) event.getSource();
-        HBox terrainBox = (HBox) source.getParent();
-        AvisTerrain terrain = (AvisTerrain) terrainBox.getUserData();
-        if (terrain != null) {
-            tfID_avis.setText(String.valueOf(terrain.getIdAvis()));
-            tfcommentaire.setText(terrain.getCommentaire());
-            tfnote.setText(String.valueOf(terrain.getNote()));
-            datePicker.setValue(terrain.getDate_avis() != null ? LocalDate.parse(terrain.getDate_avis()) : null);}}}
+    void suivant(ActionEvent event){i +=1;
+        actualise(Ts.getAllTerrains());}
+    //*******************************************************************************************
+    @FXML
+    void detail1(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
+        int index = Integer.parseInt(btn.getId().substring(9)) - 1;
+        Terrain terrain = Ts.getAllTerrains().get(index);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/detailuser.fxml"));
+        Parent root = loader.load();
+        DetailTerrainController controller = loader.getController();
+        controller.initData(terrain);
+        Stage stage = new Stage();
+        stage.setTitle("Détails Terrain");
+        stage.setScene(new Scene(root));
+        stage.show();}
+    //*******************************************************************************************
+    @FXML
+    void detail2(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
+        int index = Integer.parseInt(btn.getId().substring(9)) - 1; // Assuming the button IDs are like "btnDetail1", "btnDetail2", etc.
+        Terrain selectedTerrain = Ts.getAllTerrains().get(index);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/detailuser.fxml"));
+        Parent root = loader.load();
+        DetailTerrainController controller = loader.getController();
+        controller.initData(selectedTerrain);
+        Stage stage = new Stage();
+        stage.setTitle("Détails du Terrain");
+        stage.setScene(new Scene(root));
+        stage.show();}
+    //*******************************************************************************************
+    @FXML
+    void detail3(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
+        int index = Integer.parseInt(btn.getId().substring(9)) - 1; // Assuming the button IDs are like "btnDetail1", "btnDetail2", etc.
+        Terrain selectedTerrain = Ts.getAllTerrains().get(index);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/detailuser.fxml"));
+        Parent root = loader.load();
+        DetailTerrainController controller = loader.getController();
+        controller.initData(selectedTerrain);
+        Stage stage = new Stage();
+        stage.setTitle("Détails du Terrain");
+        stage.setScene(new Scene(root));
+        stage.show();}
+    //*******************************************************************************************
+    public void add_avis(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/DonnerAvis.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Donner un avis");
+        stage.setScene(new Scene(root));
+        stage.show();}}

@@ -1,4 +1,8 @@
 package entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Terrain {
     private int id;
     private int prix;
@@ -13,7 +17,10 @@ public class Terrain {
     private boolean status;
     private String videoPath;
     private String imagePath;
-
+    //*******************************************************************************************
+    private List<AvisTerrain> avisList; //Jointure
+    public List<AvisTerrain> getAvisList() {return avisList;}
+    public void setAvisList(List<AvisTerrain> avisList) {this.avisList = avisList;}
     //*******************************************************************************************
     public Terrain(String address, boolean gradin, boolean vestiaire, boolean status, String nomTerrain, int prix, int duree, String gouvernorat, String image, String video) {
         this.address = address;
