@@ -60,8 +60,6 @@ public class PaiementService {
         ps.setString(4, paiement.getHeure());
         ps.setBoolean(5,false);
 
-        ps.setInt(5, 1);
-
         ps.executeUpdate();
         int lignesAffectees = ps.executeUpdate();
 

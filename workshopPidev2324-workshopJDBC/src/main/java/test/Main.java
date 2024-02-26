@@ -1,9 +1,11 @@
 package test;
 
 import javafx.collections.ObservableList;
+import models.Equipe;
 import models.Reservation;
 import models.Terrain;
 import models.User;
+import services.EquipeService;
 import services.ReservationService;
 import services.TerrainService;
 
@@ -17,15 +19,11 @@ public class Main {
 
 
     public static void main(String[] args) throws SQLException {
-        TerrainService ts = new TerrainService();
-
-        ObservableList<Terrain> terrains = ts.getAllTerrains();
-        for (Terrain t : terrains){
-            System.out.println(t.toString());
+        EquipeService equipeService = new EquipeService();
+        List<Equipe> equipeList = equipeService.getEquipesParMembre(8);
+        for (Equipe equipe :equipeList){
+            System.out.println(equipe.toString());
         }
-        ReservationService reservationService = new ReservationService();
-        boolean x = reservationService.VerfierDisponibleTerrain(5, 120, "19:00", "2024-02-26");
-        System.out.println(x);
 
 
 

@@ -8,8 +8,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.SplitMenuButton;
+import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -19,8 +21,10 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import models.Equipe;
 import models.Reservation;
 import models.Terrain;
+import services.EquipeService;
 import services.PaiementService;
 import services.ReservationService;
 import services.TerrainService;
@@ -34,10 +38,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.scene.control.Label;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+
 import static models.TypeReservation.ReserverTerrainPourEquipe;
 
 public class ReserverTerrainController implements Initializable {
@@ -69,7 +72,7 @@ public class ReserverTerrainController implements Initializable {
     private DatePicker datepicker;
 
     @FXML
-    private SplitMenuButton nom_equipe;
+    private ChoiceBox<String> nom_equipe;
 
 
 
@@ -88,6 +91,29 @@ public class ReserverTerrainController implements Initializable {
         horaireInvalides.setVisible(false);
         dateInvalide.setVisible(false);
 
+        //                                    ID USER        YAAAAAAAAAAAAAAAAA MONTASSAR
+        String[] nom = nomEquipes();
+        nom_equipe.getItems().addAll(nom);
+
+    }
+    //                                                                       idUser
+    public String[] nomEquipes(){
+        EquipeService equipeService = new EquipeService();
+        // *********************************************************************************************
+        //                                                 monta heeeet numro hatit 7
+        try {
+            List<Equipe> equipeList = equipeService.getEquipesParMembre(8);
+            String[] nomEquipe = new String[equipeList.size()];
+
+            int index = 0;
+            for (Equipe equipe : equipeList) {
+                nomEquipe[index] = equipe.getNomEquipe();
+                index++;
+            }
+            return nomEquipe;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 // ajouter photo et video
     public void  showTerrains() throws SQLException {
@@ -130,11 +156,13 @@ public class ReserverTerrainController implements Initializable {
                         btnReserver.getStyleClass().add("reserver-button");
 
                         btnReserver.setOnAction(event -> {
-                            // Code à exécuter lorsqu'on clique sur le bouton "Réserver"
 
                             try {
-                                ReservationService reservationService1 = new ReservationService();
+
+                                // loutaa
                                 ajouterReservationTerrain(terrain.getId());
+
+                                ReservationService reservationService1 = new ReservationService();
                                 int dernieridReservationAjouter = reservationService1.getLastIdReservationAddRecently();
                                 passerPaiement( dernieridReservationAjouter , idUser);
                                 //id user a changer de montassar
@@ -166,10 +194,12 @@ public class ReserverTerrainController implements Initializable {
 
             if(reservationService1.VerfierDisponibleTerrain( idTerrain,terraine.getDuree(),heure.getText(),convertirDateEnString(datepicker))) {
 
-                Reservation r1 = new Reservation(false, convertirDateEnString(datepicker), heure.getText(), ReserverTerrainPourEquipe, idTerrain);
+                Reservation r1 = new Reservation(false, convertirDateEnString(datepicker), heure.getText(), ReserverTerrainPourEquipe, idTerrain, nom_equipe.getValue());
                 ReservationService reservationService = new ReservationService();
                 reservationService.ajouterReservation(r1);
-                PaimentController paimentController = new PaimentController();
+
+
+                //PaimentController paimentController = new PaimentController();
             }
 
         }
@@ -215,6 +245,19 @@ public class ReserverTerrainController implements Initializable {
         }
     }
 
+    //       -------------------------------------------------------------------------------------------------
+
+    //       ------------------------------------------------------------------------------------------------
+
+    //       ------------------------------------------------------------------------------------------------
+
+    //       ------------------------------------------------------------------------------------------------
+
+    //       -------------------------------------Passage de fxml a autre-------------------------------------
+
+    //       ------------------------------------------------------------------------------------------------
+
+    //       ------------------------------------------------------------------------------------------------
     public void AfficherTerrain(ActionEvent actionEvent) throws SQLException {
         showTerrains();
     }

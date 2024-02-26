@@ -46,13 +46,14 @@ public class ReservationService {
             ps.executeUpdate();
             */
 
-        String query = "INSERT INTO reservation (isConfirm, dateReservation, heureReservation, type, idTerrain) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO reservation (isConfirm, dateReservation, heureReservation, type, idTerrain , nomEquipe1) VALUES (?, ?, ?, ?, ?,?)";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setBoolean(1, false);
         ps.setString(2, reservation.getDateReservation());
         ps.setString(3, reservation.getHeureReservation());
         ps.setString(4, reservation.getType());
         ps.setInt(5, reservation.getIdTerrain());
+        ps.setString(6, reservation.getNomEquipe1());
 
         ps.executeUpdate();
 
@@ -60,6 +61,23 @@ public class ReservationService {
 
 
         }
+
+    public boolean updateNomEquipe2(int idReservation, String nomEquipe2) throws SQLException {
+        String query = "UPDATE reservation SET nomEquipe2 = ? WHERE idReservation = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, nomEquipe2);
+            ps.setInt(2, idReservation);
+
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows == 0) {
+                return false ;
+            }
+        } catch (SQLException e) {
+            return  false;
+        }
+        return true ;
+    }
 
         // tous les reservations
         public List<Reservation> getAllReservation() throws SQLException {
@@ -75,6 +93,7 @@ public class ReservationService {
                 reservation.setDateReservation(rs.getString("dateReservation"));
                 reservation.setHeureReservation(rs.getString("heureReservation"));
                 reservation.setType(TypeReservation.valueOf(rs.getString("type")));
+                reservation.setNomEquipe1(rs.getString("nomEquipe1"));
 
                 reservations.add(reservation);
 
@@ -99,6 +118,7 @@ public class ReservationService {
                 reservation.setDateReservation(rs.getString("dateReservation"));
                 reservation.setHeureReservation(rs.getString("heureReservation"));
                 reservation.setType(TypeReservation.valueOf(rs.getString("type")));
+                reservation.setNomEquipe1(rs.getString("nomEquipe1"));
 
                 reservations.add(reservation);
 
@@ -121,6 +141,7 @@ public class ReservationService {
                 reservation.setDateReservation(rs.getString("dateReservation"));
                 reservation.setHeureReservation(rs.getString("heureReservation"));
                 reservation.setType(TypeReservation.valueOf(rs.getString("type")));
+                reservation.setNomEquipe1(rs.getString("nomEquipe1"));
 
             }
             return reservation;
@@ -193,6 +214,7 @@ public class ReservationService {
                 reservation.setDateReservation(rs.getString("dateReservation"));
                 reservation.setHeureReservation(rs.getString("heureReservation"));
                 reservation.setType(TypeReservation.valueOf(rs.getString("type")));
+                reservation.setNomEquipe1(rs.getString("nomEquipe1"));
 
                 if (reservation.getDateReservation() != null && sontMemesDates(reservation.getDateReservation(), date)) {
                     LocalTime heureMatchReserve = LocalTime.parse(reservation.getHeureReservation());
