@@ -13,7 +13,7 @@ public class MainFX extends Application {
         Parent root = loader.load();         //parent is the first page to be load
         //scene bordure de l'app change selon l'interface
         Scene scene = new Scene(root);
-        primaryStage.setTitle("");
+        primaryStage.setTitle("Liste des terrains");
         primaryStage.setScene(scene);
         primaryStage.show();}
     //*******************************************************************************************

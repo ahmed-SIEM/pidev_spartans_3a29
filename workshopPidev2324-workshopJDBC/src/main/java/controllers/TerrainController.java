@@ -118,16 +118,29 @@ public class TerrainController {
         }
         if (isValidTerrain()) {
             if (imagePath == null) {
-                showAlert(Alert.AlertType.ERROR, "Erreur de saisie", "Veuillez sélectionner une image.");}
-            float prixValue = Float.parseFloat(tfprix.getText());
-            Terrain terrain = new Terrain(tfaddress.getText(), cbGradin.isSelected(), cbVestiaire.isSelected(), cbStatus.isSelected(), tfnom.getText(), prixValue, Integer.parseInt(tfduree.getText()), tfemplacement.getText(), imagePath, videoPath);
-            ts.add(terrain);
-            showTerrains(); // Mettre à jour l'affichage après avoir ajouté un nouveau terrain
-            clearField(); // Efface les champs après l'ajout
-            ((Button) event.getSource()).getScene().getWindow().hide();
-            voirlist();
+                showAlert(Alert.AlertType.ERROR, "Erreur de saisie", "Veuillez sélectionner une image.");
+                return; // Arrêter l'exécution si l'image n'est pas sélectionnée
+            }
+
+            // Vérifier si le nom du terrain existe déjà dans la liste
+            String nomTerrain = tfnom.getText().trim();
+            boolean nomExiste = ts.getAllTerrains().stream()
+                    .anyMatch(terrain -> terrain.getNomTerrain().equalsIgnoreCase(nomTerrain));
+
+            if (nomExiste) {
+                showAlert(Alert.AlertType.ERROR, "Erreur de saisie", "Le nom du terrain existe déjà.");
+            } else {
+                float prixValue = Float.parseFloat(tfprix.getText());
+                Terrain terrain = new Terrain(tfaddress.getText(), cbGradin.isSelected(), cbVestiaire.isSelected(), cbStatus.isSelected(), tfnom.getText(), prixValue, Integer.parseInt(tfduree.getText()), tfemplacement.getText(), imagePath, videoPath);
+                ts.add(terrain);
+                showTerrains(); // Mettre à jour l'affichage après avoir ajouté un nouveau terrain
+                clearField(); // Efface les champs après l'ajout
+                ((Button) event.getSource()).getScene().getWindow().hide();
+                voirlist();
+            }
         }
     }
+
 
     //*******************************************************************************************
     private boolean isValidTerrain() {

@@ -6,7 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -16,6 +18,8 @@ import services.TerrainService;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
+
 //*******************************************************************
 public class PageTerrainController  {
     public AnchorPane main;
@@ -69,33 +73,24 @@ public class PageTerrainController  {
     public void initialize() {actualise(Ts.getAllTerrains());}
     //*******************************************************************
     void actualise(List<Terrain> terrains){
-        if(terrains.size()-1-i*3>0){btnsuivant.setVisible(true);
-        }
-
-        if(terrains.size()-1-i*3 <= 0){btnsuivant.setVisible(false);
-        }
-        if(i > 0){btnretour.setVisible(true);
-        }
-        if(i == 0){btnretour.setVisible(false);
-        }
+        if(terrains.size()-1-i*3>0){btnsuivant.setVisible(true);}
+        if(terrains.size()-1-i*3 <= 0){btnsuivant.setVisible(false);}
+        if(i > 0){btnretour.setVisible(true);}
+        if(i == 0){btnretour.setVisible(false);}
         if(!terrains.isEmpty()){
             if(terrains.size()-1-i*3>=0){
                 BOX1.setVisible(true);
                 nom1.setText(terrains.get(i*3).getNomTerrain());
                 address1.setText(terrains.get(i*3).getAddress());
-                Img1.setImage(new Image(terrains.get(i*3).getImage()));
-            }
-            else{BOX1.setVisible(false);
-            }
+                Img1.setImage(new Image(terrains.get(i*3).getImage()));}
+            else{BOX1.setVisible(false);}
             if(terrains.size()-2-i*3>=0){
                 BOX2.setVisible(true);
                 nom2.setText(terrains.get(1+i*3).getNomTerrain());
                 address2.setText(terrains.get(1+i*3).getAddress());
-                Img2.setImage(new Image(terrains.get(1+i*3).getImage()));
-            }
+                Img2.setImage(new Image(terrains.get(1+i*3).getImage()));}
             else{
-                BOX2.setVisible(false);
-            }
+                BOX2.setVisible(false);}
             if(terrains.size()-3-i*3>=0){
                 BOX3.setVisible(true);
                 nom3.setText(terrains.get(2+i*3).getNomTerrain());
@@ -104,10 +99,8 @@ public class PageTerrainController  {
             }else{BOX3.setVisible(false);}}else{
             BOX1.setVisible(false);
             BOX2.setVisible(false);
-            BOX3.setVisible(false);
-        }
-        btnsuivant.setVisible(terrains.size() > 3);
-    }
+            BOX3.setVisible(false);}
+        btnsuivant.setVisible(terrains.size()-3*i > 3);}
     //*******************************************************************************************
     @FXML
     void retour(ActionEvent event){
@@ -131,7 +124,7 @@ public class PageTerrainController  {
     @FXML
     void detail1(ActionEvent event) throws IOException {
         Button btn = (Button) event.getSource();
-        int index = Integer.parseInt(btn.getId().substring(9)) - 1;
+        int index = Integer.parseInt(btn.getId().substring(9)) - 1+3*i;
         Terrain terrain = Ts.getAllTerrains().get(index);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/DetailTerrain.fxml"));
         Parent root = loader.load();
@@ -146,7 +139,7 @@ public class PageTerrainController  {
     @FXML
     void detail2(ActionEvent event) throws IOException {
         Button btn = (Button) event.getSource();
-        int index = Integer.parseInt(btn.getId().substring(9)) - 1; // Assuming the button IDs are like "btnDetail1", "btnDetail2", etc.
+        int index = Integer.parseInt(btn.getId().substring(9)) - 1+3*i; // Assuming the button IDs are like "btnDetail1", "btnDetail2", etc.
         Terrain selectedTerrain = Ts.getAllTerrains().get(index);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/DetailTerrain.fxml"));
         Parent root = loader.load();
@@ -161,7 +154,7 @@ public class PageTerrainController  {
     @FXML
     void detail3(ActionEvent event) throws IOException {
         Button btn = (Button) event.getSource();
-        int index = Integer.parseInt(btn.getId().substring(9)) - 1; // Assuming the button IDs are like "btnDetail1", "btnDetail2", etc.
+        int index = Integer.parseInt(btn.getId().substring(9)) - 1+3*i; // Assuming the button IDs are like "btnDetail1", "btnDetail2", etc.
         Terrain selectedTerrain = Ts.getAllTerrains().get(index);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/DetailTerrain.fxml"));
         Parent root = loader.load();
@@ -175,16 +168,53 @@ public class PageTerrainController  {
     //*******************************************************************************************
     @FXML
     void supp1(ActionEvent event) throws SQLException {
-        Terrain terrainToDelete = Ts.getAllTerrains().get(i * 3);
-        Ts.delete(terrainToDelete.getId());
-        actualise(Ts.getAllTerrains());}
+        int indexToDelete = i * 3;
+        if (indexToDelete >= 0 && indexToDelete < Ts.getAllTerrains().size()) {
+            Terrain terrainToDelete = Ts.getAllTerrains().get(indexToDelete);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation de suppression");
+            alert.setHeaderText(null);
+            alert.setContentText("Êtes-vous sûr de vouloir supprimer ce terrain ?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                Ts.delete(terrainToDelete.getId());
+                actualise(Ts.getAllTerrains());}
+        } else {showAlert(Alert.AlertType.ERROR, "Erreur de suppression", "L'index de terrain à supprimer n'est pas valide.");}}
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();}
     //*******************************************************************************************
     @FXML
-    void supp2(ActionEvent event) throws SQLException { Terrain terrainToDelete = Ts.getAllTerrains().get(1 + i * 3);
-        Ts.delete(terrainToDelete.getId());
-        actualise(Ts.getAllTerrains());}
+    void supp2(ActionEvent event) throws SQLException {
+        int indexToDelete = i * 3 + 1;
+        if (indexToDelete >= 0 && indexToDelete < Ts.getAllTerrains().size()) {
+            Terrain terrainToDelete = Ts.getAllTerrains().get(indexToDelete);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation de suppression");
+            alert.setHeaderText(null);
+            alert.setContentText("Êtes-vous sûr de vouloir supprimer ce terrain ?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                Ts.delete(terrainToDelete.getId());
+                actualise(Ts.getAllTerrains());}
+        } else {showAlert(Alert.AlertType.ERROR, "Erreur de suppression", "L'index de terrain à supprimer n'est pas valide.");}}
     //*******************************************************************************************
     @FXML
-    void supp3(ActionEvent event) throws SQLException {Terrain terrainToDelete = Ts.getAllTerrains().get(2 + i * 3);
-        Ts.delete(terrainToDelete.getId());
-        actualise(Ts.getAllTerrains());}}
+    void supp3(ActionEvent event) throws SQLException {
+        int indexToDelete = i * 3 + 2;
+        if (indexToDelete >= 0 && indexToDelete < Ts.getAllTerrains().size()) {
+            Terrain terrainToDelete = Ts.getAllTerrains().get(indexToDelete);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation de suppression");
+            alert.setHeaderText(null);
+            alert.setContentText("Êtes-vous sûr de vouloir supprimer ce terrain ?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                Ts.delete(terrainToDelete.getId());
+                actualise(Ts.getAllTerrains());}
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Erreur de suppression", "L'index de terrain à supprimer n'est pas valide.");}}
+}
