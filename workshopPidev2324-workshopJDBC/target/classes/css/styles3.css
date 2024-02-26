@@ -17,7 +17,7 @@
 }
 /* Style pour le bouton "Ajout" */
 #btnajout {
-    -fx-background-color: #28a745; /* Couleur de fond verte */
+    -fx-background-color: #0a2f55; /* Couleur de fond verte */
 }
 /* Style pour les boutons de navigation "Retour" et "Suivant" */
 #btnretour, #btnsuivant {

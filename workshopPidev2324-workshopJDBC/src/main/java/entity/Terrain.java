@@ -11,6 +11,9 @@ public class Terrain {
     private boolean gradin;
     private boolean vestiaire;
     private boolean status;
+    private String videoPath;
+    private String imagePath;
+
     //*******************************************************************************************
     public Terrain(String address, boolean gradin, boolean vestiaire, boolean status, String nomTerrain, int prix, int duree, String gouvernorat, String image, String video) {
         this.address = address;
@@ -41,6 +44,20 @@ public class Terrain {
                 ", video=" + video +
                 '}';}
     //*******************************************************************************************
+    public String getVideoPath() {
+        return videoPath;
+    }
+
+    public void setVideoPath(String videoPath) {
+        this.videoPath = videoPath;
+    }
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
     public String getNomTerrain() {return nomTerrain;}
     public void setNomTerrain(String nomTerrain) {this.nomTerrain = nomTerrain;}
     public int getPrix() {return prix;}

@@ -2,12 +2,19 @@ package controllers;
 import entity.Terrain;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import services.TerrainService;
+
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 //*******************************************************************
 public class PageTerrainController  {
@@ -91,17 +98,77 @@ public class PageTerrainController  {
     void suivant(ActionEvent event){i +=1;
         actualise(Ts.getAllTerrains());}
     @FXML
-    void Ajout(ActionEvent event) {}
+    void Ajout(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Terrain.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Gestion_Terrain");
+        stage.setScene(new Scene(root));
+        stage.show();}
     @FXML
-    void detail1(ActionEvent event) {}
+    void detail1(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
+        int index = Integer.parseInt(btn.getId().substring(9)) - 1;
+        Terrain terrain = Ts.getAllTerrains().get(index);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/DetailTerrain.fxml"));
+        Parent root = loader.load();
+        DetailTerrainController controller = loader.getController();
+        controller.initData(terrain);
+
+        Stage stage = new Stage();
+        stage.setTitle("Détails Terrain");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
     @FXML
-    void detail2(ActionEvent event) {}
+    void detail2(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
+        int index = Integer.parseInt(btn.getId().substring(9)) - 1; // Assuming the button IDs are like "btnDetail1", "btnDetail2", etc.
+
+        Terrain selectedTerrain = Ts.getAllTerrains().get(index);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/DetailTerrain.fxml"));
+        Parent root = loader.load();
+        DetailTerrainController controller = loader.getController();
+        controller.initData(selectedTerrain);
+
+        Stage stage = new Stage();
+        stage.setTitle("Détails du Terrain");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
     @FXML
-    void detail3(ActionEvent event) {}
+    void detail3(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
+        int index = Integer.parseInt(btn.getId().substring(9)) - 1; // Assuming the button IDs are like "btnDetail1", "btnDetail2", etc.
+
+        Terrain selectedTerrain = Ts.getAllTerrains().get(index);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/DetailTerrain.fxml"));
+        Parent root = loader.load();
+        DetailTerrainController controller = loader.getController();
+        controller.initData(selectedTerrain);
+
+        Stage stage = new Stage();
+        stage.setTitle("Détails du Terrain");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
     @FXML
-    void supp1(ActionEvent event) {}
+    void supp1(ActionEvent event) throws SQLException {
+        Terrain terrainToDelete = Ts.getAllTerrains().get(i * 3);
+        Ts.delete(terrainToDelete.getId());
+        actualise(Ts.getAllTerrains());}
     @FXML
-    void supp2(ActionEvent event) {}
+    void supp2(ActionEvent event) throws SQLException { Terrain terrainToDelete = Ts.getAllTerrains().get(1 + i * 3);
+        Ts.delete(terrainToDelete.getId());
+        actualise(Ts.getAllTerrains());}
     @FXML
-    void supp3(ActionEvent event) {}
+    void supp3(ActionEvent event) throws SQLException {Terrain terrainToDelete = Ts.getAllTerrains().get(2 + i * 3);
+        Ts.delete(terrainToDelete.getId());
+        actualise(Ts.getAllTerrains());}
 }

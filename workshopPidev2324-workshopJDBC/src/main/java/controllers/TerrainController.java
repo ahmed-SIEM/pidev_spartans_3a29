@@ -3,7 +3,10 @@ package controllers;
 import entity.Terrain;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,13 +17,17 @@ import javafx.stage.FileChooser;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
 import services.TerrainService;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.scene.control.CheckBox;
+
 //*******************************************************************************************
 public class TerrainController {
     @FXML
@@ -28,13 +35,12 @@ public class TerrainController {
     @FXML
     private Button btinserer;
     @FXML
-    private Button btndelete;
-    @FXML
     private Button btninserervid;
     @FXML
     private Button btnsave;
+
     @FXML
-    private Button btnupdate;
+    private Button btvoir;
     @FXML
     private TextField tfID;
     @FXML
@@ -42,11 +48,11 @@ public class TerrainController {
     @FXML
     private TextField tfaddress;
     @FXML
-    private TextField tfgradin;
+    private CheckBox cbGradin;
     @FXML
-    private TextField tfvestiaire;
+    private CheckBox cbVestiaire;
     @FXML
-    private TextField tfstatus;
+    private CheckBox cbStatus;
     @FXML
     private TextField tfprix;
     @FXML
@@ -67,10 +73,13 @@ public class TerrainController {
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showTerrains();
+        cbGradin.setSelected(false);
+        cbVestiaire.setSelected(false);
+        cbStatus.setSelected(false);
     }
     //*******************************************************************************************
     private void showTerrains() {
-        terrainContainer.getChildren().clear();
+
         List<Terrain> terrains = ts.getAllTerrains();
         for (Terrain terrain : terrains) {
             HBox terrainBox = new HBox();
@@ -94,8 +103,8 @@ public class TerrainController {
                 mediaPlayer = new MediaPlayer(media);}
             MediaView mediaView = new MediaView(mediaPlayer);
             mediaView.setFitWidth(50);
-            mediaView.setFitHeight(50);
-            // Ajout du symbole '|' entre chaque texte
+            mediaView.setFitHeight(50);}}
+           /* // Ajout du symbole '|' entre chaque texte
             String separator = " | ";
             idLabel.setText("Id: " + terrain.getId() + separator);
             nomLabel.setText("Nom: " + terrain.getNomTerrain() + separator);
@@ -107,16 +116,15 @@ public class TerrainController {
             dureeLabel.setText("Durée: " + terrain.getDuree() + separator);
             gouvernoratLabel.setText("Gouvernorat: " + terrain.getGouvernorat());
             terrainBox.getChildren().addAll(idLabel, nomLabel, addressLabel, gradinLabel, vestiaireLabel, statusLabel, prixLabel, dureeLabel, gouvernoratLabel, imageView, mediaView);
-            terrainContainer.getChildren().add(terrainBox);}}
+            terrainContainer.getChildren().add(terrainBox);}}*/
     //*******************************************************************************************
     @FXML
     void clearField() {
-        tfID.setText("");
         tfnom.setText("");
         tfaddress.setText("");
-        tfgradin.setText("");
-        tfvestiaire.setText("");
-        tfstatus.setText("");
+        cbGradin.setSelected(false);
+        cbVestiaire.setSelected(false);
+        cbStatus.setSelected(false);
         tfprix.setText("");
         tfduree.setText("");
         tfemplacement.setText("");
@@ -129,7 +137,7 @@ public class TerrainController {
     void createTerrain(ActionEvent event) throws SQLException {
         if (videoPath == null) {videoPath = "";}
         if (isValidTerrain()) {
-        Terrain terrain = new Terrain(tfaddress.getText(), Boolean.parseBoolean(tfgradin.getText()), Boolean.parseBoolean(tfvestiaire.getText()), Boolean.parseBoolean(tfstatus.getText()), tfnom.getText(), Integer.parseInt(tfprix.getText()), Integer.parseInt(tfduree.getText()), tfemplacement.getText(), imagePath, videoPath);
+            Terrain terrain = new Terrain(tfaddress.getText(), cbGradin.isSelected(), cbVestiaire.isSelected(), cbStatus.isSelected(), tfnom.getText(), Integer.parseInt(tfprix.getText()), Integer.parseInt(tfduree.getText()), tfemplacement.getText(), imagePath, videoPath);
         ts.add(terrain);
         showTerrains(); // Mettre à jour l'affichage après avoir ajouté un nouveau terrain
         clearField(); // Efface les champs après l'ajout
@@ -157,7 +165,7 @@ public class TerrainController {
         alert.setContentText(message);
         alert.showAndWait();}
     //*******************************************************************************************
-    @FXML
+    /*@FXML
     void deleteTerrain(ActionEvent event) throws SQLException {
         int id = Integer.parseInt(tfID.getText());
         Terrain terrain = ts.getTerrainById(id);
@@ -168,9 +176,9 @@ public class TerrainController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 ts.delete(id);
-                showTerrains();}}}
+                showTerrains();}}}*/
     //*******************************************************************************************
-    @FXML
+    /*@FXML
     void updateTerrain(ActionEvent event) throws SQLException {
         int id = Integer.parseInt(tfID.getText());
         Terrain terrain = ts.getTerrainById(id);
@@ -192,7 +200,7 @@ public class TerrainController {
             if (!tfemplacement.getText().isEmpty()) {
                 terrain.setGouvernorat(tfemplacement.getText());}
             ts.update(terrain);
-            showTerrains();}}
+            showTerrains();}}*/
     //*******************************************************************************************
         @FXML
         void getData(MouseEvent event) {
@@ -203,9 +211,9 @@ public class TerrainController {
                 tfID.setText(String.valueOf(terrain.getId()));
                 tfnom.setText(terrain.getNomTerrain());
                 tfaddress.setText(terrain.getAddress());
-                tfgradin.setText(String.valueOf(terrain.getGradin()));
-                tfvestiaire.setText(String.valueOf(terrain.getVestiaire()));
-                tfstatus.setText(String.valueOf(terrain.getStatus()));
+                cbGradin.setSelected(terrain.getGradin());
+                cbVestiaire.setSelected(terrain.getVestiaire());
+                cbStatus.setSelected(terrain.getStatus());
                 tfprix.setText(String.valueOf(terrain.getPrix()));
                 tfduree.setText(String.valueOf(terrain.getDuree()));
                 tfemplacement.setText(terrain.getGouvernorat());
@@ -223,6 +231,7 @@ public class TerrainController {
             vid.setMediaPlayer(mediaPlayer);
             mediaPlayer.play();
         } else {vid.setMediaPlayer(null); // Efface la vidéo s'il n'y en a pas
+
              }}}}
     //*******************************************************************************************
     @FXML
@@ -247,4 +256,13 @@ public class TerrainController {
             Media media = new Media(videoPath);
             MediaPlayer mediaPlayer = new MediaPlayer(media);
             vid.setMediaPlayer(mediaPlayer);
-            mediaPlayer.play();}}}
+            mediaPlayer.play();}}
+    @FXML
+    void voirlist(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/PageTerrain.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Donner un avis");
+        stage.setScene(new Scene(root));
+        stage.show();}
+    }
