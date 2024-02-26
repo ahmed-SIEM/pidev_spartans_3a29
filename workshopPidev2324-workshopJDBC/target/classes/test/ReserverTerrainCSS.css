@@ -22,7 +22,7 @@
 }
 
 
-.reserver-button {
+.reserver-button , #button41 {
     -fx-background-color: #4CAF50;
         -fx-border-color: #52B66C;
         -fx-border-radius: 3px;
@@ -32,20 +32,20 @@
         -fx-padding: 10px 10px;
 }
 
-.reserver-button:hover {
+.reserver-button:hover ,  #button41:hover {
     -fx-background-color: #B6E66C;
 }
 
-.reserver-button:pressed {
+.reserver-button:pressed ,  #button41:pressed {
     -fx-background-color: #388e3c;
 }
 
-.reserver-button:focused {
+.reserver-button:focused ,  #button41:focused {
     -fx-background-color: #4CAF50;
     -fx-border-color: #53D56F;
     -fx-border-width: 2px;
 }
 
-.reserver-button:disabled {
+.reserver-button:disabled ,   #button41:disabled {
     -fx-opacity: 0.5;
 }
