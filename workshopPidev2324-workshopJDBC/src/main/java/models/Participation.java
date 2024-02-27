@@ -9,7 +9,7 @@ public class Participation {
     private int id ;
     private int idMembre;
 
-            private String nomEquipe ;
+    private String nomEquipe ;
 
     private boolean status ;
 

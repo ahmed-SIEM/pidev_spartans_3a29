@@ -10,7 +10,7 @@ public class MainFx extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainFx.class.getResource("first.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainFx.class.getResource("tournoi.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
 
         stage.setScene(scene);
