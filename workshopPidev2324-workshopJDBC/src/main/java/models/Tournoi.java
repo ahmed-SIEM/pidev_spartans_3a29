@@ -56,6 +56,15 @@ public class Tournoi {
         this.orgid = orgid;
     }
 
+    public Tournoi(int nbrquipeMax, String nom, String affiche, String address, String datedebut, String datefin) {
+        this.nbrquipeMax = nbrquipeMax;
+        this.nom = nom;
+        this.affiche = affiche;
+        this.Address = address;
+        this.datedebut = datedebut;
+        this.datefin = datefin;
+    }
+
     public int getId() {
         return id;
     }

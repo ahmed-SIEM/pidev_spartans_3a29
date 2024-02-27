@@ -26,6 +26,7 @@ public class Main {
         St.modifier(new Tournoi(7,20,"EVENT","","Ariana","12/12/2024","04/11/2025",2));
 
 
-
+        Participation pa2 = new Participation(2,"gafsa tournoi",7);
+        Sp.ajouter(pa2);
     }
 }

@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-public class AjoutTournoiController implements Initializable {
+public class ModifierTournoiController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -125,10 +125,11 @@ public class AjoutTournoiController implements Initializable {
             LocalDate dateFin = LocalDate.parse(dateFinText, formatter);
 
             if (dateDebut.isAfter(dateFin)) {
-               errorLabel.setVisible(true);
+                errorLabel.setVisible(true);
+                errorLabel.setText("La date de début doit être avant la date de fin.");
                 return  false ;
             } else {
-                errorLabel.setVisible(false);
+                errorLabel.setText("");
                 return  true ;
             }
         } catch (DateTimeParseException e) {
@@ -138,27 +139,25 @@ public class AjoutTournoiController implements Initializable {
         }
     }
 
-    private boolean validateNombreEquipes() {
+    private void validateNombreEquipes() {
         String nombreEquipesText = InputNombreéquipes.getText();
         if (Pattern.matches("^(8|16|24|48)$", nombreEquipesText)) {
-            errorLabel2.setVisible(false);
-            return  true;
-        } else {
             errorLabel2.setVisible(true);
+            errorLabel2.setText("");
+        } else {
+            errorLabel2.setText("Le nombre d'équipes doit être 8, 16, 24, ou 48.");
         }
-        return false;
     }
-    private boolean validateNom() {
+    private void validateNom() {
         String nomText = InputNom.getText();
 
+        // Utiliser une expression régulière pour valider le nom (lettres et chiffres seulement)
         if (Pattern.matches("^[a-zA-Z0-9]+$", nomText)) {
-            errorLabel3.setVisible(false);
-            return true;
+            errorLabel3.setText("");
         } else {
             errorLabel3.setVisible(true);
-
+            errorLabel3.setText("Le nom ne doit contenir que des lettres et des chiffres.");
         }
-        return false;
     }
 
     @FXML
@@ -173,24 +172,20 @@ public class AjoutTournoiController implements Initializable {
             imgview.setImage(image);}
     }
 
-    public void AjouterTournoi(ActionEvent actionEvent) throws SQLException, IOException {
+    public void ModifierTournoi(ActionEvent actionEvent) throws SQLException, IOException {
 
-        if (validateNombreEquipes() && validateNom() && validateDate()) {
-            ServiceTournoi ts = new ServiceTournoi();
-            Tournoi tournoi = new Tournoi(Integer.parseInt(InputNombreéquipes.getText()), InputNom.getText(), imagePath, InputAddress.getText(), InputDateDébut.getText(), InputDateFin.getText(), 2);
-            ts.ajouter(tournoi);
-            System.out.println(tournoi);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/test/tournoi.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Gestion_Tournoi");
-            stage.setScene(new Scene(root));
-            stage.show();
-            ((Button) actionEvent.getSource()).getScene().getWindow().hide();
-
-        }
+        ServiceTournoi ts = new ServiceTournoi();
+        Tournoi tournoi = new Tournoi(tournoiActuel.getId(),Integer.parseInt(InputNombreéquipes.getText()), InputNom.getText(),imagePath,InputAddress.getText(), InputDateDébut.getText(), InputDateFin.getText(),2 );
+        ts.modifier(tournoi);
+        System.out.println(tournoi);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/test/tournoi.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Gestion_Tournoi");
+        stage.setScene(new Scene(root));
+        stage.show();
+        ((Button) actionEvent.getSource()).getScene().getWindow().hide();
     }
-
 
 
 }
