@@ -38,7 +38,7 @@
             <Glow />
         </effect>
     </Label>
-    <ButtonBar layoutX="384.0" layoutY="641.0" prefHeight="91.0" prefWidth="532.0">
+    <ButtonBar layoutX="398.0" layoutY="638.0" prefHeight="91.0" prefWidth="532.0">
         <buttons>
             <Button fx:id="btnsave" mnemonicParsing="false" onAction="#createTerrain" prefHeight="200.0" prefWidth="200.0" text="Enregistrer" textFill="#10215e" />
           <Button fx:id="btvoir" mnemonicParsing="false" onAction="#voirlist" text="Voir liste" />
