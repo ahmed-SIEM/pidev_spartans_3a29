@@ -9,12 +9,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SvParticipation
-{
+public class ServiceParticipation {
 
     private final Connection connection;
 
-    public SvParticipation() {
+    public ServiceParticipation() {
         connection = MyDatabase.getInstance().getConnection();
     }
     public void ajouter(Participation J) throws SQLException {

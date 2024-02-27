@@ -1,11 +1,9 @@
 package test;
 
-import models.Organisateur;
 import models.Participation;
 import models.Tournoi;
-import services.GestionEvenement.SvParticipation;
+import services.GestionEvenement.ServiceParticipation;
 import services.GestionEvenement.ServiceTournoi;
-import services.GestionEvenement.SvParticipation;
 
 import java.sql.SQLException;
 
@@ -20,7 +18,7 @@ public class Main {
       //  St.ajouter(tr);
         Tournoi tr1 = new Tournoi(20,"gafsaEVENT","","Ariana","12/12/2024","04/11/2025",2);
         St.ajouter(tr1);
-        SvParticipation Sp = new SvParticipation();
+        ServiceParticipation Sp = new ServiceParticipation();
         Participation pa1 = new Participation(2,"gafsa sports",7);
 
         Sp.ajouter(pa1);
