@@ -108,7 +108,7 @@ public class TerrainService {
         return terrain;
     }
     public Terrain getTerrainById(int id) {
-        Terrain terrain = null;
+        Terrain terrain = new Terrain();
         String query = "SELECT * FROM terrain WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);

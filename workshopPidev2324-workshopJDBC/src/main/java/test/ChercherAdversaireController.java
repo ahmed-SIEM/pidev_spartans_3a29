@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.ScrollPane ;
+
 import javafx.stage.Stage;
 import models.Equipe;
 import models.Reservation;
@@ -26,13 +27,16 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class chercherAdversaireController implements Initializable {
+public class ChercherAdversaireController implements Initializable {
+
+
+
 
     @FXML
     private Label nomEquipeInvalide;
-
     @FXML
-    private ScrollPane Vbox1;
+    private VBox vbox2;
+
 
     @FXML
     private Button buttonAccueil;
@@ -96,14 +100,24 @@ public class chercherAdversaireController implements Initializable {
 
     public void showReservation() throws SQLException {
 
-        //Vbox1.getChildren().clear();
-        Vbox1.getStyleClass().add("vbox-spacing");
+        vbox2.getChildren().clear();
+        vbox2.getStyleClass().add("vbox-spacing");
+
         ReservationService reservationService = new ReservationService();
+
         List<Reservation> reservationList = reservationService.getAllReservation();
+
+
         for (Reservation reservation : reservationList) {
+            int idres = reservation.getIdReservation();
+            int idter = reservation.getIdTerrain();
+            System.out.println(reservation);
+            System.out.println(reservation.toString());
+            System.out.println("idres "+idres+" id ter"+idter);
             AnchorPane anchorPane3 = new AnchorPane();
             HBox hBox = new HBox();
             anchorPane3.getStyleClass().add("anchor-pane-style");
+            anchorPane3.setPadding(new Insets(10, 10, 10, 10));
             Label idReservationLabel = new Label("Id: " + reservation.getIdReservation());
             Label nomEquipeLabel = new Label("Nom: " + reservation.getNomEquipe1());
             Label DateReservationLabel = new Label("Address: " + reservation.getDateReservation());
@@ -117,41 +131,55 @@ public class chercherAdversaireController implements Initializable {
             TerrainService terrainService = new TerrainService();
             Terrain terrain = terrainService.getTerrainById(reservation.getIdTerrain());
 
-            Label idLabel = new Label("Id: " + terrain.getId());
-            Label nomLabel = new Label("Nom: " + terrain.getNomTerrain());
-            Label addressLabel = new Label("Address: " + terrain.getAddress());
-            Label gradinLabel = new Label("Gradin: " + terrain.getGradin());
-            Label vestiaireLabel = new Label("Vestiaire: " + terrain.getVestiaire());
-            Label statusLabel = new Label("Status: " + terrain.getStatus());
-            Label prixLabel = new Label("Prix: " + terrain.getPrix());
-            Label dureeLabel = new Label("Durée: " + terrain.getDuree());
 
-            nomLabel.getStyleClass().add("label-style");
-            addressLabel.getStyleClass().add("label-style");
-            vestiaireLabel.getStyleClass().add("label-style");
-            prixLabel.getStyleClass().add("label-style");
-            dureeLabel.getStyleClass().add("label-style");
-            gradinLabel.getStyleClass().add("label-style");
 
-            Button btnReserver = new Button("Réserver");
-            btnReserver.getStyleClass().add("reserver-button");
+            if (terrain.getStatus()) {
+                System.out.println("4.1");
+                Label idLabel = new Label("Id: " + terrain.getId());
+                Label nomLabel = new Label("Nom: " + terrain.getNomTerrain());
+                Label addressLabel = new Label("Address: " + terrain.getAddress());
+                Label gradinLabel = new Label("Gradin: " + terrain.getGradin());
+                Label vestiaireLabel = new Label("Vestiaire: " + terrain.getVestiaire());
+                Label statusLabel = new Label("Status: " + terrain.getStatus());
+                Label prixLabel = new Label("Prix: " + terrain.getPrix());
+                Label dureeLabel = new Label("Durée: " + terrain.getDuree());
 
-            btnReserver.setOnAction(event -> {
+                nomLabel.getStyleClass().add("label-style");
+                addressLabel.getStyleClass().add("label-style");
+                vestiaireLabel.getStyleClass().add("label-style");
+                prixLabel.getStyleClass().add("label-style");
+                dureeLabel.getStyleClass().add("label-style");
+                gradinLabel.getStyleClass().add("label-style");
 
-                try {
-                    ReservationService reservationService1 = new ReservationService();
-                    if (reservationService1.updateNomEquipe2(reservation.getIdReservation(), nom_equipe.getValue())) {
+                Button btnReserver = new Button("Réserver");
+                btnReserver.getStyleClass().add("reserver-button");
+                System.out.println("5");
+                btnReserver.setOnAction(event -> {
 
-                        passerPaiement(reservation.getIdReservation(), idUser);
+                    try {
+                        ReservationService reservationService1 = new ReservationService();
+                        if (reservationService1.updateNomEquipe2(reservation.getIdReservation(), nom_equipe.getValue())) {
+                            System.out.println("6");
+                            passerPaiement(reservation.getIdReservation(), idUser);
+                        }
+                        //id user a changer de montassar
+
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
                     }
-                    //id user a changer de montassar
+                    System.out.println("Réserver terrain avec l'ID: " + terrain.getId());
+                });
 
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-                System.out.println("Réserver terrain avec l'ID: " + terrain.getId());
-            });
+                hBox.setSpacing(10);
+                hBox.getStyleClass().add("hbox-with-padding");
 
+                hBox.getChildren().addAll(nomLabel, addressLabel, gradinLabel, vestiaireLabel, dureeLabel, prixLabel, nomEquipeLabel,DateReservationLabel,heureReservationLabel, btnReserver );
+
+                hBox.setSpacing(10);
+
+                anchorPane3.getChildren().addAll(hBox);
+                vbox2.getChildren().add(anchorPane3);
+            }
         }
     }
 

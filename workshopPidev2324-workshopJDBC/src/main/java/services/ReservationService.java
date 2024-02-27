@@ -93,6 +93,7 @@ public class ReservationService {
                 reservation.setDateReservation(rs.getString("dateReservation"));
                 reservation.setHeureReservation(rs.getString("heureReservation"));
                 reservation.setType(TypeReservation.valueOf(rs.getString("type")));
+                reservation.setIdTerrain(rs.getInt("idTerrain"));
                 reservation.setNomEquipe1(rs.getString("nomEquipe1"));
 
                 reservations.add(reservation);
@@ -118,6 +119,7 @@ public class ReservationService {
                 reservation.setDateReservation(rs.getString("dateReservation"));
                 reservation.setHeureReservation(rs.getString("heureReservation"));
                 reservation.setType(TypeReservation.valueOf(rs.getString("type")));
+                reservation.setIdTerrain(rs.getInt("idTerrain"));
                 reservation.setNomEquipe1(rs.getString("nomEquipe1"));
 
                 reservations.add(reservation);
@@ -141,6 +143,7 @@ public class ReservationService {
                 reservation.setDateReservation(rs.getString("dateReservation"));
                 reservation.setHeureReservation(rs.getString("heureReservation"));
                 reservation.setType(TypeReservation.valueOf(rs.getString("type")));
+                reservation.setIdTerrain(rs.getInt("idTerrain"));
                 reservation.setNomEquipe1(rs.getString("nomEquipe1"));
 
             }
@@ -214,6 +217,7 @@ public class ReservationService {
                 reservation.setDateReservation(rs.getString("dateReservation"));
                 reservation.setHeureReservation(rs.getString("heureReservation"));
                 reservation.setType(TypeReservation.valueOf(rs.getString("type")));
+                reservation.setIdTerrain(rs.getInt("idTerrain"));
                 reservation.setNomEquipe1(rs.getString("nomEquipe1"));
 
                 if (reservation.getDateReservation() != null && sontMemesDates(reservation.getDateReservation(), date)) {

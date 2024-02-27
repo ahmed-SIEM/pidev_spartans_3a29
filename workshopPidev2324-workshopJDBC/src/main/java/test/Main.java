@@ -1,19 +1,12 @@
 package test;
 
-import javafx.collections.ObservableList;
 import models.Equipe;
-import models.Reservation;
-import models.Terrain;
-import models.User;
 import services.EquipeService;
-import services.ReservationService;
 import services.TerrainService;
 
 
 import java.sql.SQLException;
 import java.util.List;
-
-import static models.TypeReservation.ReserverTerrainPourEquipe;
 
 public class Main {
 
@@ -24,6 +17,8 @@ public class Main {
         for (Equipe equipe :equipeList){
             System.out.println(equipe.toString());
         }
+        TerrainService terrainService = new TerrainService();
+        System.out.println(terrainService.getTerrainById(6));
 
 
 
