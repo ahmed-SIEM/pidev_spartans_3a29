@@ -4,9 +4,8 @@ module test {
     requires javafx.fxml;
 
 
-    requires org.controlsfx.controls;
     requires java.sql;
-    requires sinch.sdk.java;
+
 
 
     opens test to javafx.fxml;

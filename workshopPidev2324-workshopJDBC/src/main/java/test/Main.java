@@ -20,9 +20,7 @@ public class Main {
 
         ServiceParticipation Sp = new ServiceParticipation();
 
-        Participation p = new Participation(1,"eop",3);
 
-        Sp.ajouter(p);
 
 
 
