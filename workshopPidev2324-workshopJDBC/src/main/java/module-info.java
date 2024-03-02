@@ -5,7 +5,8 @@ module test {
 
 
     requires java.sql;
-
+    requires org.apache.httpcomponents.httpcore;
+    requires org.apache.httpcomponents.httpclient;
 
 
     opens test to javafx.fxml;

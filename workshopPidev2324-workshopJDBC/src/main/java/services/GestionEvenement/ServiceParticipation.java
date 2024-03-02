@@ -83,4 +83,21 @@ public class ServiceParticipation {
         }
         return Tournois;
     }
+
+    public  List<String> getNomsEquipesPourMembre(int idMembre) throws SQLException {
+        List<String> nomsEquipes = new ArrayList<>();
+        String query = "SELECT e.nomEquipe " +
+                "FROM equipe e " +
+                "JOIN membreparequipe mpe ON e.idEquipe = mpe.idEquipe " +
+                "WHERE mpe.idMembre = ?";
+        PreparedStatement pst = connection.prepareStatement(query);
+        pst.setInt(1, idMembre); // Set the idMembre parameter in the query
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            nomsEquipes.add(rs.getString("nomEquipe"));
+        }
+
+        return nomsEquipes;
+    }
 }

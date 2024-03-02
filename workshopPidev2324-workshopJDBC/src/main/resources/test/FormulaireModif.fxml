@@ -11,7 +11,7 @@
 <AnchorPane fx:id="FormulaireRoot" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #033E6A;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.Controllers.ModifierTournoiController">
     <AnchorPane layoutX="373.0" layoutY="44.0" prefHeight="650.0" prefWidth="650.0" style="-fx-background-color: #EDEDED; -fx-background-radius: 20;">
         <AnchorPane prefHeight="150.0" prefWidth="650.0" style="-fx-background-color: #C4CCD1; -fx-background-radius: 20 20 0 0;">
-            <Text fill="#033e6a" layoutX="33.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Formulaire d'Ajout" textAlignment="CENTER">
+            <Text fill="#033e6a" layoutX="33.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Formulaire de Modification" textAlignment="CENTER">
                 <font>
                     <Font name="Roboto Bold" size="35.0" />
                 </font>
@@ -55,9 +55,9 @@
                 <Font size="15.0" />
             </font>
         </Button>
-        <AnchorPane layoutX="415.0" layoutY="374.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: white;">
+        <AnchorPane layoutX="375.0" layoutY="374.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: white;">
          <children>
-               <ImageView fx:id="imgview" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+               <ImageView fx:id="imgview" fitHeight="120.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" />
          </children></AnchorPane>
         <Button fx:id="btnuploadimage" layoutX="355.0" layoutY="512.0" mnemonicParsing="false" onAction="#addimage" style="-fx-background-color: #033e6a; -fx-font-weight: bold; -fx-background-radius: 5; -fx-padding: 8;" text="Télécharger une nouvelle Affiche" textAlignment="CENTER" textFill="WHITE">
             <font>
@@ -66,9 +66,9 @@
         </Button>
       <TextField fx:id="InputDateDébut" layoutX="49.0" layoutY="300.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-width: 1; -fx-background-color: transparent; -fx-padding: 8; -fx-border-radius: 3;" />
       <TextField fx:id="InputDateFin" layoutX="375.0" layoutY="307.0" prefWidth="200.0" style="-fx-border-color: grey; -fx-border-width: 1; -fx-background-color: transparent; -fx-padding: 8; -fx-border-radius: 3;" />
-      <Label fx:id="errorLabel" layoutX="283.0" layoutY="316.0" text="Date Fausee" textFill="RED" />
-      <Label fx:id="errorLabel2" layoutX="193.0" layoutY="255.0" text="Faux Nombre" textFill="RED" />
-      <Label fx:id="errorLabel3" layoutX="535.0" layoutY="255.0" text="Faux nom" textFill="RED" />
+      <Label fx:id="errorLabel" layoutX="198.0" layoutY="345.0" text="La date Début ne peut pas étre avant la Date fin" textFill="RED" />
+      <Label fx:id="errorLabel2" layoutX="21.0" layoutY="246.0" text="Nombre Invalide. Le Nombre doit etre soit 8,16,24,48" textFill="RED" />
+      <Label fx:id="errorLabel3" layoutX="360.0" layoutY="246.0" text="le Nom ne contient pas des caractères spéciaux" textFill="RED" />
     </AnchorPane>
     <Button fx:id="Btnback" layoutX="25.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToTournoi" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 1; -fx-padding: 1; -fx-font-weight: bold;" text="&lt;&lt;" textFill="WHITE">
         <font>
