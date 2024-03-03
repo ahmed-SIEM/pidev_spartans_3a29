@@ -1,6 +1,7 @@
 package services.GestionEvenement;
 
 import models.Organisateur;
+import models.Participation;
 import models.Tournoi;
 import utils.MyDatabase;
 
@@ -120,6 +121,24 @@ public Organisateur getbyidorg(int id) throws SQLException {
         }
         return Tournois;
     }
+
+    public List<Participation> getparticipationbytournoiid(int id) throws SQLException {
+        List<Participation> Participations = new ArrayList<>();
+        String query = "SELECT * FROM participation WHERE idTournoi = ?";
+        PreparedStatement st = connection.prepareStatement(query);
+        st.setInt(1, id);
+        ResultSet rs = st.executeQuery(); // Correction ici: ne passez pas la requête en argument
+        while (rs.next()) {
+            Participation pt = new Participation();
+            pt.setIdMembre(rs.getInt("idmembre"));
+            pt.setIdTournoi(rs.getInt("idTournoi"));
+            pt.setId(rs.getInt("id"));
+            pt.setNomEquipe(rs.getString("NomEquipe"));
+            Participations.add(pt);
+        }
+        return Participations;
+    }
+
 
 
 

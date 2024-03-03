@@ -28,12 +28,15 @@ public class Main {
        // Participation pa3 = new Participation(2,"gafsa0",19);
        // Sp.ajouter(pa3);
 
-        //ServiceParticipation sp = new ServiceParticipation();
-       // System.out.println(sp.getNomsEquipesPourMembre(3));
+        ServiceParticipation sp = new ServiceParticipation();
+        System.out.println(sp.getNomsEquipesPourMembre(3));
 
-        //Tournoi tr = new Tournoi(1,52,"ArianaEVENT","","Ariana","12/12/2024","04/11/2025");
-      //  Participation pa3 = new Participation(3,"gafsa0",52);
-        //tr.ajouterParticipation(pa3);
+        Tournoi tr = new Tournoi(1,52,"ArianaEVENT","","Ariana","12/12/2024","04/11/2025");
+       Participation pa3 = new Participation(3,"gafsa0",52);
+        tr.ajouterParticipation(pa3);
+        System.out.println(tr.getParticipationList());
+        System.out.println(St.getparticipationbytournoiid(49));
+
 
     }
 }

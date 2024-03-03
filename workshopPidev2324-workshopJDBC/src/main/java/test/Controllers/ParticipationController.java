@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import models.Participation;
 import models.Tournoi;
 import services.GestionEvenement.ServiceParticipation;
+import services.GestionEvenement.ServiceTournoi;
 import test.MainFx;
 
 import java.io.IOException;
@@ -29,6 +30,8 @@ import java.util.regex.Pattern;
 public class ParticipationController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         errorLabel3.setVisible(false);
+        errorLabel4.setVisible(false);
+
 
     }
 
@@ -48,6 +51,9 @@ public class ParticipationController implements Initializable {
     @FXML
     private Label errorLabel3;
 
+    @FXML
+    private Label errorLabel4;
+
 
     @FXML
     private ComboBox<String> nomequipe;
@@ -56,6 +62,8 @@ public class ParticipationController implements Initializable {
 
   private List<String> nomEquipes = new ArrayList<>();
    private ObservableList<String> options ;
+
+   ServiceTournoi st = new ServiceTournoi();
     @FXML
     void goToDetailsClient(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(MainFx.class.getResource("TournoiClient.fxml"));
@@ -71,10 +79,10 @@ public class ParticipationController implements Initializable {
         System.out.println(nomEquipes);
         options = FXCollections.observableArrayList(nomEquipes);
         nomequipe.setItems(options);
-        System.out.println(tournoiActuel.getParticipationList());
+        tournoiActuel.setParticipationList(st.getparticipationbytournoiid(tournoiActuel.getId()));
         }
 
-    private boolean validateNbrParticipation() {
+    private boolean validateNbrParticipation() throws SQLException {
         if (tournoiActuel.getParticipationList().size() < tournoiActuel.getNbrquipeMax()) {
             errorLabel3.setVisible(false);
             return true;
@@ -85,13 +93,23 @@ public class ParticipationController implements Initializable {
         return false;
     }
 
+    private boolean validateEquipeParticipation(String nomEquipeSelectionne) {
+        for (Participation participation : tournoiActuel.getParticipationList()) {
+            if (participation.getNomEquipe().equals(nomEquipeSelectionne)) {
+                errorLabel4.setVisible(true);
+                return false;
+            }
+        }
+        errorLabel4.setVisible(false);
+        return true;
+    }
 
 
 
 
     @FXML
     void participerd(ActionEvent event) throws SQLException, IOException {
-if(validateNbrParticipation()){
+if(validateNbrParticipation() && validateEquipeParticipation( nomequipe.getValue())){
         ServiceParticipation ps = new ServiceParticipation();
         String nomEquipeSelectionne = nomequipe.getValue();
         int idTournoi = tournoiActuel.getId();

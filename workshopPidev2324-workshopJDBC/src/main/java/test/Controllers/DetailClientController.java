@@ -6,7 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,13 +24,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class DetailClientController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        btparticiper.setVisible(true);
+        btparticiper.setVisible(false);
         btannuler.setVisible(false);
     }
     @FXML
@@ -56,6 +59,9 @@ public class DetailClientController implements Initializable {
     private Button btannuler;
     private Tournoi tournoiActuel;
 
+    ServiceTournoi st = new ServiceTournoi();
+
+    ServiceParticipation sp = new ServiceParticipation();
 
 
 
@@ -69,18 +75,7 @@ public class DetailClientController implements Initializable {
         detailroot.getChildren().setAll(root);
     }
 
-    private void verifierParticipation(int idMembre) {
-        boolean aParticipe = false;
-        for (Participation participation : tournoiActuel.getParticipationList()) {
-            if (participation.getIdMembre() == idMembre) {
-                aParticipe = true;
-                break;
-            }
-        }
-        btparticiper.setVisible(!aParticipe);
-        btannuler.setVisible(aParticipe);
-    }
-    public void initData(Tournoi tournoi) {
+    public void initData(Tournoi tournoi) throws SQLException {
         this.tournoiActuel = tournoi;
         System.out.println(tournoiActuel);
         nombre.setText(String.valueOf(tournoi.getNbrquipeMax()));
@@ -91,8 +86,26 @@ public class DetailClientController implements Initializable {
         if (tournoi.getAffiche() != null && !tournoi.getAffiche().isEmpty()) {
             Image image = new Image(tournoi.getAffiche());
             imgd.setImage(image);}
+        tournoiActuel.setParticipationList(st.getparticipationbytournoiid(tournoiActuel.getId()));
         verifierParticipation(3);
+
+
     }
+
+    private void verifierParticipation(int idMembre) {
+        System.out.println(tournoiActuel.getParticipationList());
+        boolean aParticipe = false;
+        for (Participation participation : tournoiActuel.getParticipationList()) {
+            if (participation.getIdMembre() == idMembre) {
+                aParticipe = true;
+                break;
+            }
+        }
+        System.out.println(aParticipe);
+        btparticiper.setVisible(!aParticipe);
+        btannuler.setVisible(aParticipe);
+    }
+
 
 
     @FXML
@@ -107,10 +120,34 @@ public class DetailClientController implements Initializable {
     }
 
     @FXML
-    void annuler(ActionEvent event) {
+    void annuler(ActionEvent event) throws SQLException, IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText(null);
+        alert.setContentText("Êtes-vous sûr de vouloir supprimer cette participation ?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            for ( Participation participation: tournoiActuel.getParticipationList())
+            {
+                if (participation.getIdTournoi() == tournoiActuel.getId() && participation.getIdMembre() == 3)
+                {
+                    sp.supprimer( participation.getId());
 
+                }
+            }}
+     else {showAlert(Alert.AlertType.ERROR, "Erreur de suppression", "L'index de participation à supprimer n'est pas valide.");}
+        FXMLLoader loader = new FXMLLoader(MainFx.class.getResource("tournoiClient.fxml"));
+        AnchorPane root = loader.load();
+        detailroot.getChildren().setAll(root);
+    }
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();}
     }
 
-}
+
 
 
