@@ -95,4 +95,19 @@ public class Participation {
         this.dateC = currentTimeString;
         this.idTournoi = idTournoi;
     }
+
+    @Override
+    public String toString() {
+        return "Participation{" +
+                "id=" + id +
+                ", idMembre=" + idMembre +
+                ", nomEquipe='" + nomEquipe + '\'' +
+                ", status=" + status +
+                ", dateC='" + dateC + '\'' +
+                ", idTournoi=" + idTournoi +
+                ", currentTime=" + currentTime +
+                ", formatter=" + formatter +
+                ", currentTimeString='" + currentTimeString + '\'' +
+                '}';
+    }
 }

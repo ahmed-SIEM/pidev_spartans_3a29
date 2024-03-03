@@ -16,17 +16,24 @@ public class Main {
          // Tournoi tr = new Tournoi(20,"ArianaEVENT","","Ariana","12/12/2024","04/11/2025",1);
 
       //  St.ajouter(tr);
-        Tournoi tr1 = new Tournoi(20,"gafsaEVENT","","Ariana","12/12/2024","04/11/2025",2);
-        St.ajouter(tr1);
-        ServiceParticipation Sp = new ServiceParticipation();
+        // Tournoi tr1 = new Tournoi(20,"gafsaEVENT","","Ariana","12/12/2024","04/11/2025",2);
+       //  St.ajouter(tr1);
+        // ServiceParticipation Sp = new ServiceParticipation();
 
 
-        St.supprimer(8);
-        St.modifier(new Tournoi(7,20,"EVENT","","Ariana","12/12/2024","04/11/2025",2));
+       //  St.supprimer(8);
+       //  St.modifier(new Tournoi(7,20,"EVENT","","Ariana","12/12/2024","04/11/2025",2));
 
 
-        Participation pa3 = new Participation(2,"gafsa0",19);
-        Sp.ajouter(pa3);
+       // Participation pa3 = new Participation(2,"gafsa0",19);
+       // Sp.ajouter(pa3);
+
+        //ServiceParticipation sp = new ServiceParticipation();
+       // System.out.println(sp.getNomsEquipesPourMembre(3));
+
+        //Tournoi tr = new Tournoi(1,52,"ArianaEVENT","","Ariana","12/12/2024","04/11/2025");
+      //  Participation pa3 = new Participation(3,"gafsa0",52);
+        //tr.ajouterParticipation(pa3);
 
     }
 }

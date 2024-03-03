@@ -17,6 +17,7 @@
                 <Font size="19.0" />
             </font>
         </Button>
-      <ComboBox fx:id="nomequipe" layoutX="412.0" layoutY="276.0" onAction="#equipe" prefWidth="150.0" />
+      <ComboBox fx:id="nomequipe" layoutX="412.0" layoutY="276.0" prefWidth="150.0" />
+      <Label fx:id="errorLabel3" layoutX="562.0" layoutY="661.0" text="Nombre de participation max atteint" textFill="RED" />
     </children>
 </AnchorPane>

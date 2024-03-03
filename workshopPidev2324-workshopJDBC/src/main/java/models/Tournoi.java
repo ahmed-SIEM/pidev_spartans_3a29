@@ -15,7 +15,7 @@ public class Tournoi {
     private String datedebut;
     private String datefin;
 
-    private List<Participation> participationList ;
+    private List<Participation> participationList = new ArrayList<>() ;
 
     private int orgid ;
 
@@ -150,5 +150,10 @@ public class Tournoi {
                 ", participationList=" + participationList +
                 ", org=" + orgid +
                 '}';
+    }
+
+    public void ajouterParticipation(Participation participation) {
+        this.participationList.add(participation);
+        System.out.println(participationList);
     }
 }

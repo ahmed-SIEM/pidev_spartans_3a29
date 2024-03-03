@@ -32,5 +32,6 @@
         </Button>
         <AnchorPane layoutX="91.0" layoutY="54.0" prefHeight="200.0" prefWidth="212.0" style="-fx-border-color: grey;" />
           <ImageView fx:id="imgd" fitHeight="180.0" fitWidth="200.0" layoutX="97.0" layoutY="64.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btannuler" layoutX="618.0" layoutY="648.0" mnemonicParsing="false" onAction="#annuler" prefHeight="44.0" prefWidth="138.0" text="Annuler La Participation" />
     </children>
 </AnchorPane>
