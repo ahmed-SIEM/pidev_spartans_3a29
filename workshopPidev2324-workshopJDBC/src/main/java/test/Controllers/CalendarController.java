@@ -7,6 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -14,10 +16,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import models.Tournoi;
+import test.MainFx;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class CalendarController implements Initializable {
@@ -34,11 +41,19 @@ public class CalendarController implements Initializable {
     @FXML
     private FlowPane calendar;
 
+    @FXML
+    private Button btnretour;
+
+    @FXML
+    private AnchorPane calender;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        calendar.getChildren().clear();
         dateFocus = ZonedDateTime.now();
         today = ZonedDateTime.now();
         drawCalendar();
+
     }
 
     @FXML
@@ -158,14 +173,29 @@ public class CalendarController implements Initializable {
 
     private Map<Integer, List<CalendarActivity>> getCalendarActivitiesMonth(ZonedDateTime dateFocus) {
         List<CalendarActivity> calendarActivities = new ArrayList<>();
-        int year = dateFocus.getYear();
-        int month = dateFocus.getMonth().getValue();
-
-        Random random = new Random();
-        for (int i = 0; i < 50; i++) {
-            ZonedDateTime time = ZonedDateTime.of(year, month, random.nextInt(27)+1, 16,0,0,0,dateFocus.getZone());
+        for (Tournoi tournoi : TournoiData.tournois) {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate dateDebut = LocalDate.parse(tournoi.getDatedebut(), formatter);
+                if (dateDebut.getYear() == dateFocus.getYear() && dateDebut.getMonth().getValue() == dateFocus.getMonthValue()) {
+                    // Convertir la date de début du tournoi en ZonedDateTime
+                    ZonedDateTime time = dateDebut.atStartOfDay(dateFocus.getZone());
+                    // Créer une nouvelle activité de calendrier avec le nom du tournoi et l'ajouter à la liste
+                    CalendarActivity activity = new CalendarActivity(time, tournoi.getNom(), null); // 'null' peut être remplacé par un identifiant si nécessaire
+                    calendarActivities.add(activity);
+                }
+            } catch (DateTimeParseException e) {
+                e.printStackTrace();
+            }
         }
 
+        // Convertir la liste des activités en une carte organisée par jour du mois
         return createCalendarMap(calendarActivities);
+    }
+    @FXML
+    void retour(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(MainFx.class.getResource("tournoiClient.fxml"));
+        AnchorPane root = loader.load();
+        calender.getChildren().setAll(root);
     }
 }

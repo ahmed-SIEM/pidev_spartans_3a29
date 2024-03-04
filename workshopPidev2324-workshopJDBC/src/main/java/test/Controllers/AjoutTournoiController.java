@@ -28,6 +28,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -255,6 +256,7 @@ public class AjoutTournoiController implements Initializable {
             Tournoi tournoi = new Tournoi(Integer.parseInt(InputNombreéquipes.getText()), InputNom.getText(), imagePath, InputAddress.getText(), InputDateDébut.getText(), InputDateFin.getText(), 2);
             ts.ajouter(tournoi);
             System.out.println(tournoi);
+            TournoiData.tournois.add(tournoi);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/test/tournoi.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();

@@ -67,6 +67,8 @@ public class FirstController {
     private Text nom2;
     @FXML
     private Text nom3;
+
+
     int i= 0;
     ServiceTournoi Ts = new ServiceTournoi();
     //*******************************************************************
@@ -221,4 +223,6 @@ public class FirstController {
 
 
     }
+
+
 }
