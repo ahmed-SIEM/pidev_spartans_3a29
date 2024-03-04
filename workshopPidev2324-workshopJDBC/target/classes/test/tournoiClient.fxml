@@ -14,6 +14,11 @@
                     <Font name="Roboto Bold" size="35.0" />
                 </font>
             </Text>
+         <Button fx:id="btnCalendar" contentDisplay="CENTER" layoutX="595.0" layoutY="85.0" mnemonicParsing="false" onAction="#calendar" prefHeight="38.0" prefWidth="164.0" style="-fx-background-color: #033e6a; -fx-font-weight: bold; -fx-background-radius: 5; -fx-padding: 8;" text="Calendrier" textAlignment="CENTER" textFill="WHITE">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Button>
         </AnchorPane>
       <AnchorPane fx:id="BOX1" layoutX="14.0" layoutY="167.0" prefHeight="423.0" prefWidth="234.0" style="-fx-background-color: white;">
          <children>

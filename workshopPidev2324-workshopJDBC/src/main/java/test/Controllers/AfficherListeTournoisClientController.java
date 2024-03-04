@@ -44,6 +44,10 @@ public class AfficherListeTournoisClientController {
     private Button btnsuivant;
 
     @FXML
+    private Button btnCalendar;
+
+
+    @FXML
     private ImageView img1;
 
     @FXML
@@ -153,5 +157,18 @@ public class AfficherListeTournoisClientController {
         stage.setScene(new Scene(root));
         stage.show();
         ((Button) event.getSource()).getScene().getWindow().hide();}
+
+    @FXML
+    void calendar(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/test/Calender.fxml"));
+        Parent root = loader.load();
+        CalendarController controller = loader.getController();
+        Stage stage = new Stage();
+        stage.setTitle("Gestion_Tournoi");
+        stage.setScene(new Scene(root));
+        stage.show();
+        ((Button) event.getSource()).getScene().getWindow().hide();
+
+    }
 
 }
