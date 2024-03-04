@@ -55,6 +55,11 @@ public class DetailClientController implements Initializable {
 
     @FXML
     private Label nomd;
+    @FXML
+    private Label datedebut;
+
+    @FXML
+    private Label datefin;
 
     @FXML
     private Button btannuler;
@@ -88,6 +93,8 @@ public class DetailClientController implements Initializable {
         nombre.setText(String.valueOf(tournoi.getNbrquipeMax()));
         nomd.setText(tournoi.getNom());
         adresse.setText(tournoi.getAddress());
+        datedebut.setText(tournoi.getDatedebut());
+        datefin.setText(tournoi.getDatefin());
         /*inputDateFin.setText(tournoi.getDatefin());
         InputAddress.setText(tournoi.getAddress());*/
         if (tournoi.getAffiche() != null && !tournoi.getAffiche().isEmpty()) {
