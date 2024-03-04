@@ -69,7 +69,9 @@ public class AjoutTournoiController implements Initializable {
             if (placeName != null && !placeName.isEmpty()) {
                 locationInfo += placeName + " ";
             }
-            InputAddress.setText(locationInfo);
+            String address = locationInfo.substring(locationInfo.indexOf(' ')+1).trim();
+            InputAddress.setText(address);
+
             // You can perform any necessary actions with the received latitude, longitude, and placeName here
         });
     }

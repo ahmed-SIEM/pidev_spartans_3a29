@@ -32,10 +32,15 @@ public class ServiceTournoi {
 
     public void supprimer(int id) throws SQLException {
 
-       String query = "DELETE FROM tournoi WHERE id = ?";
+        String query = "DELETE FROM participation WHERE idTournoi = ?";
+       String query1 = "DELETE FROM tournoi WHERE id = ?";
        PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, id);
        ps.executeUpdate();
+        PreparedStatement ps1 = connection.prepareStatement(query1);
+        ps1.setInt(1, id);
+        ps1.executeUpdate();
+
         System.out.println("tournoi supprimer avec succés");
     }
 

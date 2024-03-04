@@ -6,13 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import models.Participation;
 import models.Tournoi;
@@ -33,6 +32,8 @@ public class DetailClientController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btparticiper.setVisible(false);
         btannuler.setVisible(false);
+        WebEngine webEngine = weatherView.getEngine();
+        webEngine.load(getClass().getResource("/test/weather.html").toExternalForm());
     }
     @FXML
     private Button Btnback;
@@ -58,6 +59,12 @@ public class DetailClientController implements Initializable {
     @FXML
     private Button btannuler;
     private Tournoi tournoiActuel;
+
+    @FXML
+    private TextArea forecastTextArea;
+
+    @FXML
+    private WebView weatherView;
 
     ServiceTournoi st = new ServiceTournoi();
 
@@ -146,6 +153,8 @@ public class DetailClientController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();}
+
+
     }
 
 

@@ -129,7 +129,7 @@ public class FirstController {
     @FXML
     void detail2(ActionEvent event) throws IOException, SQLException {
         Button btn = (Button) event.getSource();
-        int index = Integer.parseInt(btn.getId().substring(9)) - 1+3*i; // Assuming the button IDs are like "btnDetail1", "btnDetail2", etc.
+        int index = Integer.parseInt(btn.getId().substring(9)) - 1+3*i;
         Tournoi selectedTournoi = Ts.allTournoi().get(index);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/test/DetailTournoi.fxml"));
         Parent root = loader.load();
